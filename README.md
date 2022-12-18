@@ -1,6 +1,10 @@
 ### Vim config for rust development
 Feel free to take advantage of this and mess with it as required.
 
+Setup Instructions in bash folder readme
+
+Might end up making this an install script
+
 Note: The .vimrc file attached has to be moved to the active .vimrc file (I use :f ~/.vimrc but there is probably a better way.
 
 For Ubuntu: The default theming is really ugly with a transparent vim background so if not configured I recommend commenting the bottom line of the .vimrc file out  and setting the backgrounf to dark like this direcly above the colorscheme set:
