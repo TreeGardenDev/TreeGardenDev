@@ -11,9 +11,25 @@ curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 ***nodejs (for coc):***
 
 Ubuntu:
+snap available if desired:
 ```bash
-sudo apt install nodejs npm
+sudo snap install nodejs npm
   ```
+ Ubuntu from binary:
+ ```bash
+ https://nodejs.org/en/download/
+ Extract folder
+ Should go into downloads with version name - [Version]
+ 
+ cd /lib
+ sudo mkdir node
+ cd node
+ sudo mv ~/Downloads/node-[version]-linux-x64 /lib/node/
+ sudo nano ~/.bashrc
+ To end of file:
+ export PATH=/lib/node/node-[version]-linux-x64/bin:$PATH
+
+ ```
  Arch
  ```bash
  sudo pacman -S nodejs # also installs npm
