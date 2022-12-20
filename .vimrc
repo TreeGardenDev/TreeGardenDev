@@ -16,7 +16,7 @@ filetype plugin indent on    " required
 " see :h vundle for more details or wiki for FAQ
 
 set number
-
+set relativenumber
 call plug#begin()
 " The default plugin directory will be as follows:
 "   - Vim (Linux/macOS): '~/.vim/plugged'
