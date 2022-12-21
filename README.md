@@ -12,7 +12,7 @@ For Ubuntu: The default theming is really ugly with a transparent vim background
 ```bash
 set background=dark 
 ```
-
+Setup or Starship coming soon but it is pretty well documented.
 <!--
 **TreeGardenDev/TreeGardenDev** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
 
