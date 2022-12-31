@@ -2,7 +2,7 @@ set nocompatible              " be iMproved, required
 autocmd VimEnter * NERDTree
 filetype off                  " required
 
-
+filetype plugin on
 filetype plugin indent on    " required
 " To ignore plugin indent changes, instead use:
 "filetype plugin on
@@ -24,20 +24,25 @@ call plug#begin()
 "   - e.g. `call plug#begin('~/.vim/plugged')`
 "   - Avoid using standard Vim directory names like 'plugin'
 Plug 'tpope/vim-fugitive'
+Plug 'rhysd/vim-clang-format'
+Plug 'cdelledonne/vim-cmake'
 Plug 'embear/vim-uncrustify'
 Plug 'github/copilot.vim'
 Plug 'OmniSharp/omnisharp-roslyn'
 Plug 'prabirshrestha/vim-lsp'
 Plug 'mattn/vim-lsp-settings'
+"Plug 'altercation/vim-colors-solarized'
 Plug 'octol/vim-cpp-enhanced-highlight'
 Plug 'rust-lang/rust.vim'
 Plug 'preservim/nerdtree'
-Plug 'morhetz/gruvbox'
-Plug 'davidhalter/jedi-vim'
+Plug 'gruvbox-community/gruvbox'
+"Plug 'davidhalter/jedi-vim'
+Plug 'preservim/nerdcommenter'
+Plug 'vim-airline/vim-airline'
 Plug 'Vimjas/vim-python-pep8-indent'
 Plug 'itchyny/vim-cursorword'
+Plug 'cpiger/NeoDebug'
 Plug 'bounceme/poppy.vim'
-"Plug 'OmniSharp/omnisharp-vim'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'dmerejkowsky/vim-ale', {'branch':'master'}
 Plug 'airblade/vim-gitgutter', {'branch':'master'}
@@ -49,10 +54,13 @@ au FileType cs set foldmarker={,}
 au FileType cs set foldtext=substitute(getline(v:foldstart),'{.*','{...}',)
 au FileType cs set foldlevelstart=2  
 let g:ale_fixers={'rust':'rustfmt'}
+let g:gruvbox_contrast_dark = 'hard'
+"let g:gruvbox_colors= 'dark0'
 au! cursormoved * call PoppyInit()
 "let NERDTreeShowHidden=1
 syntax enable
 filetype plugin indent on
+"hi Normal guibg=NONE ctermbg=NONE
 set background=dark
 colorscheme gruvbox
-"hi Normal guibg=NONE ctermbg=NONE
+"colorscheme solarized
