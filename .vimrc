@@ -1,28 +1,15 @@
 set nocompatible              " be iMproved, required
-autocmd VimEnter * NERDTree
 filetype off                  " required
-
+" Start NERDTree. If a file is specified, move the cursor to its window.
+autocmd StdinReadPre * let s:std_in=1
+autocmd VimEnter * NERDTree | if argc() > 0 || exists("s:std_in") | wincmd p | endif
+" Close the tab if NERDTree is the only window remaining in it.
+autocmd BufEnter * if winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() | quit | endif
 filetype plugin on
 filetype plugin indent on    " required
-" To ignore plugin indent changes, instead use:
-"filetype plugin on
-"
-" Brief help
-" :PluginList       - lists configured plugins
-" :PluginInstall    - installs plugins; append `!` to update or just :PluginUpdate
-" :PluginSearch foo - searches for foo; append `!` to refresh local cache
-" :PluginClean      - confirms removal of unused plugins; append `!` to auto-approve removal
-"
 set number
 set relativenumber
 call plug#begin()
-" The default plugin directory will be as follows:
-"   - Vim (Linux/macOS): '~/.vim/plugged'
-"   - Vim (Windows): '~/vimfiles/plugged'
-"   - Neovim (Linux/macOS/Windows): stdpath('data') . '/plugged'
-" You can specify a custom plugin directory by passing it as the argument
-"   - e.g. `call plug#begin('~/.vim/plugged')`
-"   - Avoid using standard Vim directory names like 'plugin'
 Plug 'tpope/vim-fugitive'
 Plug 'rhysd/vim-clang-format'
 Plug 'cdelledonne/vim-cmake'
@@ -32,12 +19,15 @@ Plug 'OmniSharp/omnisharp-roslyn'
 Plug 'prabirshrestha/vim-lsp'
 Plug 'mattn/vim-lsp-settings'
 "Plug 'altercation/vim-colors-solarized'
+Plug 'sheerun/vim-polyglot'
+Plug 'pineapplegiant/spaceduck', { 'branch': 'main' }
 Plug 'octol/vim-cpp-enhanced-highlight'
 Plug 'rust-lang/rust.vim'
 Plug 'preservim/nerdtree'
 Plug 'gruvbox-community/gruvbox'
 "Plug 'davidhalter/jedi-vim'
 Plug 'preservim/nerdcommenter'
+"Plug 'mhinz/vim-startify'
 Plug 'vim-airline/vim-airline'
 Plug 'Vimjas/vim-python-pep8-indent'
 Plug 'itchyny/vim-cursorword'
@@ -54,6 +44,9 @@ au FileType cs set foldmarker={,}
 au FileType cs set foldtext=substitute(getline(v:foldstart),'{.*','{...}',)
 au FileType cs set foldlevelstart=2  
 let g:ale_fixers={'rust':'rustfmt'}
+autocmd BufNew,BufRead *.asm set ft=nasm
+autocmd BufNew,BufRead *.inc set ft=nasm
+autocmd BufNew,BufRead *.s set ft=nasm
 let g:gruvbox_contrast_dark = 'hard'
 "let g:gruvbox_colors= 'dark0'
 au! cursormoved * call PoppyInit()
@@ -61,6 +54,13 @@ au! cursormoved * call PoppyInit()
 syntax enable
 filetype plugin indent on
 "hi Normal guibg=NONE ctermbg=NONE
-set background=dark
-colorscheme gruvbox
+    if exists('+termguicolors')
+      let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+      let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+      set termguicolors
+    endif
+
+   colorscheme spaceduck
+"set background=dark
+"colorscheme gruvbox
 "colorscheme solarized
