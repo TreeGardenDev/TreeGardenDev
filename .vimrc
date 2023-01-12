@@ -33,7 +33,7 @@ Plug 'Vimjas/vim-python-pep8-indent'
 Plug 'itchyny/vim-cursorword'
 Plug 'cpiger/NeoDebug'
 Plug 'bounceme/poppy.vim'
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
+"Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'dmerejkowsky/vim-ale', {'branch':'master'}
 Plug 'airblade/vim-gitgutter', {'branch':'master'}
 call plug#end()
@@ -47,10 +47,11 @@ let g:ale_fixers={'rust':'rustfmt'}
 autocmd BufNew,BufRead *.asm set ft=nasm
 autocmd BufNew,BufRead *.inc set ft=nasm
 autocmd BufNew,BufRead *.s set ft=nasm
+autocmd BufEnter NERD_tree_* | execute 'normal R'
 let g:gruvbox_contrast_dark = 'hard'
 "let g:gruvbox_colors= 'dark0'
 au! cursormoved * call PoppyInit()
-"let NERDTreeShowHidden=1
+let NERDTreeShowHidden=1
 syntax enable
 filetype plugin indent on
 "hi Normal guibg=NONE ctermbg=NONE
