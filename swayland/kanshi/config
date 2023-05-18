@@ -1,0 +1,11 @@
+profile {
+	output eDP-1 disable
+	output HDMI-A-2 mode 3840x2160@60Hz position 0,0
+}
+profile {
+	output eDP-1 disable
+    output 'Samsung Electric Company SAMSUNG Unknown' mode 3840x2160@60Hz position 0,0
+}
+profile {
+	output eDP-1 enable mode 1920x1080 position 0,0
+}
