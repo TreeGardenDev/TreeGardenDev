@@ -1,5 +1,5 @@
 # This file is a modified version based on default i3-config-wizard config
-# source is available here:
+# source is available heree
 # https://raw.githubusercontent.com/endeavouros-team/endeavouros-i3wm-setup/master/.config/i3/config
 # Maintainer: joekamprad [joekamprad@endeavouros.com]
 # https://endeavouros.com
@@ -13,17 +13,6 @@ exec_always --no-startup-id export TUIR_EDITOR=nvim
 exec_always --no-startup-id kanshi
 exec_always --no-startup-id spotifyd 
 focus_follows_mouse yes
-#exec_always --no-startup-id 'xmodmap  ~/.Xmodmap'
-#exec_always '--no-startup-id kitty -e export TUIR_EDITOR=nvim'
-# iconic font icon search: https://fontawesome.com/v4.7/cheatsheet/
-#
-# --> to update this run the following command (will backup existing setup file)
-# wget --backups=1 https://raw.githubusercontent.com/endeavouros-team/endeavouros-i3wm-setup/main/.config/i3/config -P ~/.config/i3/
-#
-# Endeavouros-i3 config file
-# Source for complete framework of our i3 config and theming here: https://github.com/endeavouros-team/endeavouros-i3wm-setup
-# EndeavourOS wiki holds some Information also: https://discovery.endeavouros.com/window-tiling-managers/i3-wm/
-# Please see http://i3wm.org/docs/userguide.html for the official i3 reference!
 
 #######################
 # config starts here: #
@@ -44,14 +33,11 @@ set $mod Mod4
 # workspace layout: #
 #####################
 
-# default i3 tiling mode:
 workspace_layout default
 
-# i3 stacking layout:
 # Each window will be fullscreen and tabbed top to bottom.
 #workspace_layout stacking
 
-# i3 tabbed layout:
 # Each new window will open fullscreen as a tab (left to right)
 #workspace_layout tabbed
 set $menu wofi --hide-scroll | xargs swaymsg exec --
@@ -60,7 +46,8 @@ bindsym $mod+d exec $menu
 bindsym $mod+Shift+z exec zathura
 bindsym $mod+Shift+p exec cpupower-gui -p
 bindsym $mod+Shift+o exec cpupower-gui -b
-#bindsym $mod+Shift+b exec 'cpupower frequency-set --governor performance'
+bindsym $mod+Shift+b exec bitwarden-desktop
+#bindsym $mod+Shift+++b exec 'cpupower frequency-set --governor performance'
 ##############################
 # extra options for windows: #
 ##############################
@@ -79,7 +66,7 @@ gaps outer 2
 #default_border normal
 
 # window title alignment
-#title_align center
+title_align center
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
@@ -132,10 +119,10 @@ bindsym $mod+Shift+0    move container to workspace  10
 # Pressing right will grow the window's width.
 # Pressing up will shrink the window's height.
 # Pressing down will grow the window's height.
-#        bindsym j resize shrink width 10 px or 10 ppt
-#        bindsym k resize grow height 10 px or 10 ppt
-#        bindsym l resize shrink height 10 px or 10 ppt
-#        bindsym ntilde resize grow width 10 px or 10 ppt
+        bindsym $mod+Ctrl+h resize shrink width 50 px or 50 ppt
+        bindsym $mod+Ctrl+k resize grow height 50 px or 50 ppt
+        bindsym $mod+Ctrl+j resize shrink height 50 px or 50 ppt
+        bindsym $mod+Ctrl+l resize grow width 50 px or 50 ppt
 
 # same bindings, but for the arrow keys
 #	bindsym Left resize shrink width 10 px or 10 ppt
@@ -249,15 +236,18 @@ bindsym $mod+Shift+n exec ~/.config/i3/scripts/empty_workspace
 # Multimedia Keys
 
 # volume
-bindsym XF86AudioRaiseVolume exec pactl set-sink-volume alsa_output.pci-0000_00_1f.3.3.analog-stereo +10%; exec pactl set-sink-volume  bluez_output.74_45_CE_6F_AB_89.1 +10%
-bindsym XF86AudioLowerVolume exec pactl set-sink-volume alsa_output.pci-0000_00_1f.3.3.analog-stereo -10%; exec pactl set-sink-volume  bluez_output.74_45_CE_6F_AB_89.1 -10%
+bindsym XF86AudioRaiseVolume exec pactl set-sink-volume alsa_output.pci-0000_00_1f.3.analog-stereo +10%; exec pactl set-sink-volume bluez_output.74_45_CE_6F_AB_89.1 +10%
+bindsym XF86AudioLowerVolume exec pactl set-sink-volume alsa_output.pci-0000_00_1f.3.analog-stereo -10%; exec pactl set-sink-volume bluez_output.74_45_CE_6F_AB_89.1 -10%
 
 # gradular volume control
-bindsym $mod+XF86AudioRaiseVolume exec pactl set-sink-volume alsa_output.pci-0000_00_1f.3.3.analog-stereo +1%
-bindsym $mod+XF86AudioLowerVolume exec pactl set-sink-volume alsa_output.pci-0000_00_1f.3.3.analog-stereo -1%
+bindsym $mod+XF86AudioRaiseVolume exec pactl set-sink-volume alsa_output.pci-0000_00_1f.3.analog-stereo +1%
+bindsym $mod+XF86AudioLowerVolume exec pactl set-sink-volume alsa_output.pci-0000_00_1f.3.analog-stereo -1%
 
 # mute
-bindsym XF86AudioMute exec pactl set-sink-mute alsa_output.pci-0000_00_1f.3.3.analog-stereo toggle; exec pactl set-sink-mute bluez_output.74_45_CE_6F_AB_89.1 toggle
+bindsym XF86AudioMute exec pactl set-sink-mute alsa_output.pci-0000_00_1f.3.analog-stereo toggle; exec pactl set-sink-mute bluez_output.74_45_CE_6F_AB_89.1 toggle
+
+#mute microphone
+bindsym XF86AudioMicMute exec pactl set-source-mute alsa_input.pci-0000_00_1f.3.analog-stereo toggle
 
 # audio control
 bindsym XF86AudioPlay exec playerctl play
@@ -270,6 +260,7 @@ bindsym XF86AudioPrev exec playerctl previous
 
 ## App shortcuts
 bindsym $mod+w exec /usr/bin/librewolf
+bindsym $mod+Shift+w exec /usr/bin/qutebrowser
 #bindsym $mod+n exec /usr/bin/thunar
 bindsym $mod+n exec kitty -e nmtui
 bindsym $mod+b exec kitty -e bluetuith
@@ -420,13 +411,14 @@ exec --no-startup-id dbus-launch dunst --config ~/.config/dunst/dunstrc
 #exec --no-startup-id xfce4-clipman
 
 ##################
-# floating rules #
+# floating rules #for_window [app_id="ncmpcpp"] floating enablfor_window [app_id="ncmpcpp"] floating enabl
 ##################
 
 # set floating (nontiling) for apps needing it
 for_window [class="Yad" instance="yad"] floating enable
 for_window [class="Galculator" instance="galculator"] floating enable
 for_window [class="Blueberry.py" instance="blueberry.py"] floating enable
+for_window [class="Bitwarden" instance="bitwarden"] floating enable
 
 # set floating (nontiling) for special apps
 for_window [class="Xsane" instance="xsane"] floating enable
@@ -442,10 +434,10 @@ for_window [class="urxvt"] border pixel 1
 
 # set size of floating window
 #for_window [window_role="(?i)GtkFileChooserDialog"] resize set 640 480 #to set size of file choose dialog
-#for_window [class=".*"] resize set 640 480 #to change size of all floating windows 
+#for_window [class="Bitwarden"] resize set 480 480 #to change size of all floating windows 
 
 # set position of floating window
-#for_window [class=".*"] move position center
+for_window [class="Bitwarden"] move position right
 
 ######################################
 # color settings for bar and windows #
@@ -561,7 +553,7 @@ client.urgent		    	$darkblue $urgentred	$white		$yellowbrown	$yellowbrown
 #		-config ~/.config/rofi/rofidmenu.rasi
 
 ## rofi bindings for window menu ($mod+t /F10 optional disabled)
-bindsym $mod+Ctrl+l exec swaylock
+bindsym $mod+Shift+Ctrl+l exec swaylock
 bindsym $mod+t exec wofi -show window \
 		-config ~/.config/rofi/rofidmenu.rasi
 
