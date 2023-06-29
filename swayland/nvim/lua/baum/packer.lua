@@ -12,13 +12,18 @@ return require('packer').startup(function(use)
 	-- or                            , branch = '0.1.x',
 	  requires = { {'nvim-lua/plenary.nvim'} }
 	}
+    use "lukas-reineke/indent-blankline.nvim"
 	use 'marko-cerovac/material.nvim'
+    use 'lervag/vimtex'
 	use ('nvim-treesitter/nvim-treesitter', {run = ':TSUpdate'})
 	use ('nvim-treesitter/playground')
 	use ('nvim-lua/plenary.nvim')
 	use 'ThePrimeagen/harpoon'
 	use ('mbbill/undotree')
 	use ('tpope/vim-fugitive')
+    -- nvim v0.7.2
+        -- optional for floating window border decoration
+      
 	 use ('rust-lang/rust.vim')
 	 use {
 		  'VonHeikemen/lsp-zero.nvim',
@@ -43,4 +48,11 @@ return require('packer').startup(function(use)
     use 'simrat39/rust-tools.nvim'
     -- Debugging
     use 'mfussenegger/nvim-dap'
+    use({
+    "kdheepak/lazygit.nvim",
+    -- optional for floating window border decoration
+    requires = {
+        "nvim-lua/plenary.nvim",
+    },
+})
   end)
