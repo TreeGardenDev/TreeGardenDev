@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+#acpi --battery | sed -n '3 p' | awk '{print $2, $3, $4, $5}' ;
+
+op=$(( acpi --battery | awk '{print $2, $3, $4, $5}' ; 
+echo "CPU Usage: "$(iostat -c | awk '{print $1+$3}'  | sed -n '4 p')"%" ; 
+echo "Memory Remaining: "$(cat /proc/meminfo | sed -n '2 p'  | awk '{print $2, $3}') ; 
+echo "CPU Temp "$(sensors | sed -n '12 p' | awk '{print $2}') ; 
+echo "Fan: "$(sensors | sed -n '11 p' | awk '{print $2, $3}');
+iwconfig wlan0 | sed -n '1 p' |awk '{print $4}' ;
+volume=$(pactl list sinks | sed -n '10 p' | awk '{print $5}'); 
+echo "Volume: $volume" ; timedatectl | sed -n '1 p' | awk '{print $3,$4, $5}')| cat |  
+    wofi -c ~/.config/wofi/scripts/listsysconf -s ~/.config/wofi/scripts/listsys.css --xoffset 0 --yoffset 0 --width 400 --height 400 -i --dmenu | awk '{print tolower($2)}')

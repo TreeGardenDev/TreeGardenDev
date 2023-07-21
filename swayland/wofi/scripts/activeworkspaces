@@ -1,0 +1,22 @@
+#!/bin/bash
+
+# Get available windows
+#windows=$(swaymsg -t get_tree | jq -r '.nodes | .[] | .nodes | . [] | select(.nodes != null) | .nodes | .[] | select(.name != null) | "\(.id?) \(.name?)"')
+
+
+
+#windows=$(swaymsg -t get_tree | jq -r '.nodes[1].nodes[].nodes[] | .. | (.id|tostring) + " " + .name?' | grep -e "[0-9]* ."  )
+#swaymsg -t get_tree | jq -r '.nodes[1].nodes[].nodes[] | .. | (.id|tostring) + " " + .name?' | grep -e "[0-9]* ."  )
+#swaymsg -t get_tree | jq -r '.nodes | .[] | .nodes | . [] | select(.nodes != null) | .nodes | .[] | select(.name != null) | "\(.id?) \(.name?)"'
+
+# Select window with rofi
+
+
+#print the workspace number and representation with the json attribut name focus on the workspace based on the id
+#
+windows=$(swaymsg -t get_workspaces | jq -r '.[] | "\(.num) \(.representation) \(.name)"')
+
+selected=$(echo "$windows" | wofi --xoffset 0 --yoffset 0 --width 1000 --height 400 --dmenu -i | awk '{print $1}')
+
+# Tell sway to focus said window
+swaymsg [con_id="$selected"] focus
