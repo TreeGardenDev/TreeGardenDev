@@ -1,13 +1,9 @@
-### Vim config for rust development
-Feel free to take advantage of this and mess with it as required.
+### Setup personal environments ###
 
-Setup Instructions in bash folder readme
+i3 and sway setup, neovim and other QOL improvements/hacks for myself
 
-Might end up making this an install script
 
-Note: The .vimrc file attached has to be moved to the active .vimrc file (I use :w ~/.vimrc but there is probably a better way.
 
-For Ubuntu: The default theming is really ugly with a transparent vim background so if not pre-configured I recommend commenting the bottom line of the .vimrc file out  and setting the background to dark like this directly above the colorscheme set:
 
 ```bash
 set background=dark 
