@@ -2,13 +2,8 @@
 
 i3 and sway setup, neovim and other QOL improvements/hacks for myself
 
+Only tested or otherwise worked on in Arch Linux
 
-
-
-```bash
-set background=dark 
-```
-Setup for Starship coming soon but it is pretty well documented.
 <!--
 **TreeGardenDev/TreeGardenDev** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
 
