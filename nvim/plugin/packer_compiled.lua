@@ -79,15 +79,53 @@ _G.packer_plugins = {
     path = "/home/baum/.local/share/nvim/site/pack/packer/start/LuaSnip",
     url = "https://github.com/L3MON4D3/LuaSnip"
   },
+  catppuccin = {
+    loaded = true,
+    path = "/home/baum/.local/share/nvim/site/pack/packer/start/catppuccin",
+    url = "https://github.com/catppuccin/nvim"
+  },
+  ["cmp-buffer"] = {
+    loaded = true,
+    path = "/home/baum/.local/share/nvim/site/pack/packer/start/cmp-buffer",
+    url = "https://github.com/hrsh7th/cmp-buffer"
+  },
   ["cmp-nvim-lsp"] = {
     loaded = true,
     path = "/home/baum/.local/share/nvim/site/pack/packer/start/cmp-nvim-lsp",
     url = "https://github.com/hrsh7th/cmp-nvim-lsp"
   },
+  ["cmp-path"] = {
+    loaded = true,
+    path = "/home/baum/.local/share/nvim/site/pack/packer/start/cmp-path",
+    url = "https://github.com/hrsh7th/cmp-path"
+  },
+  ["copilot-cmp"] = {
+    config = { "\27LJ\2\n9\0\0\3\0\3\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\nsetup\16copilot_cmp\frequire\0" },
+    load_after = {},
+    loaded = true,
+    needs_bufread = false,
+    path = "/home/baum/.local/share/nvim/site/pack/packer/opt/copilot-cmp",
+    url = "https://github.com/zbirenbaum/copilot-cmp"
+  },
+  ["copilot.lua"] = {
+    loaded = true,
+    path = "/home/baum/.local/share/nvim/site/pack/packer/start/copilot.lua",
+    url = "https://github.com/zbirenbaum/copilot.lua"
+  },
   harpoon = {
     loaded = true,
     path = "/home/baum/.local/share/nvim/site/pack/packer/start/harpoon",
     url = "https://github.com/ThePrimeagen/harpoon"
+  },
+  ["indent-blankline.nvim"] = {
+    loaded = true,
+    path = "/home/baum/.local/share/nvim/site/pack/packer/start/indent-blankline.nvim",
+    url = "https://github.com/lukas-reineke/indent-blankline.nvim"
+  },
+  ["lazygit.nvim"] = {
+    loaded = true,
+    path = "/home/baum/.local/share/nvim/site/pack/packer/start/lazygit.nvim",
+    url = "https://github.com/kdheepak/lazygit.nvim"
   },
   ["lsp-zero.nvim"] = {
     loaded = true,
@@ -108,6 +146,20 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/baum/.local/share/nvim/site/pack/packer/start/material.nvim",
     url = "https://github.com/marko-cerovac/material.nvim"
+  },
+  ["neoai.nvim"] = {
+    commands = { "NeoAI", "NeoAIOpen", "NeoAIClose", "NeoAIToggle", "NeoAIContext", "NeoAIContextOpen", "NeoAIContextClose", "NeoAIInject", "NeoAIInjectCode", "NeoAIInjectContext", "NeoAIInjectContextCode" },
+    config = { "\27LJ\2\n\v\0\1\1\0\0\0\1L\0\2\0Í\3\1\0\a\0\23\0\0306\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\4\0005\3\3\0=\3\5\0024\3\3\0005\4\6\0>\4\1\3=\3\a\0025\3\t\0003\4\b\0=\4\n\0036\4\0\0'\6\v\0B\4\2\0029\4\f\4=\4\r\3=\3\14\0025\3\15\0=\3\16\0025\3\17\0=\3\18\0025\3\20\0005\4\19\0=\4\21\3=\3\22\2B\0\2\1K\0\1\0\fopen_ai\fapi_key\1\0\0\1\0\1\benv\19OPENAI_API_KEY\rmappings\1\0\2\16select_down\n<C-j>\14select_up\n<C-k>\vinject\1\0\1\17cutoff_width\3K\20register_output\6c\26extract_code_snippets\16neoai.utils\6g\1\0\0\0\vmodels\1\0\2\nmodel\18gpt-3.5-turbo\tname\vopenai\aui\1\0\0\1\0\5\21input_popup_text\vPrompt\22output_popup_text\nNeoAI\vsubmit\f<Enter>\24output_popup_height\3P\nwidth\3\30\nsetup\nneoai\frequire\0" },
+    loaded = false,
+    needs_bufread = false,
+    only_cond = false,
+    path = "/home/baum/.local/share/nvim/site/pack/packer/opt/neoai.nvim",
+    url = "https://github.com/Bryley/neoai.nvim"
+  },
+  ["nui.nvim"] = {
+    loaded = true,
+    path = "/home/baum/.local/share/nvim/site/pack/packer/start/nui.nvim",
+    url = "https://github.com/MunifTanjim/nui.nvim"
   },
   ["nvim-cmp"] = {
     loaded = true,
@@ -168,10 +220,106 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/baum/.local/share/nvim/site/pack/packer/start/vim-fugitive",
     url = "https://github.com/tpope/vim-fugitive"
+  },
+  vimtex = {
+    loaded = true,
+    path = "/home/baum/.local/share/nvim/site/pack/packer/start/vimtex",
+    url = "https://github.com/lervag/vimtex"
   }
 }
 
 time([[Defining packer_plugins]], false)
+-- Load plugins in order defined by `after`
+time([[Sequenced loading]], true)
+vim.cmd [[ packadd copilot.lua ]]
+vim.cmd [[ packadd copilot-cmp ]]
+
+-- Config for: copilot-cmp
+try_loadstring("\27LJ\2\n9\0\0\3\0\3\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\nsetup\16copilot_cmp\frequire\0", "config", "copilot-cmp")
+
+time([[Sequenced loading]], false)
+
+-- Command lazy-loads
+time([[Defining lazy-load commands]], true)
+pcall(vim.api.nvim_create_user_command, 'NeoAI', function(cmdargs)
+          require('packer.load')({'neoai.nvim'}, { cmd = 'NeoAI', l1 = cmdargs.line1, l2 = cmdargs.line2, bang = cmdargs.bang, args = cmdargs.args, mods = cmdargs.mods }, _G.packer_plugins)
+        end,
+        {nargs = '*', range = true, bang = true, complete = function()
+          require('packer.load')({'neoai.nvim'}, {}, _G.packer_plugins)
+          return vim.fn.getcompletion('NeoAI ', 'cmdline')
+      end})
+pcall(vim.api.nvim_create_user_command, 'NeoAIOpen', function(cmdargs)
+          require('packer.load')({'neoai.nvim'}, { cmd = 'NeoAIOpen', l1 = cmdargs.line1, l2 = cmdargs.line2, bang = cmdargs.bang, args = cmdargs.args, mods = cmdargs.mods }, _G.packer_plugins)
+        end,
+        {nargs = '*', range = true, bang = true, complete = function()
+          require('packer.load')({'neoai.nvim'}, {}, _G.packer_plugins)
+          return vim.fn.getcompletion('NeoAIOpen ', 'cmdline')
+      end})
+pcall(vim.api.nvim_create_user_command, 'NeoAIClose', function(cmdargs)
+          require('packer.load')({'neoai.nvim'}, { cmd = 'NeoAIClose', l1 = cmdargs.line1, l2 = cmdargs.line2, bang = cmdargs.bang, args = cmdargs.args, mods = cmdargs.mods }, _G.packer_plugins)
+        end,
+        {nargs = '*', range = true, bang = true, complete = function()
+          require('packer.load')({'neoai.nvim'}, {}, _G.packer_plugins)
+          return vim.fn.getcompletion('NeoAIClose ', 'cmdline')
+      end})
+pcall(vim.api.nvim_create_user_command, 'NeoAIToggle', function(cmdargs)
+          require('packer.load')({'neoai.nvim'}, { cmd = 'NeoAIToggle', l1 = cmdargs.line1, l2 = cmdargs.line2, bang = cmdargs.bang, args = cmdargs.args, mods = cmdargs.mods }, _G.packer_plugins)
+        end,
+        {nargs = '*', range = true, bang = true, complete = function()
+          require('packer.load')({'neoai.nvim'}, {}, _G.packer_plugins)
+          return vim.fn.getcompletion('NeoAIToggle ', 'cmdline')
+      end})
+pcall(vim.api.nvim_create_user_command, 'NeoAIContext', function(cmdargs)
+          require('packer.load')({'neoai.nvim'}, { cmd = 'NeoAIContext', l1 = cmdargs.line1, l2 = cmdargs.line2, bang = cmdargs.bang, args = cmdargs.args, mods = cmdargs.mods }, _G.packer_plugins)
+        end,
+        {nargs = '*', range = true, bang = true, complete = function()
+          require('packer.load')({'neoai.nvim'}, {}, _G.packer_plugins)
+          return vim.fn.getcompletion('NeoAIContext ', 'cmdline')
+      end})
+pcall(vim.api.nvim_create_user_command, 'NeoAIContextOpen', function(cmdargs)
+          require('packer.load')({'neoai.nvim'}, { cmd = 'NeoAIContextOpen', l1 = cmdargs.line1, l2 = cmdargs.line2, bang = cmdargs.bang, args = cmdargs.args, mods = cmdargs.mods }, _G.packer_plugins)
+        end,
+        {nargs = '*', range = true, bang = true, complete = function()
+          require('packer.load')({'neoai.nvim'}, {}, _G.packer_plugins)
+          return vim.fn.getcompletion('NeoAIContextOpen ', 'cmdline')
+      end})
+pcall(vim.api.nvim_create_user_command, 'NeoAIContextClose', function(cmdargs)
+          require('packer.load')({'neoai.nvim'}, { cmd = 'NeoAIContextClose', l1 = cmdargs.line1, l2 = cmdargs.line2, bang = cmdargs.bang, args = cmdargs.args, mods = cmdargs.mods }, _G.packer_plugins)
+        end,
+        {nargs = '*', range = true, bang = true, complete = function()
+          require('packer.load')({'neoai.nvim'}, {}, _G.packer_plugins)
+          return vim.fn.getcompletion('NeoAIContextClose ', 'cmdline')
+      end})
+pcall(vim.api.nvim_create_user_command, 'NeoAIInject', function(cmdargs)
+          require('packer.load')({'neoai.nvim'}, { cmd = 'NeoAIInject', l1 = cmdargs.line1, l2 = cmdargs.line2, bang = cmdargs.bang, args = cmdargs.args, mods = cmdargs.mods }, _G.packer_plugins)
+        end,
+        {nargs = '*', range = true, bang = true, complete = function()
+          require('packer.load')({'neoai.nvim'}, {}, _G.packer_plugins)
+          return vim.fn.getcompletion('NeoAIInject ', 'cmdline')
+      end})
+pcall(vim.api.nvim_create_user_command, 'NeoAIInjectCode', function(cmdargs)
+          require('packer.load')({'neoai.nvim'}, { cmd = 'NeoAIInjectCode', l1 = cmdargs.line1, l2 = cmdargs.line2, bang = cmdargs.bang, args = cmdargs.args, mods = cmdargs.mods }, _G.packer_plugins)
+        end,
+        {nargs = '*', range = true, bang = true, complete = function()
+          require('packer.load')({'neoai.nvim'}, {}, _G.packer_plugins)
+          return vim.fn.getcompletion('NeoAIInjectCode ', 'cmdline')
+      end})
+pcall(vim.api.nvim_create_user_command, 'NeoAIInjectContext', function(cmdargs)
+          require('packer.load')({'neoai.nvim'}, { cmd = 'NeoAIInjectContext', l1 = cmdargs.line1, l2 = cmdargs.line2, bang = cmdargs.bang, args = cmdargs.args, mods = cmdargs.mods }, _G.packer_plugins)
+        end,
+        {nargs = '*', range = true, bang = true, complete = function()
+          require('packer.load')({'neoai.nvim'}, {}, _G.packer_plugins)
+          return vim.fn.getcompletion('NeoAIInjectContext ', 'cmdline')
+      end})
+pcall(vim.api.nvim_create_user_command, 'NeoAIInjectContextCode', function(cmdargs)
+          require('packer.load')({'neoai.nvim'}, { cmd = 'NeoAIInjectContextCode', l1 = cmdargs.line1, l2 = cmdargs.line2, bang = cmdargs.bang, args = cmdargs.args, mods = cmdargs.mods }, _G.packer_plugins)
+        end,
+        {nargs = '*', range = true, bang = true, complete = function()
+          require('packer.load')({'neoai.nvim'}, {}, _G.packer_plugins)
+          return vim.fn.getcompletion('NeoAIInjectContextCode ', 'cmdline')
+      end})
+time([[Defining lazy-load commands]], false)
+
 
 _G._packer.inside_compile = false
 if _G._packer.needs_bufread == true then
