@@ -80,7 +80,6 @@ return require('packer').startup(function(use)
     -- nvim v0.7.2
         -- optional for floating window border decoration
     use { "zbirenbaum/copilot.lua" }
-    use  { "catppuccin/nvim", as = "catppuccin" }
     use {
         "zbirenbaum/copilot-cmp",
           after = { "copilot.lua" },

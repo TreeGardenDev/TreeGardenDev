@@ -79,11 +79,6 @@ _G.packer_plugins = {
     path = "/home/baum/.local/share/nvim/site/pack/packer/start/LuaSnip",
     url = "https://github.com/L3MON4D3/LuaSnip"
   },
-  catppuccin = {
-    loaded = true,
-    path = "/home/baum/.local/share/nvim/site/pack/packer/start/catppuccin",
-    url = "https://github.com/catppuccin/nvim"
-  },
   ["cmp-buffer"] = {
     loaded = true,
     path = "/home/baum/.local/share/nvim/site/pack/packer/start/cmp-buffer",
@@ -149,7 +144,7 @@ _G.packer_plugins = {
   },
   ["neoai.nvim"] = {
     commands = { "NeoAI", "NeoAIOpen", "NeoAIClose", "NeoAIToggle", "NeoAIContext", "NeoAIContextOpen", "NeoAIContextClose", "NeoAIInject", "NeoAIInjectCode", "NeoAIInjectContext", "NeoAIInjectContextCode" },
-    config = { "\27LJ\2\n\v\0\1\1\0\0\0\1L\0\2\0Í\3\1\0\a\0\23\0\0306\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\4\0005\3\3\0=\3\5\0024\3\3\0005\4\6\0>\4\1\3=\3\a\0025\3\t\0003\4\b\0=\4\n\0036\4\0\0'\6\v\0B\4\2\0029\4\f\4=\4\r\3=\3\14\0025\3\15\0=\3\16\0025\3\17\0=\3\18\0025\3\20\0005\4\19\0=\4\21\3=\3\22\2B\0\2\1K\0\1\0\fopen_ai\fapi_key\1\0\0\1\0\1\benv\19OPENAI_API_KEY\rmappings\1\0\2\16select_down\n<C-j>\14select_up\n<C-k>\vinject\1\0\1\17cutoff_width\3K\20register_output\6c\26extract_code_snippets\16neoai.utils\6g\1\0\0\0\vmodels\1\0\2\nmodel\18gpt-3.5-turbo\tname\vopenai\aui\1\0\0\1\0\5\21input_popup_text\vPrompt\22output_popup_text\nNeoAI\vsubmit\f<Enter>\24output_popup_height\3P\nwidth\3\30\nsetup\nneoai\frequire\0" },
+    config = { "\27LJ\2\n\v\0\1\1\0\0\0\1L\0\2\0Í\3\1\0\a\0\23\0\0306\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\4\0005\3\3\0=\3\5\0024\3\3\0005\4\6\0>\4\1\3=\3\a\0025\3\t\0003\4\b\0=\4\n\0036\4\0\0'\6\v\0B\4\2\0029\4\f\4=\4\r\3=\3\14\0025\3\15\0=\3\16\0025\3\17\0=\3\18\0025\3\20\0005\4\19\0=\4\21\3=\3\22\2B\0\2\1K\0\1\0\fopen_ai\fapi_key\1\0\0\1\0\1\benv\19OPENAI_API_KEY\rmappings\1\0\2\14select_up\n<C-k>\16select_down\n<C-j>\vinject\1\0\1\17cutoff_width\3K\20register_output\6c\26extract_code_snippets\16neoai.utils\6g\1\0\0\0\vmodels\1\0\2\nmodel\18gpt-3.5-turbo\tname\vopenai\aui\1\0\0\1\0\5\21input_popup_text\vPrompt\22output_popup_text\nNeoAI\vsubmit\f<Enter>\24output_popup_height\3P\nwidth\3\30\nsetup\nneoai\frequire\0" },
     loaded = false,
     needs_bufread = false,
     only_cond = false,
