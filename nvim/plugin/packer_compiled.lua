@@ -49,8 +49,8 @@ local function save_profiles(threshold)
 end
 
 time([[Luarocks path setup]], true)
-local package_path_str = "/home/baum/.cache/nvim/packer_hererocks/2.1.0-beta3/share/lua/5.1/?.lua;/home/baum/.cache/nvim/packer_hererocks/2.1.0-beta3/share/lua/5.1/?/init.lua;/home/baum/.cache/nvim/packer_hererocks/2.1.0-beta3/lib/luarocks/rocks-5.1/?.lua;/home/baum/.cache/nvim/packer_hererocks/2.1.0-beta3/lib/luarocks/rocks-5.1/?/init.lua"
-local install_cpath_pattern = "/home/baum/.cache/nvim/packer_hererocks/2.1.0-beta3/lib/lua/5.1/?.so"
+local package_path_str = "/home/baum/.cache/nvim/packer_hererocks/2.1.1692616192/share/lua/5.1/?.lua;/home/baum/.cache/nvim/packer_hererocks/2.1.1692616192/share/lua/5.1/?/init.lua;/home/baum/.cache/nvim/packer_hererocks/2.1.1692616192/lib/luarocks/rocks-5.1/?.lua;/home/baum/.cache/nvim/packer_hererocks/2.1.1692616192/lib/luarocks/rocks-5.1/?/init.lua"
+local install_cpath_pattern = "/home/baum/.cache/nvim/packer_hererocks/2.1.1692616192/lib/lua/5.1/?.so"
 if not string.find(package.path, package_path_str, 1, true) then
   package.path = package.path .. ';' .. package_path_str
 end
@@ -122,6 +122,16 @@ _G.packer_plugins = {
     path = "/home/baum/.local/share/nvim/site/pack/packer/start/lazygit.nvim",
     url = "https://github.com/kdheepak/lazygit.nvim"
   },
+  ["lsp-debug-tools.nvim"] = {
+    loaded = true,
+    path = "/home/baum/.local/share/nvim/site/pack/packer/start/lsp-debug-tools.nvim",
+    url = "https://github.com/ThePrimeagen/lsp-debug-tools.nvim"
+  },
+  ["lsp-inlayhints.nvim"] = {
+    loaded = true,
+    path = "/home/baum/.local/share/nvim/site/pack/packer/start/lsp-inlayhints.nvim",
+    url = "https://github.com/lvimuser/lsp-inlayhints.nvim"
+  },
   ["lsp-zero.nvim"] = {
     loaded = true,
     path = "/home/baum/.local/share/nvim/site/pack/packer/start/lsp-zero.nvim",
@@ -144,7 +154,7 @@ _G.packer_plugins = {
   },
   ["neoai.nvim"] = {
     commands = { "NeoAI", "NeoAIOpen", "NeoAIClose", "NeoAIToggle", "NeoAIContext", "NeoAIContextOpen", "NeoAIContextClose", "NeoAIInject", "NeoAIInjectCode", "NeoAIInjectContext", "NeoAIInjectContextCode" },
-    config = { "\27LJ\2\n\v\0\1\1\0\0\0\1L\0\2\0Í\3\1\0\a\0\23\0\0306\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\4\0005\3\3\0=\3\5\0024\3\3\0005\4\6\0>\4\1\3=\3\a\0025\3\t\0003\4\b\0=\4\n\0036\4\0\0'\6\v\0B\4\2\0029\4\f\4=\4\r\3=\3\14\0025\3\15\0=\3\16\0025\3\17\0=\3\18\0025\3\20\0005\4\19\0=\4\21\3=\3\22\2B\0\2\1K\0\1\0\fopen_ai\fapi_key\1\0\0\1\0\1\benv\19OPENAI_API_KEY\rmappings\1\0\2\14select_up\n<C-k>\16select_down\n<C-j>\vinject\1\0\1\17cutoff_width\3K\20register_output\6c\26extract_code_snippets\16neoai.utils\6g\1\0\0\0\vmodels\1\0\2\nmodel\18gpt-3.5-turbo\tname\vopenai\aui\1\0\0\1\0\5\21input_popup_text\vPrompt\22output_popup_text\nNeoAI\vsubmit\f<Enter>\24output_popup_height\3P\nwidth\3\30\nsetup\nneoai\frequire\0" },
+    config = { "\27LJ\2\n\v\0\1\1\0\0\0\1L\0\2\0Í\3\1\0\a\0\23\0\0306\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\4\0005\3\3\0=\3\5\0024\3\3\0005\4\6\0>\4\1\3=\3\a\0025\3\t\0003\4\b\0=\4\n\0036\4\0\0'\6\v\0B\4\2\0029\4\f\4=\4\r\3=\3\14\0025\3\15\0=\3\16\0025\3\17\0=\3\18\0025\3\20\0005\4\19\0=\4\21\3=\3\22\2B\0\2\1K\0\1\0\fopen_ai\fapi_key\1\0\0\1\0\1\benv\19OPENAI_API_KEY\rmappings\1\0\2\16select_down\n<C-j>\14select_up\n<C-k>\vinject\1\0\1\17cutoff_width\3K\20register_output\6c\26extract_code_snippets\16neoai.utils\6g\1\0\0\0\vmodels\1\0\2\tname\vopenai\nmodel\18gpt-3.5-turbo\aui\1\0\0\1\0\5\nwidth\3\30\21input_popup_text\vPrompt\22output_popup_text\nNeoAI\vsubmit\f<Enter>\24output_popup_height\3P\nsetup\nneoai\frequire\0" },
     loaded = false,
     needs_bufread = false,
     only_cond = false,
@@ -191,16 +201,6 @@ _G.packer_plugins = {
     path = "/home/baum/.local/share/nvim/site/pack/packer/start/plenary.nvim",
     url = "https://github.com/nvim-lua/plenary.nvim"
   },
-  ["rust-tools.nvim"] = {
-    loaded = true,
-    path = "/home/baum/.local/share/nvim/site/pack/packer/start/rust-tools.nvim",
-    url = "https://github.com/simrat39/rust-tools.nvim"
-  },
-  ["rust.vim"] = {
-    loaded = true,
-    path = "/home/baum/.local/share/nvim/site/pack/packer/start/rust.vim",
-    url = "https://github.com/rust-lang/rust.vim"
-  },
   ["telescope.nvim"] = {
     loaded = true,
     path = "/home/baum/.local/share/nvim/site/pack/packer/start/telescope.nvim",
@@ -236,6 +236,20 @@ time([[Sequenced loading]], false)
 
 -- Command lazy-loads
 time([[Defining lazy-load commands]], true)
+pcall(vim.api.nvim_create_user_command, 'NeoAIInjectContext', function(cmdargs)
+          require('packer.load')({'neoai.nvim'}, { cmd = 'NeoAIInjectContext', l1 = cmdargs.line1, l2 = cmdargs.line2, bang = cmdargs.bang, args = cmdargs.args, mods = cmdargs.mods }, _G.packer_plugins)
+        end,
+        {nargs = '*', range = true, bang = true, complete = function()
+          require('packer.load')({'neoai.nvim'}, {}, _G.packer_plugins)
+          return vim.fn.getcompletion('NeoAIInjectContext ', 'cmdline')
+      end})
+pcall(vim.api.nvim_create_user_command, 'NeoAIInjectContextCode', function(cmdargs)
+          require('packer.load')({'neoai.nvim'}, { cmd = 'NeoAIInjectContextCode', l1 = cmdargs.line1, l2 = cmdargs.line2, bang = cmdargs.bang, args = cmdargs.args, mods = cmdargs.mods }, _G.packer_plugins)
+        end,
+        {nargs = '*', range = true, bang = true, complete = function()
+          require('packer.load')({'neoai.nvim'}, {}, _G.packer_plugins)
+          return vim.fn.getcompletion('NeoAIInjectContextCode ', 'cmdline')
+      end})
 pcall(vim.api.nvim_create_user_command, 'NeoAI', function(cmdargs)
           require('packer.load')({'neoai.nvim'}, { cmd = 'NeoAI', l1 = cmdargs.line1, l2 = cmdargs.line2, bang = cmdargs.bang, args = cmdargs.args, mods = cmdargs.mods }, _G.packer_plugins)
         end,
@@ -298,20 +312,6 @@ pcall(vim.api.nvim_create_user_command, 'NeoAIInjectCode', function(cmdargs)
         {nargs = '*', range = true, bang = true, complete = function()
           require('packer.load')({'neoai.nvim'}, {}, _G.packer_plugins)
           return vim.fn.getcompletion('NeoAIInjectCode ', 'cmdline')
-      end})
-pcall(vim.api.nvim_create_user_command, 'NeoAIInjectContext', function(cmdargs)
-          require('packer.load')({'neoai.nvim'}, { cmd = 'NeoAIInjectContext', l1 = cmdargs.line1, l2 = cmdargs.line2, bang = cmdargs.bang, args = cmdargs.args, mods = cmdargs.mods }, _G.packer_plugins)
-        end,
-        {nargs = '*', range = true, bang = true, complete = function()
-          require('packer.load')({'neoai.nvim'}, {}, _G.packer_plugins)
-          return vim.fn.getcompletion('NeoAIInjectContext ', 'cmdline')
-      end})
-pcall(vim.api.nvim_create_user_command, 'NeoAIInjectContextCode', function(cmdargs)
-          require('packer.load')({'neoai.nvim'}, { cmd = 'NeoAIInjectContextCode', l1 = cmdargs.line1, l2 = cmdargs.line2, bang = cmdargs.bang, args = cmdargs.args, mods = cmdargs.mods }, _G.packer_plugins)
-        end,
-        {nargs = '*', range = true, bang = true, complete = function()
-          require('packer.load')({'neoai.nvim'}, {}, _G.packer_plugins)
-          return vim.fn.getcompletion('NeoAIInjectContextCode ', 'cmdline')
       end})
 time([[Defining lazy-load commands]], false)
 

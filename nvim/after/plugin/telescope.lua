@@ -1,7 +1,14 @@
-local builtin = require('telescope.builtin')
-
-vim.keymap.set('n', '<C-n>', builtin.find_files, {})
-vim.keymap.set('n', '<C-p>', builtin.git_files, {})
+local telescope= require('telescope.builtin')
+--.setup{
+--    pickers={
+--        find_files={
+--            hidden=true
+--        }
+--    }
+--}
+vim.keymap.set('n', '<C-n>', telescope.find_files, {})
+vim.keymap.set('n', '<C-p>', telescope.git_files, {})
+vim.api.nvim_set_keymap('n', '<leader>n', ':lua require"telescope.builtin".find_files({ hidden = true })<CR>', {noremap = true, silent = true})
 vim.keymap.set('n', '<C-s>', function()
-	builtin.grep_string({ search = vim.fn.input("Grep > ")});
+	telescope.grep_string({ search = vim.fn.input("Grep > ")});
 end)

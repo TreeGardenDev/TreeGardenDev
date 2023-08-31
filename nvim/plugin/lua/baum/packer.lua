@@ -9,6 +9,11 @@ return require('packer').startup(function(use)
     use 'MunifTanjim/nui.nvim'
     use 'hrsh7th/cmp-buffer'
     use 'hrsh7th/cmp-path'
+    use 'ThePrimeagen/lsp-debug-tools.nvim'
+    use 'lvimuser/lsp-inlayhints.nvim'
+    --use 'simrat39/rust-tools.nvim'
+    --use 'p00f/clangd_extensions.nvim'
+
     use ({
     "Bryley/neoai.nvim",
 	require = { "MunifTanjim/nui.nvim" },
@@ -87,7 +92,6 @@ return require('packer').startup(function(use)
             require("copilot_cmp").setup()
           end
         }
-	 use ('rust-lang/rust.vim')
 	 use {
 		  'VonHeikemen/lsp-zero.nvim',
 		  branch = 'v2.x',
@@ -108,7 +112,25 @@ return require('packer').startup(function(use)
 		  }
 	}
     use 'neovim/nvim-lspconfig'
-    use 'simrat39/rust-tools.nvim'
+    --use {
+    --      "neovim/nvim-lspconfig",
+    --      opt = true,
+    --      event = { "BufReadPre" },
+    --      wants = {
+    --        "inlay-hints.nvim",
+    --      },
+    --      config = function()
+    --        require("config.lsp").setup()
+    --      end,
+    --      requires = {
+    --        {
+    --          "simrat39/inlay-hints.nvim",
+    --          config = function()
+    --            require("inlay-hints").setup()
+    --          end,
+    --        },
+    --      },
+    --    }
     -- Debugging
     use 'mfussenegger/nvim-dap'
     use({

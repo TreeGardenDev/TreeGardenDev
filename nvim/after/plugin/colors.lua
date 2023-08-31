@@ -3,7 +3,7 @@ local colors = require 'material.colors'
 
 -- setup must be called before loading
 material.setup{
-custom_highlights = {
+    custom_highlights = {
         LineNr = { fg = '#cccccc' }
     },
     high_visibility = {
@@ -12,7 +12,6 @@ custom_highlights = {
     },
 }
 
-colorschemeset=false;
 function readAlacrittyColorscheme()
     local config_file = '/home/baum/.config/alacritty/alacritty.yml';
     local pattern = '[*]light'
@@ -23,7 +22,6 @@ function readAlacrittyColorscheme()
     if match then
         vim.g.material_style = "lighter"
         vim.cmd 'colorscheme material'
-        --vim.cmd 'colorscheme catppuccin'
     else
         vim.g.material_style = "deep ocean"
         vim.cmd 'colorscheme material'
