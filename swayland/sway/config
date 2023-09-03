@@ -1,15 +1,9 @@
-# This file is a modified version based on default i3-config-wizard config
-# source is available heree
-# https://raw.githubusercontent.com/endeavouros-team/endeavouros-i3wm-setup/master/.config/i3/config
-# Maintainer: joekamprad [joekamprad@endeavouros.com]
-# https://endeavouros.com
-#
 #smart_gaps on
 #smart_borders on
 #exec_always --no-startup-id waybar
-#edited
 ##~/.config/polybar/launch.sh
-exec_always --no-startup-id export TUIR_EDITOR=nvim
+#exec_always --no-startup-id export TUIR_EDITOR=nvim
+#exec_always --no-startup-id copyq
 exec_always --no-startup-id kanshi
 exec_always --no-startup-id spotifyd 
 focus_follows_mouse yes
@@ -18,12 +12,7 @@ focus_follows_mouse yes
 # config starts here: #
 #######################
 
-# Font for window titles. Will also be used by the bar unless a different font
-# is used in the bar {} block below.
-# This font is widely installed, provides lots of unicode glyphs, right-to-left
-# text rendering and scalability on retina/hidpi displays (thanks to pango).
-#font pango: Source Code Pro 11
-font pango: 'JetBrainsMono Nerd Font' Regular 11
+font pango: BlexMono Nerd Font 12
 #font pango: JetBrainsMono Medium 10
 
 # set the mod key to the winkey:
@@ -32,21 +21,50 @@ set $mod Mod4
 #####################
 # workspace layout: #
 #####################
+#set $output-secondary DP-1
+#set $output-primary HDMI-1
+#set $output-quatiary eDP-1
+#set $output-tertiary DP-2
+#
+#workspace_layout default
+#
+#workspace 1 output $output-primary
+#workspace 2 output $output-primary
+#workspace 3 output $output-primary
+#workspace 4 output $output-primary
+#workspace 5 output $output-primary
+#workspace 6 output $output-secondary
+#workspace 7 output $output-secondary
+#workspace 8 output $output-secondary
+#workspace 9 output $output-secondary
+#workspace 10 output $output-secondary
 
-workspace_layout default
+
 
 # Each window will be fullscreen and tabbed top to bottom.
 #workspace_layout stacking
 
 # Each new window will open fullscreen as a tab (left to right)
 #workspace_layout tabbed
-set $menu wofi --hide-scroll | xargs swaymsg exec --
+set $menu wofi --hide-scroll -xoffset 0 -yoffset 0
+bindgesture swipe:right workspace prev 
+bindgesture swipe:left workspace next
+bindgesture swipe:up exec '~/.config/wofi/scripts/wofi-list-system'
+bindgesture swipe:down exec $menu
+#| xargs swaymsg exec --
 #bindsym $mod+space exec $menu
 bindsym $mod+d exec $menu
+#bindsym $mod+Ctrl+p exec '~/.config/wofi/scripts/wofi-power-menu'
+bindsym $mod+end exec '~/.config/wofi/scripts/wofi-power-menu'
+#bindsym $mod+XF86PowerOff exec '~/.config/wofi/scripts/wofi-power-menu'
 bindsym $mod+Shift+z exec zathura
 bindsym $mod+Shift+p exec cpupower-gui -p
 bindsym $mod+Shift+o exec cpupower-gui -b
 bindsym $mod+Shift+b exec bitwarden-desktop
+bindsym $mod+Shift+w exec killall -SIGUSR1 waybar
+# bindsym $mod+Shift+w exec '~/.config/wofi/scripts/wofi-list-system'
+bindsym $mod+Shift+q exec '~/.config/wofi/scripts/activeworkspaces'
+#bindsym $mod+Ctrl+w exec '~/.config/wofi/scripts/activeworkspaces' ; exec '~/.config/wofi/scripts/wofi-list-system' 
 #bindsym $mod+Shift+++b exec 'cpupower frequency-set --governor performance'
 ##############################
 # extra options for windows: #
@@ -56,11 +74,11 @@ bindsym $mod+Shift+b exec bitwarden-desktop
 default_border pixel 1
 
 # thin borders
-hide_edge_borders both
+hide_edge_borders smart
 
 # Set inner/outer gaps
 gaps inner 2
-gaps outer 2
+gaps outer 0
 
 # show window title bars (not officially supported with i3gaps)
 #default_border normal
@@ -72,10 +90,10 @@ title_align center
 floating_modifier $mod
 
 # switch/iterate between workspaces
-bindsym $mod+x exec '--no-startup-id xmodmap  ~/.Xmodmap'
+#bindsym $mod+x exec '--no-startup-id xmodmap  ~/.Xmodmap'
 bindsym $mod+Tab workspace next
 bindsym $mod+Shift+Tab workspace prev
-bindsym $mod+Shift+f exec kitty -e ranger
+bindsym $mod+Shift+f exec alacritty -e ranger
 bindsym $mod+Ctrl+f exec thunar
 bindsym $mod+i exec torguard
 #bindsym fn3 exec xbacklight +10 && notify-send "Brightness - $(xbacklight -get | cut -d '.' -f 1)%"
@@ -119,10 +137,10 @@ bindsym $mod+Shift+0    move container to workspace  10
 # Pressing right will grow the window's width.
 # Pressing up will shrink the window's height.
 # Pressing down will grow the window's height.
-        bindsym $mod+Ctrl+h resize shrink width 50 px or 50 ppt
-        bindsym $mod+Ctrl+k resize grow height 50 px or 50 ppt
-        bindsym $mod+Ctrl+j resize shrink height 50 px or 50 ppt
-        bindsym $mod+Ctrl+l resize grow width 50 px or 50 ppt
+bindsym $mod+Ctrl+h resize shrink width 50 px or 50 ppt
+bindsym $mod+Ctrl+k resize grow height 50 px or 50 ppt
+bindsym $mod+Ctrl+j resize shrink height 50 px or 50 ppt
+bindsym $mod+Ctrl+l resize grow width 50 px or 50 ppt
 
 # same bindings, but for the arrow keys
 #	bindsym Left resize shrink width 10 px or 10 ppt
@@ -135,38 +153,40 @@ bindsym $mod+Shift+0    move container to workspace  10
 #        bindsym Escape mode "default"
 #}
 
-#bindsym $mod+r mode "resize"
+# bindsym $mod+r mode "resize"
 
 ######################################
 # keybindings for different actions: #
 ######################################
 
 # start a terminal
-bindsym $mod+Return exec kitty
+bindsym $mod+Return exec alacritty
+bindsym $mod+Shift+Return exec alacritty -e tmux
 
 # kill focused window
 bindsym $mod+q kill
 
-bindsym $mod+Shift+t exec kitty -e tuir --no-flash
-bindsym $mod+Shift+y exec kitty -e ytfzf --detach -s
-bindsym $mod+Shift+v exec kitty -e ytfzf -m -s
-bindsym $mod+Shift+m exec kitty -e spt
-#bindsym $mod+Shift+b exec w3mweb
+# bindsym $mod+Shift+t exec kitty -e tuir --no-flash
+bindsym $mod+t exec gpaste-client  ui
+bindsym $mod+Shift+y exec 'alacritty -e ytfzf -s'
+bindsym $mod+Shift+v exec 'alacritty -e ytfzf -s -m'
+bindsym $mod+Shift+m exec alacritty -e spt
+##bindsym $mod+Shift+b exec w3mweb
 
 # exit-menu
-bindsym $mod+Shift+e exec ~/.config/sway/powermenu
+##bindsym $mod+Shift+e exec ~/.config/sway/powermenu
 
 # Lock the system
 # lock with a picture:
-#bindsym $mod+l exec i3lock -i  ~/.config/i3/i3-lock-screen.png -p default|win -t
+# bindsym $mod+l exec i3lock -i  ~/.config/i3/i3-lock-screen.png -p default|win -t
 # lock by blurring the screen:
-#bindsym $mod+l exec ~/.config/i3/scripts/blur-lock
+# bindsym $mod+l exec ~/.config/i3/scripts/blur-lock
 
 # reload the configuration file
 bindsym $mod+Shift+c reload
 
 # restart i3 inplace (preserves your layout/session, can be used to update i3)
-bindsym $mod+Shift+r restart
+bindsym $mod+Shift+r exec liferea
 
 # keybinding in fancy rofi (automated): bindsym F1 exec ~/.config/i3/scripts/keyhint-2
 # alternative
@@ -174,7 +194,7 @@ bindsym $mod+Shift+r restart
 # bindsym $mod+F1 exec xed ~/.config/i3/keybindings
 
 # Backlight control
-#bindsym XF86MonBrightnessUp exec xbacklight +10 && notify-send "Brightness - $(xbacklight -get | cut -d '.' -f 1)%"
+# bindsym XF86MonBrightnessUp exec xbacklight +10 && notify-send "Brightness - $(xbacklight -get | cut -d '.' -f 1)%"
 bindsym XF86MonBrightnessUp exec light -A 10 
 bindsym $mod+XF86MonBrightnessUp exec light -A 1 
 #&& notify-send "Brightness  $(cat /sys/class/backlight/amdgpu_bl0/brightness)%"
@@ -214,7 +234,11 @@ bindsym $mod+o split v
 
 # enter fullscreen mode for the focused container
 bindsym $mod+f fullscreen toggle
-bindsym $mod+e exec codium
+bindsym $mod+e exec 'code-oss  --password-store="gnome"'
+bindsym $mod+Shift+e exec obsidian
+#bindsym $mod+e exec /opt/clion-2023.2/bin/clion.sh
+#for_window [app_id="copyq"] floating enable, sticky enable, resize set height 600px width 550px, move position cursor, move down 330
+#bindsym $mod+Shift+t exec copyq toggle
 
 # change container layout (stacked, tabbed, toggle split)
 #bindsym $mod+s layout stacking
@@ -231,23 +255,33 @@ bindsym $mod+Ctrl+space focus mode_toggle
 bindsym $mod+a focus parent
 
 # open new empty workspace
-bindsym $mod+Shift+n exec ~/.config/i3/scripts/empty_workspace
+#bindsym $mod+Shift+n exec ~/.config/i3/scripts/empty_workspace
 
 # Multimedia Keys
 
 # volume
-bindsym XF86AudioRaiseVolume exec pactl set-sink-volume alsa_output.pci-0000_00_1f.3.analog-stereo +10%; exec pactl set-sink-volume bluez_output.74_45_CE_6F_AB_89.1 +10%
-bindsym XF86AudioLowerVolume exec pactl set-sink-volume alsa_output.pci-0000_00_1f.3.analog-stereo -10%; exec pactl set-sink-volume bluez_output.74_45_CE_6F_AB_89.1 -10%
+bindsym XF86AudioRaiseVolume exec '/home/baum/.config/pactl/raise_volume.sh'
+#pactl set-sink-volume 0 +10%; 
+#exec 
+#pactl set-sink-volume bluez_output.74_45_CE_6F_AB_89.1 +10%
+bindsym XF86AudioLowerVolume exec '/home/baum/.config/pactl/lower_volume.sh'
+#pactl set-sink-volume 0 -10%; 
+#exec pactl set-sink-volume bluez_output.74_45_CE_6F_AB_89.1 -10%
 
 # gradular volume control
-bindsym $mod+XF86AudioRaiseVolume exec pactl set-sink-volume alsa_output.pci-0000_00_1f.3.analog-stereo +1%
-bindsym $mod+XF86AudioLowerVolume exec pactl set-sink-volume alsa_output.pci-0000_00_1f.3.analog-stereo -1%
+bindsym $mod+XF86AudioRaiseVolume exec '/home/baum/.config/pactl/raise_volume_one_percent.sh'
+#exec pactl set-sink-volume 0 +1%
+bindsym $mod+XF86AudioLowerVolume exec '/home/baum/.config/pactl/lower_volume_one_percent.sh'
+#pactl set-sink-volume 0 -1%
 
 # mute
-bindsym XF86AudioMute exec pactl set-sink-mute alsa_output.pci-0000_00_1f.3.analog-stereo toggle; exec pactl set-sink-mute bluez_output.74_45_CE_6F_AB_89.1 toggle
+bindsym XF86AudioMute exec '/home/baum/.config/pactl/mute_all_sinks.sh'
+#pactl set-sink-mute 0 toggle; 
+#exec pactl set-sink-mute bluez_output.74_45_CE_6F_AB_89.1 toggle
 
 #mute microphone
-bindsym XF86AudioMicMute exec pactl set-source-mute alsa_input.pci-0000_00_1f.3.analog-stereo toggle
+bindsym XF86AudioMicMute exec '/home/baum/.config/pactl/mute_all_mics.sh'
+#pactl set-source-mute 0 toggle
 
 # audio control
 bindsym XF86AudioPlay exec playerctl play
@@ -259,11 +293,12 @@ bindsym XF86AudioPrev exec playerctl previous
 #bindsym $mod+p exec /usr/local/bin/switch-audio-port
 
 ## App shortcuts
-bindsym $mod+w exec /usr/bin/librewolf
-bindsym $mod+Shift+w exec /usr/bin/qutebrowser
+#bindsym $mod+w exec /usr/bin/librewolf
+bindsym $mod+w exec firefox-nightly
 #bindsym $mod+n exec /usr/bin/thunar
-bindsym $mod+n exec kitty -e nmtui
-bindsym $mod+b exec kitty -e bluetuith
+bindsym $mod+n exec iwgtk
+bindsym $mod+b exec alacritty -e bluetuith
+#bindsym $mod+b exec blueman-manager
 bindsym $mod+m exec thunderbird
 #
 #bindsym Print exec scrot ~/Pictures/%Y-%m-%d-%T-screenshot.png && notify-send "Screenshot saved to ~/Pictures/$(date +"%Y-%m-%d-%T")-screenshot.png"
@@ -337,46 +372,13 @@ for_window [class=TelegramDesktop] focus
 #get auth work with polkit-gnome
 exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 
-# dex execute .desktop files + apps using /etc/xdg/autostart.
-# when second to i3 a DE is installed or mixed usage of i3 + xfce4 or GNOME
-# in this cases better disable dex and use manual starting apps using xdg/autostart
-# if enabled you should comment welcome app.
-# https://github.com/jceb/dex
-#exec --no-startup-id dex -a -s /etc/xdg/autostart/:~/.config/autostart/
-#exec --no-startup-id dex --autostart --environment i3
-
-# start welcome app
-#exec --no-startup-id sh /usr/share/endeavouros/scripts/welcome --startdelay=3 
-
-# num lock activated
-#exec --no-startup-id numlockx on
-
-# configure multiple keyboard layouts and hotkey to switch (Alt+CAPSLOCK in this example)
-#exec --no-startup-id setxkbmap -layout 'us,sk' -variant altgr-intl,qwerty -option 'grp:alt_caps_toggle'
-
-# start conky:
-#exec_always --no-startup-id conky
-
-# start a script to setup displays
-# uncomment the next line, use arandr to setup displays and save the file as monitor:
-#exec --no-startup-id ~/.screenlayout/monitor.sh
-
-# set wallpaper
-# exec --no-startup-id sleep 2 && nitrogen --restore
-exec --no-startup-id 'swaybg -i /home/baum/Pictures/wildarch2.png'
-
-# set powersavings for display:
-exec --no-startup-id xset s 480 dpms 600 600 600
-
-# disable power saving (for example if using xscreensaver)
-#exec --no-startup-id xset -dpms
-
-# use xautolock to use autosuspend rules for mobile devices
-# https://wiki.archlinux.org/title/Session_lock#xautolock
-#exec --no-startup-id xautolock -time 60 -locker "systemctl suspend"
-
-
-# xscreensaver
+#output * bg-fill 'find $wallpapers_path -type f | shuf -n 1` fill  
+#set scaling mode for wallpaper
+#exec_always swaybg -i /home/baum/Pictures/wavesdrawn.png -s fill
+#output * bg '/home/baum/Pictures/wavesdrawn.png' fill
+#output * bg '/home/baum/Pictures/img/mactree.jpg' fill
+output * bg '/home/baum/Pictures/4lucie.jpeg' fill
+#output * bg '/home/baum/Pictures/archprd.png' fill
 # https://www.jwz.org/xscreensaver
 #exec --no-startup-id xscreensaver --no-splash
 
@@ -391,7 +393,7 @@ exec --no-startup-id dbus-launch dunst --config ~/.config/dunst/dunstrc
 #exec_always --no-startup-id autotiling
 
 # Autostart apps as you like
-#exec --no-startup-id sleep 2 && kitty
+#exec --no-startup-id sleep 2 && terminator
 #exec --no-startup-id sleep 7 && librewolf https://github.com/endeavouros-team/endeavouros-i3wm-setup/blob/main/force-knowledge.md
 #exec --no-startup-id sleep 3 && thunar
 
@@ -418,7 +420,8 @@ exec --no-startup-id dbus-launch dunst --config ~/.config/dunst/dunstrc
 for_window [class="Yad" instance="yad"] floating enable
 for_window [class="Galculator" instance="galculator"] floating enable
 for_window [class="Blueberry.py" instance="blueberry.py"] floating enable
-for_window [class="Bitwarden" instance="bitwarden"] floating enable
+for_window [class="Bitwarden" instance="bitwarden"] floating enable, resize set 480 480, move absolute position 0 0 
+for_window [class="obsidian" instance="obsidian"] floating enable, move absolute position 0 0
 
 # set floating (nontiling) for special apps
 for_window [class="Xsane" instance="xsane"] floating enable
@@ -437,7 +440,7 @@ for_window [class="urxvt"] border pixel 1
 #for_window [class="Bitwarden"] resize set 480 480 #to change size of all floating windows 
 
 # set position of floating window
-for_window [class="Bitwarden"] move position right
+#for_window [class="Bitwarden"] move position right
 
 ######################################
 # color settings for bar and windows #
@@ -478,18 +481,6 @@ client.urgent		    	$darkblue $urgentred	$white		$yellowbrown	$yellowbrown
 # (plus the system information i3status finds out, if available)
 #
 #
-#commented here
-#bar {
-#		font pango: Noto Sans Regular 10
-#		status_command i3blocks -c ~/.config/i3/i3blocks.conf
-#	    	position bottom
-##	    	i3bar_command i3bar --transparency
-## it could be that you have no primary display set: set one (xrandr --output <output> --primary)
-## reference: https://i3wm.org/docs/userguide.html#_tray_output
-#		    #tray_output primary
-#		    tray_padding 0
-#
-## When strip_workspace_numbers is set to yes,
 ## any workspace that has a name of the form
 ## “[n][:][NAME]” will display only the name.
 #strip_workspace_numbers yes
@@ -523,23 +514,10 @@ client.urgent		    	$darkblue $urgentred	$white		$yellowbrown	$yellowbrown
 # When strip_workspace_numbers is set to yes,
 # any workspace that has a name of the form
 # “[n][:][NAME]” will display only the name.
-#strip_workspace_numbers yes
-##strip_workspace_name no
-#
-#	colors {
-#		separator          $purple
-#		background         $darkbluetrans
-#        	statusline         $white
-#					border		bg		txt		indicator
-#		focused_workspace	$lighterblue	$lighterblue	$darkblue	$purple
-#		active_workspace	$lightdblue	$lightdblue	$darkblue	$purple
-#		inactive_workspace	$darkblue	$darkblue	$lightdblue	$purple
-#		urgent_workspace	$urgentred	$urgentred	$white		$purple
-#	}
-#}
+# strip_workspace_numbers yes
 
-#bindsym $mod+Shift+z layout toggle split
-#bindsym $mod+Shift+x layout tabbed
+# bindsym $mod+Shift+z layout toggle split
+# bindsym $mod+Shift+x layout tabbed
 #####################################
 # Application menu handled by rofi: #
 #####################################
@@ -549,26 +527,39 @@ client.urgent		    	$darkblue $urgentred	$white		$yellowbrown	$yellowbrown
 #\
 #		-config ~/.config/rofi/rofidmenu.rasi
 
-#bindsym F9 exec wofi -modi drun -show drun \
+##bindsym F9 exec wofi -modi drun -show drun \
 #		-config ~/.config/rofi/rofidmenu.rasi
 
 ## rofi bindings for window menu ($mod+t /F10 optional disabled)
 bindsym $mod+Shift+Ctrl+l exec swaylock
-bindsym $mod+t exec wofi -show window \
-		-config ~/.config/rofi/rofidmenu.rasi
+##bindsym $mod+t exec wofi -show window \
+#		-config ~/.config/rofi/rofidmenu.rasi
 
-#bindsym F10 exec rofi -show window \
+##bindsym F10 exec rofi -show window \
 #		-config ~/.config/rofi/rofidmenu.rasi
 
 ## rofi bindings to manage clipboard (install rofi-greenclip from the AUR)
-exec swayidle -w timeout 300 'swaylock' timeout 600 'swaymsg "output * dpms off"' resume 'swaymsg "output * dpms on"' before-sleep 'swaylock -f' &
+#exec swayidle -w timeout 300 'swaylock' timeout 600 'swaymsg "output * dpms off"' resume 'swaymsg "output * dpms on"' before-sleep 'swaylock -f' &
+exec swayidle -w timeout 300 'swaylock -f -c 000000' timeout 600 'swaymsg "output * power off"' resume 'swaymsg "output * power on"' before-sleep 'swaylock -f -c 000000'
 
+#set $lock 'swaylock'
+##turn bluetooth on/off
+#set $btoff 'bluetoothctl power off'
+#set $bton 'bluetoothctl power on'
+#set $intoff 'nmcli radio wifi off'
+#set $inton 'nmcli radio wifi on'
+
+
+# activate screen lock when lid is closed
+
+ #bindswitch --reload --locked lid:on exec $lock
 # exec swayidle -w \
 #          timeout 300 'swaylock -f' \
 #          before-sleep 'swaylock -f'
 #exec --no-startup-id greenclip daemon>/dev/null
-#bindsym $mod+c exec --no-startup-id rofi -modi "clipboard:greenclip print" -show clipboard \
+# bindsym $mod+c exec --no-startup-id wofi --modi "clipboard:greenclip print" -show clipboard \
 bindsym print exec grim - | swappy -f -
+# bindsym print exec flameshot full
 bindsym Shift+print exec grim -g "$(slurp)" - | swappy -f -
     # Drag floating windows by holding down $mod and left mouse button.
     # Resize them with right mouse button + $mod.
@@ -581,21 +572,22 @@ input type:keyboard {
     xkb_layout "us"
     xkb_options "caps:escape"
 }
-set $my_cursor volantes_cursors
-set $my_cursor_size 1
+#set $my_cursor volantes_cursors
+#set $my_cursor_size 1
 
-seat seat0 xcursor_theme $my_cursor $my_cursor_size
-exec_always {
-    gsettings set org.gnome.desktop.interface cursor-theme $my_cursor
-    gsettings set org.gnome.desktop.interface cursor-size $my_cursor_size
-}
+#seat seat0 xcursor_theme $my_cursor $my_cursor_size
+##exec_always {
+##    gsettings set org.gnome.desktop.interface cursor-theme $my_cursor
+##    gsettings set org.gnome.desktop.interface cursor-size $my_cursor_size
+##}
 
 #default_border normal
 #default_floating_border normal
 default_floating_border none
 bar {
     swaybar_command waybar
-    }
 }
-bindsym $mod+Shift+s exec systemctl suspend
+#lock screen and suspend
+
+# bindsym $mod+Shift+s exec 'systemctl suspend && swaylock -f'
 include /etc/sway/config.d/*
