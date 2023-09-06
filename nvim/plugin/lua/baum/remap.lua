@@ -1,4 +1,3 @@
-
 vim.g.mapleader = " "
 vim.keymap.set("n", "<leader>pv", vim.cmd.Ex)
 
@@ -22,17 +21,24 @@ vim.keymap.set("n", "N", "Nzzzv")
 vim.keymap.set("x", "<leader>p", [["_dP]])
 
 -- next greatest remap ever : asbjornHaland
-vim.keymap.set({"n", "v"}, "<leader>y", [["+y]])
+vim.keymap.set({ "n", "v" }, "<leader>y", [["+y]])
 vim.keymap.set("n", "<leader>Y", [["+Y]])
 
-vim.keymap.set({"n", "v"}, "<leader>d", [["_d]])
+vim.keymap.set({ "n", "v" }, "<leader>d", [["_d]])
 
 -- This is going to get me cancelled
-vim.keymap.set("i", "<C-c>", "<Esc>")
 
+vim.keymap.set("n", "q", "<nop>")
 vim.keymap.set("n", "Q", "<nop>")
 vim.keymap.set("n", "<C-f>", "<cmd>silent !tmux neww tmux-sessionizer<CR>")
 vim.keymap.set("n", "<leader>f", vim.lsp.buf.format)
+vim.keymap.set("n", "<leader>gd", vim.lsp.buf.definition)
+vim.keymap.set("n", "<leader>tn", "<cmd>tabnew<CR>")
+--vim.keymap.set("n", "<leader>tn", "<cmd>lua newtabbuffersamefiletype()<CR>")
+--end tab and buffer
+vim.keymap.set("n", "<leader>tc", "<cmd>q!<CR>")
+vim.keymap.set("n", "<leader>tt", "<cmd>tabnext<CR>")
+vim.keymap.set("n", "<leader>tT", "<cmd>tabprev<CR>")
 
 vim.keymap.set("n", "<C-k>", "<cmd>cnext<CR>zz")
 vim.keymap.set("n", "<C-j>", "<cmd>cprev<CR>zz")
@@ -42,10 +48,50 @@ vim.keymap.set("n", "<leader>j", "<cmd>lprev<CR>zz")
 vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
 vim.keymap.set("n", "<leader>x", "<cmd>!chmod +x %<CR>", { silent = true })
 
-vim.keymap.set("n", "<leader>vpp", "<cmd>e ~/.dotfiles/nvim/.config/nvim/lua/theprimeagen/packer.lua<CR>");
-vim.keymap.set("n", "<leader>mr", "<cmd>CellularAutomaton make_it_rain<CR>");
+function closetabandkillbuffer()
+    --go to first tab
+    local firsttab = 1
+    --delete first line from file in first tab
+    local firsttabname = vim.fn.bufname(firsttab)
+end
+
+function newtabbuffersamefiletype()
+    local fileextension = vim.fn.expand("%:e")
+    local buffercount = vim.fn.bufnr("$")
+
+    local filetype = vim.bo.filetype
+    --find lsp server for this filetype
+    local lspbeingused = vim.lsp.get_active_clients()
+    local lspbeingused = lspbeingused[2]
+    --get client id
+    local lspbeingused = lspbeingused.id
+    --start lspbeingused in new tab
+    --
+    --
+    --write into original file at the top
+    --enter pub mod into file
+    if fileextension == "rs" then
+        vim.cmd("normal gg")
+        vim.cmd("normal O")
+        vim.cmd("normal ipub mod buffer" .. tostring(buffercount) .. ";")
+    end
+    local buffname = ""
+    if fileextension == "rs" then
+        buffname = "src/buffer" .. tostring(buffercount) .. "." .. fileextension
+    else
+        buffname = "buffer" .. tostring(buffercount) .. "." .. fileextension
+    end
+
+    --local buffname = "src/buffer" .. tostring(buffercount) .. "." .. fileextension
+    vim.cmd("tabnew " .. buffname)
+    local currbuffname = vim.fn.expand("%:t")
+    local bufnr = vim.fn.bufnr("%")
+    vim.lsp.buf_attach_client(bufnr, lspbeingused)
+    --make the box with code option appear
+    --
+end
 
 --vim.keymap.set("n", "<leader><leader>", function()
+--
 --    vim.cmd("so")
 --end)
-
