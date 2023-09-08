@@ -13,7 +13,13 @@ return require('packer').startup(function(use)
     use 'lvimuser/lsp-inlayhints.nvim'
     --use 'simrat39/rust-tools.nvim'
     --use 'p00f/clangd_extensions.nvim'
-
+    use({
+        "L3MON4D3/LuaSnip",
+        -- follow latest release.
+        tag = "v2.*", -- Replace <CurrentMajor> by the latest released major (first number of latest release)
+        -- install jsregexp (optional!:).
+        run = "make install_jsregexp"
+    })
     use({
         "Bryley/neoai.nvim",
         require = { "MunifTanjim/nui.nvim" },
@@ -76,8 +82,8 @@ return require('packer').startup(function(use)
     --use "lukas-reineke/indent-blankline.nvim"
     use 'marko-cerovac/material.nvim'
     use 'lervag/vimtex'
-    --use ('nvim-treesitter/nvim-treesitter', {run = ':TSUpdate'})
-    --use ('nvim-treesitter/playground')
+    --use('nvim-treesitter/nvim-treesitter', { run = ':TSUpdate' })
+    --use('nvim-treesitter/playground')
     use('nvim-lua/plenary.nvim')
     use 'ThePrimeagen/harpoon'
     use('mbbill/undotree')
