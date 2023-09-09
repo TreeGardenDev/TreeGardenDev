@@ -1,9 +1,10 @@
 * {
     border: none;
     border-radius: 0;
-    font-family: jetbrainsmono;
-    font-size: 16px;
+    font-family: blexmono;
+    font-size: 12px;
     min-height: 0;
+    font-weight: bold;
 }
 
 window#waybar {
@@ -13,9 +14,10 @@ window#waybar {
 
 #workspaces {
 	background-color: #211e20;
-	margin: 3px;
+	margin: 6px;
 	margin-left: 10px;
 	border-radius: 5px;
+
 }
 #workspaces button {
     padding: 0 10px;
@@ -55,17 +57,6 @@ window#waybar {
     color: #e8e8e8;
 }
 
-#custom-power {
-	color: #e8e8e8;
-	background-color: #bf616a;
-	border-radius: 5px;
-	margin-right: 10px;
-	margin-top: 5px;
-	margin-bottom: 5px;
-	margin-left: 0px;
-	padding: 0px 10px;
-}
-
 #clock {
     color: #e8e8e8;
     border-radius: 0px 5px 5px 0px;
@@ -73,9 +64,6 @@ window#waybar {
 }
 
 #battery {
-    color: #e8e8e8;
-}
-#battery2 {
     color: #e8e8e8;
 }
 
@@ -89,9 +77,6 @@ window#waybar {
 #battery.charging {
     color: #e8e8e8;
 }
-#battery2.charging {
-    color: #e8e8e8;
-}
 
 #battery.critical:not(.charging) {
     background-color: #f53c3c;
@@ -102,21 +87,11 @@ window#waybar {
     animation-iteration-count: infinite;
     animation-direction: alternate;
 }
-#battery2.critical:not(.charging) {
-    background-color: #f53c3c;
-    color: #ffffff;
-    animation-name: blink;
-    animation-duration: 0.5s;
-    animation-timing-function: linear;
-    animation-iteration-count: infinite;
-    animation-direction: alternate;
-}
-
 #network {
 	color: #e8e8e8;
 }
 
 #pulseaudio {
 	color: #e8e8e8;
-	border-radius: 5px 0px 0px 5px;
+	border-radius: 5px 3px 3px 5px;
 }
