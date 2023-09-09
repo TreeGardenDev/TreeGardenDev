@@ -1,7 +1,5 @@
 #!/usr/bin/env bash
 
-## Copyright (C) 2020-2022 Aditya Shakya <adi1090x@gmail.com>
-
 set -o noclobber -o noglob -o nounset -o pipefail
 IFS=$'\n'
 
@@ -62,7 +60,8 @@ handle_extension() {
         # PDF
         pdf)
             # Preview as text conversion
-            pdftotext -l 10 -nopgbrk -q -- "${FILE_PATH}" - && exit 5
+            pdftotext -l 10 -nopgbrk -q -- "${FILE_PATH}" - | fmt -w ${PV_WIDTH} && exit 5
+            mutool draw -F txt -i -- "${FILE_PATH}" 1-10 | fmt -w ${PV_WIDTH} && exit 5
             exiftool "${FILE_PATH}" && exit 5
             exit 1;;
 
@@ -91,9 +90,9 @@ handle_image() {
     local mimetype="${1}"
     case "${mimetype}" in
         # SVG
-        image/svg+xml)
-             convert "${FILE_PATH}" "${IMAGE_CACHE_PATH}" && exit 6
-             exit 1;;
+        # image/svg+xml)
+        #     convert "${FILE_PATH}" "${IMAGE_CACHE_PATH}" && exit 6
+        #     exit 1;;
 
         # Image
         image/*)
@@ -111,13 +110,12 @@ handle_image() {
             exit 7;;
 
         # Video
-        video/*)
-             # Thumbnail
+         video/*)
+        #     # Thumbnail
              ffmpegthumbnailer -i "${FILE_PATH}" -o "${IMAGE_CACHE_PATH}" -s 0 && exit 6
              exit 1;;
-        
         # PDF
-        application/pdf)
+         application/pdf)
              pdftoppm -f 1 -l 1 \
                       -scale-to-x 1920 \
                       -scale-to-y -1 \
@@ -125,6 +123,43 @@ handle_image() {
                       -jpeg -tiffcompression jpeg \
                       -- "${FILE_PATH}" "${IMAGE_CACHE_PATH%.*}" \
                  && exit 6 || exit 1;;
+
+        # Preview archives using the first image inside.
+        # (Very useful for comic book collections for example.)
+        # application/zip|application/x-rar|application/x-7z-compressed|\
+        #     application/x-xz|application/x-bzip2|application/x-gzip|application/x-tar)
+        #     local fn=""; local fe=""
+        #     local zip=""; local rar=""; local tar=""; local bsd=""
+        #     case "${mimetype}" in
+        #         application/zip) zip=1 ;;
+        #         application/x-rar) rar=1 ;;
+        #         application/x-7z-compressed) ;;
+        #         *) tar=1 ;;
+        #     esac
+        #     { [ "$tar" ] && fn=$(tar --list --file "${FILE_PATH}"); } || \
+        #     { fn=$(bsdtar --list --file "${FILE_PATH}") && bsd=1 && tar=""; } || \
+        #     { [ "$rar" ] && fn=$(unrar lb -p- -- "${FILE_PATH}"); } || \
+        #     { [ "$zip" ] && fn=$(zipinfo -1 -- "${FILE_PATH}"); } || return
+        #
+        #     fn=$(echo "$fn" | python -c "import sys; import mimetypes as m; \
+        #             [ print(l, end='') for l in sys.stdin if \
+        #               (m.guess_type(l[:-1])[0] or '').startswith('image/') ]" |\
+        #         sort -V | head -n 1)
+        #     [ "$fn" = "" ] && return
+        #     [ "$bsd" ] && fn=$(printf '%b' "$fn")
+        #
+        #     [ "$tar" ] && tar --extract --to-stdout \
+        #         --file "${FILE_PATH}" -- "$fn" > "${IMAGE_CACHE_PATH}" && exit 6
+        #     fe=$(echo -n "$fn" | sed 's/[][*?\]/\\\0/g')
+        #     [ "$bsd" ] && bsdtar --extract --to-stdout \
+        #         --file "${FILE_PATH}" -- "$fe" > "${IMAGE_CACHE_PATH}" && exit 6
+        #     [ "$bsd" ] || [ "$tar" ] && rm -- "${IMAGE_CACHE_PATH}"
+        #     [ "$rar" ] && unrar p -p- -inul -- "${FILE_PATH}" "$fn" > \
+        #         "${IMAGE_CACHE_PATH}" && exit 6
+        #     [ "$zip" ] && unzip -pP "" -- "${FILE_PATH}" "$fe" > \
+        #         "${IMAGE_CACHE_PATH}" && exit 6
+        #     [ "$rar" ] || [ "$zip" ] && rm -- "${IMAGE_CACHE_PATH}"
+        #     ;;
     esac
 }
 
