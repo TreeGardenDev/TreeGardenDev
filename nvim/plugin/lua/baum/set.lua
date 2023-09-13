@@ -25,7 +25,7 @@ vim.g.mapleader = " "
 
 --vim.opt.completeopt = "menuone,noselect"
 vim.cmd("set list")
-vim.cmd("set listchars=eol:¬,tab:>·,space:.")
+vim.cmd("set listchars=eol:¬,tab:>·")
 --set listchars=eol:¬,tab:>·,trail:~,extends:>,precedes:<,space:.
 --
 --vim.cmd("set scrolloff=20")

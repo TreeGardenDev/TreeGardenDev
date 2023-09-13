@@ -77,3 +77,11 @@ end)
 --vim.cmd [[autocmd BufWritePre * lua vim.lsp.buf.format()]]
 
 lsp.setup()
+
+--
+--if filetype ==wat or wasm
+--vim.lsp.start({
+--  name = 'wasm_lsp',   -- No idea whether this should be "more unique" 🤷
+--  cmd = {'wasm-lsp'},
+--  root_dir = '~/git/wasm-lsp-server/'
+--})
