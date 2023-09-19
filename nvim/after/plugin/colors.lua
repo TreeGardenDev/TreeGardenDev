@@ -30,6 +30,7 @@ end
 
 vim.cmd 'autocmd VimEnter * lua readAlacrittyColorscheme()';
 
+vim.keymap.set("n", "<C-b>", "<cmd>!/home/baum/.config/alacritty/alacritty_colorscheme.py <CR> <cmd>lua readAlacrittyColorscheme()<CR>")
 
 
 --vim.cmd('autocmd ColorScheme * if g:Alacritty_Colorscheme == "*dark" then colorscheme material else colorscheme catppuccin end');
