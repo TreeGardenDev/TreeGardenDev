@@ -1,0 +1,97 @@
+* {
+    border: none;
+    border-radius: 0;
+    font-family: blexmono;
+    font-size: 12px;
+    min-height: 0;
+    font-weight: bold;
+}
+
+window#waybar {
+    background: #e5e5e5;
+    color: black;
+}
+
+#workspaces {
+	background-color: #dee1df;
+	margin: 6px;
+	margin-left: 10px;
+	border-radius: 5px;
+
+}
+#workspaces button {
+    padding: 0 10px;
+    color: #171717;
+}
+
+#workspaces button.focused {
+    color: #d1cbbf;
+    background-color: #171717;
+    border-radius: 5px;
+}
+
+#workspaces button:hover {
+    color: #e5e5e5;
+	background-color: #a17e53;
+	border-radius: 5px;
+}
+
+#custom-date, #clock, #battery, #pulseaudio, #network {
+	padding: 0px 10px;
+	margin: 5px 0px;
+}
+
+#custom-date {
+	color: #171717;
+}
+#cpu {
+    color: #171717;
+}
+#memory {
+    color: #171717;
+}
+#temperature {
+    color: #171717;
+}
+#backlight {
+    color: #171717;
+}
+
+#clock {
+    color: #171717;
+    border-radius: 0px 5px 5px 0px;
+    margin-right: 10px;
+}
+
+#battery {
+    color: #171717;
+}
+
+@keyframes blink {
+    to {
+        background-color: #171717;
+        color: white;
+    }
+}
+
+#battery.charging {
+    color: #171717;
+}
+
+#battery.critical:not(.charging) {
+    background-color: #0ac3c3;
+    color: #000000;
+    animation-name: blink;
+    animation-duration: 0.5s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+}
+#network {
+	color: #171717;
+}
+
+#pulseaudio {
+	color: #171717;
+	border-radius: 5px 3px 3px 5px;
+}
