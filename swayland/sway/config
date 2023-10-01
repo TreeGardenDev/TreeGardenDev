@@ -21,23 +21,23 @@ set $mod Mod4
 #####################
 # workspace layout: #
 #####################
-#set $output-secondary DP-1
-#set $output-primary HDMI-1
+set $output-secondary DP-4
+set $output-primary DP-5
 #set $output-quatiary eDP-1
 #set $output-tertiary DP-2
 #
 #workspace_layout default
 #
-#workspace 1 output $output-primary
-#workspace 2 output $output-primary
-#workspace 3 output $output-primary
-#workspace 4 output $output-primary
-#workspace 5 output $output-primary
-#workspace 6 output $output-secondary
-#workspace 7 output $output-secondary
-#workspace 8 output $output-secondary
-#workspace 9 output $output-secondary
-#workspace 10 output $output-secondary
+workspace 1 output $output-primary
+workspace 2 output $output-primary
+workspace 3 output $output-primary
+workspace 4 output $output-primary
+workspace 5 output $output-primary
+workspace 6 output $output-secondary
+workspace 7 output $output-secondary
+workspace 8 output $output-secondary
+workspace 9 output $output-secondary
+workspace 10 output $output-secondary
 
 
 
@@ -46,7 +46,10 @@ set $mod Mod4
 
 # Each new window will open fullscreen as a tab (left to right)
 #workspace_layout tabbed
-set $menu wofi --hide-scroll -xoffset 0 -yoffset 0
+set $width /home/baum/.local/bin/getmidwidthsh
+set $height /home/baum/.local/bin/getmidleheightsh
+#set $menu wofi --hide-scroll -xoffset $width -yoffset $height --dmenu--height 800 --width 400 --dmenu --insensitive --case-sensitive --allow-markup --allow-images --cache-file /dev/null --show drun --prompt "Run: " --no-custom --icon-theme "Papirus" --monitor 1 --location 0 --columns 1 --font "BlexMono Nerd Font 12" --show-icons --icon-theme "Papirus" --dpi 96 --color-window "#000000, #000000, #000000" --color-normal "#000000, #ffffff, #000000, #000000, #ffffff" --color-active "#000000, #ffffff, #000000, #000000, #ffffff" --color-urgent "#000000, #ffffff, #000000, #000000, #ffffff" --color-active-urgent "#000000, #ffffff, #000000, #000000, #ffffff" --color-input "#000000, #ffffff, #000000, #000000, #ffffff" --color-block "#000000, #ffffff, #000000, #000000, #ffffff" --color-separator "#000000, #ffffff, #000000, #000000, #ffffff" --color-normal-elevated "#000000, #ffffff, #000000, #000000, #ffffff" --color-active-elevated "#000000, #ffffff, #000000, #000000, #ffffff" --color-urgent-elevated "#000000, #ffffff, #000000, #000000, #ffffff" --color-active-urgent-elevated "#000000, #ffffff, #000000, #000000, #ffffff" --color-window-elevated "#000000, #000000, #000000" --color-separator-elevated "#000000, #000000, #000000" --color-input-elevated "#000000, #000000, #000000" --color-block-elevated "#000000, #000000, #000000" --color-normal-elevated "#000000, #000000, #000000" --color-active-elevated "#000000, #000000, #000000" --color-urgent-elevated "#000000, #000000, #000000" --color-active-
+set $menu /home/baum/.local/bin/execwoficmd
 bindgesture swipe:right workspace prev 
 bindgesture swipe:left workspace next
 bindgesture swipe:up exec '~/.config/wofi/scripts/wofi-list-system'
@@ -54,13 +57,14 @@ bindgesture swipe:down exec $menu
 #| xargs swaymsg exec --
 #bindsym $mod+space exec $menu
 bindsym $mod+d exec $menu
-#bindsym $mod+Ctrl+p exec '~/.config/wofi/scripts/wofi-power-menu'
+bindsym $mod+Ctrl+p exec '~/.config/wofi/scripts/wofi-power-menu'
 bindsym $mod+end exec '~/.config/wofi/scripts/wofi-power-menu'
 #bindsym $mod+XF86PowerOff exec '~/.config/wofi/scripts/wofi-power-menu'
 bindsym $mod+Shift+z exec zathura
 bindsym $mod+Shift+p exec cpupower-gui -p
 bindsym $mod+Shift+o exec cpupower-gui -b
-bindsym $mod+Shift+b exec bitwarden-desktop
+# bindsym $mod+Shift+b exec bitwarden-desktop
+
 bindsym $mod+Shift+w exec killall -SIGUSR1 waybar
 # bindsym $mod+Shift+w exec '~/.config/wofi/scripts/wofi-list-system'
 bindsym $mod+Shift+q exec '~/.config/wofi/scripts/activeworkspaces'
@@ -168,8 +172,8 @@ bindsym $mod+q kill
 
 # bindsym $mod+Shift+t exec kitty -e tuir --no-flash
 bindsym $mod+t exec gpaste-client  ui
-bindsym $mod+Shift+y exec 'alacritty -e ytfzf -s'
-bindsym $mod+Shift+v exec 'alacritty -e ytfzf -s -m'
+bindsym $mod+Shift+y exec alacritty -e ytfzf -s
+bindsym $mod+Shift+v exec alacritty -e ytfzf -s -m
 bindsym $mod+Shift+m exec alacritty -e spt
 ##bindsym $mod+Shift+b exec w3mweb
 
@@ -293,8 +297,8 @@ bindsym XF86AudioPrev exec playerctl previous
 #bindsym $mod+p exec /usr/local/bin/switch-audio-port
 
 ## App shortcuts
-#bindsym $mod+w exec /usr/bin/librewolf
-bindsym $mod+w exec firefox-nightly
+bindsym $mod+w exec /usr/bin/librewolf
+#bindsym $mod+w exec firefox-nightly
 #bindsym $mod+n exec /usr/bin/thunar
 bindsym $mod+n exec iwgtk
 bindsym $mod+b exec alacritty -e bluetuith
@@ -354,12 +358,6 @@ for_window [class=TelegramDesktop] focus
 #
 # or:
 #
-# picom: https://wiki.archlinux.org/title/Picom
-# manpage: https://man.archlinux.org/man/picom.1.en
-# The default configuration is available in /etc/xdg/picom.conf 
-# For modifications, it can be copied to ~/.config/picom/picom.conf or ~/.config/picom.conf
-# install picom package (yay -S picom)
-# start using default config 
 #exec_always --no-startup-id picom -b
 #
 # for custom config:
@@ -377,13 +375,15 @@ exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 #exec_always swaybg -i /home/baum/Pictures/wavesdrawn.png -s fill
 #output * bg '/home/baum/Pictures/wavesdrawn.png' fill
 #output * bg '/home/baum/Pictures/img/mactree.jpg' fill
-output * bg '/home/baum/Pictures/4lucie.jpeg' fill
+output * bg '/home/baum/Pictures/mandel.png' fill
+#output * bg '/home/baum/Pictures/4lucie.jpeg' fill
 #output * bg '/home/baum/Pictures/archprd.png' fill
 # https://www.jwz.org/xscreensaver
 #exec --no-startup-id xscreensaver --no-splash
 
 # Desktop notifications
-exec --no-startup-id dbus-launch dunst --config ~/.config/dunst/dunstrc
+#exec --no-startup-id dbus-launch dunst --config ~/.config/dunst/dunstrc
+exec --no-startup-id dbus-launch mako
 # alternative if you installed aside with XFCE4:
 # exec --no-startup-id /usr/lib/xfce4/notifyd/xfce4-notifyd &
 
@@ -391,30 +391,6 @@ exec --no-startup-id dbus-launch dunst --config ~/.config/dunst/dunstrc
 # https://github.com/nwg-piotr/autotiling
 # `yay -S autotiling ;) (it is in AUR)
 #exec_always --no-startup-id autotiling
-
-# Autostart apps as you like
-#exec --no-startup-id sleep 2 && terminator
-#exec --no-startup-id sleep 7 && librewolf https://github.com/endeavouros-team/endeavouros-i3wm-setup/blob/main/force-knowledge.md
-#exec --no-startup-id sleep 3 && thunar
-
-###############
-# system tray #
-###############
-# if you do not use dex: exec --no-startup-id dex --autostart --environment i3
-# you need to have tray apps started manually one by one:
-
-# start blueberry app for managing bluetooth devices from tray:
-#exec --no-startup-id blueberry-tray
-
-# networkmanager-applet
-#exec --no-startup-id nm-applet
-
-# clipman-applet
-#exec --no-startup-id xfce4-clipman
-
-##################
-# floating rules #for_window [app_id="ncmpcpp"] floating enablfor_window [app_id="ncmpcpp"] floating enabl
-##################
 
 # set floating (nontiling) for apps needing it
 for_window [class="Yad" instance="yad"] floating enable
@@ -484,93 +460,27 @@ client.urgent		    	$darkblue $urgentred	$white		$yellowbrown	$yellowbrown
 ## any workspace that has a name of the form
 ## “[n][:][NAME]” will display only the name.
 #strip_workspace_numbers yes
-###strip_workspace_name no
-#
-#		    colors {
-#		    separator          $purple
-#		    background         $darkgrey
-#		    statusline         $white
-##                          		border 		        bg		txt		indicator
-#		focused_workspace	$mediumgrey	   	$grey		$darkgrey	$purple
-#		active_workspace	$lightblue      	$mediumgrey	$darkgrey	$purple
-#		inactive_workspace	$darkgrey   		$darkgrey	$grey		$purple
-#		urgent_workspace	$urgentred	    	$urgentred	$white		$purple
-#	}
-#}
-
-# you can add different bars for multidisplay setups on each display:
-# set output HDMI-0 to the display you want the bar, --transparency can be set.
-# Transparency needs rgba color codes to be used where the last two letters are the transparency factor see here:
-# https://gist.github.com/lopspower/03fb1cc0ac9f32ef38f4
-# #08052be6 --> e6=90%
-
-# bar {
-#	font pango: Noto Sans Regular 10
-#	status_command i3blocks -c ~/.config/i3/i3blocks-2.conf
-#	i3bar_command i3bar --transparency
-#	output HDMI-0
-#	position bottom
-#
-# When strip_workspace_numbers is set to yes,
-# any workspace that has a name of the form
-# “[n][:][NAME]” will display only the name.
-# strip_workspace_numbers yes
-
-# bindsym $mod+Shift+z layout toggle split
-# bindsym $mod+Shift+x layout tabbed
-#####################################
-# Application menu handled by rofi: #
-#####################################
-
-## rofi bindings fancy application menu ($mod+d /F9 optional disabled)
-
 #\
-#		-config ~/.config/rofi/rofidmenu.rasi
-
-##bindsym F9 exec wofi -modi drun -show drun \
-#		-config ~/.config/rofi/rofidmenu.rasi
-
-## rofi bindings for window menu ($mod+t /F10 optional disabled)
 bindsym $mod+Shift+Ctrl+l exec swaylock
-##bindsym $mod+t exec wofi -show window \
-#		-config ~/.config/rofi/rofidmenu.rasi
 
-##bindsym F10 exec rofi -show window \
-#		-config ~/.config/rofi/rofidmenu.rasi
-
-## rofi bindings to manage clipboard (install rofi-greenclip from the AUR)
-#exec swayidle -w timeout 300 'swaylock' timeout 600 'swaymsg "output * dpms off"' resume 'swaymsg "output * dpms on"' before-sleep 'swaylock -f' &
 exec swayidle -w timeout 300 'swaylock -f -c 000000' timeout 600 'swaymsg "output * power off"' resume 'swaymsg "output * power on"' before-sleep 'swaylock -f -c 000000'
 
-#set $lock 'swaylock'
-##turn bluetooth on/off
-#set $btoff 'bluetoothctl power off'
-#set $bton 'bluetoothctl power on'
-#set $intoff 'nmcli radio wifi off'
-#set $inton 'nmcli radio wifi on'
 
-
-# activate screen lock when lid is closed
-
- #bindswitch --reload --locked lid:on exec $lock
-# exec swayidle -w \
-#          timeout 300 'swaylock -f' \
-#          before-sleep 'swaylock -f'
-#exec --no-startup-id greenclip daemon>/dev/null
-# bindsym $mod+c exec --no-startup-id wofi --modi "clipboard:greenclip print" -show clipboard \
 bindsym print exec grim - | swappy -f -
 # bindsym print exec flameshot full
 bindsym Shift+print exec grim -g "$(slurp)" - | swappy -f -
-    # Drag floating windows by holding down $mod and left mouse button.
-    # Resize them with right mouse button + $mod.
-    # Despite the name, also works for non-floating windows.
-    # Change normal to inverse to use left mouse button for resizing and right
-    # mouse button for dragging.
+
     floating_modifier $mod normal
 #		-config ~/.config/rofi/rofidmenu.rasi
 input type:keyboard {
     xkb_layout "us"
     xkb_options "caps:escape"
+    
+}
+input "2:10:TPPS/2_IBM_TrackPoint" {
+   dwt enabled
+   pointer_accel 0.75
+   scroll_factor .05
 }
 #set $my_cursor volantes_cursors
 #set $my_cursor_size 1
@@ -584,9 +494,16 @@ input type:keyboard {
 #default_border normal
 #default_floating_border normal
 default_floating_border none
+# exec_always '~/.config/waybar/findcolor.py'
+#
+# exec_always --no-startup-id waybar -s /home/baum/.config/waybar/light.css
 bar {
     swaybar_command waybar
 }
+
+# bindsym $mod+Shift+b exec ~/.config/waybar/hotswapcolor.py
+
+
 #lock screen and suspend
 
 # bindsym $mod+Shift+s exec 'systemctl suspend && swaylock -f'
