@@ -1,0 +1,11 @@
+#!/bin/bash
+width=$(/home/baum/.local/bin/getmidwidthsh)
+height=$(/home/baum/.local/bin/getmidleheightsh)
+widthtouse=$((900))
+heighttouse=$((900))
+widthforthis=$(($width-$widthtouse/2))
+heightforthis=$(($height-$heighttouse/3))
+
+woficmd="wofi --dmenu --show drun --insensitive --width=$widthtouse --height=$heighttouse --prompt \"Run: \" --allow-markup --allow-images --cache-file /dev/null --lines=15 --yoffset=$heightforthis --xoffset=$widthforthis --hide-scroll"
+
+exec $woficmd
