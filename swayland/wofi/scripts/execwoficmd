@@ -1,0 +1,26 @@
+#!/bin/bash
+width=$(/home/baum/.local/bin/getmidwidthsh)
+height=$(/home/baum/.local/bin/getmidleheightsh)
+transform=$(/home/baum/.local/bin/gettransformsh)
+widthtouse=900
+heighttouse=900
+#
+widthforthis=0
+heightforthis=0
+checkvar='"normal"'
+echo $transform
+echo $checkvar
+if [ "$transform" = "$checkvar" ];
+then
+    widthforthis=$(($width-$widthtouse/2))
+    heightforthis=$(($height-$heighttouse/3))
+else
+    widthforthis=$(($width-$widthtouse/1))
+    heightforthis=$(($height-$heighttouse/5))
+fi
+echo $widthforthis
+echo $heightforthis
+
+woficmd="wofi --dmenu --show drun --insensitive --width=$widthtouse --height=$heighttouse --prompt \"Run: \" --allow-markup --allow-images --cache-file /dev/null --lines=15 --yoffset=$heightforthis --xoffset=$widthforthis --hide-scroll"
+
+exec $woficmd
