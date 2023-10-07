@@ -3,7 +3,7 @@
     "spacing": 4, // Gaps between modules (4px)
     "modules-left": ["sway/workspaces", "sway/mode", "sway/scratchpad", "custom/media"],
     "modules-center": ["sway/window"],
-    "modules-right": ["pulseaudio", "network", "cpu", "memory", "temperature", "backlight",  "custom/betterbattery", "clock", "tray"],
+    "modules-right": ["idle_inhibitor","pulseaudio", "network", "cpu", "memory", "temperature", "backlight",  "custom/betterbattery", "clock", "tray"],
     "sway/workspaces": {
 		"disable-scroll": true,
 		"all-outputs": true,
