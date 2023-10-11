@@ -5,7 +5,8 @@ local telescope= require('telescope.builtin')
 --            hidden=true
 --        }
 --    }
---}
+---}
+--nnoremap <leader>ff <cmd>lua require('telescope.builtin').find_files()<cr>;
 vim.keymap.set('n', '<C-n>', telescope.find_files, {})
 vim.keymap.set('n', '<C-p>', telescope.git_files, {})
 vim.api.nvim_set_keymap('n', '<leader>n', ':lua require"telescope.builtin".find_files({ hidden = true })<CR>', {noremap = true, silent = true})

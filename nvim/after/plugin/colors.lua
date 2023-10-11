@@ -10,6 +10,7 @@ material.setup{
         lighter = true, -- Enable higher contrast text for lighter style
         darker = true-- Enable higher contrast text for darker style
     },
+    lualine_style="stealth",
 }
 
 function readAlacrittyColorscheme()
@@ -29,9 +30,10 @@ function readAlacrittyColorscheme()
 end
 
 vim.cmd 'autocmd VimEnter * lua readAlacrittyColorscheme()';
+--vim.cmd.colorscheme('material')
 
-vim.keymap.set("n", "<C-b>", "<cmd>!/home/baum/.config/alacritty/alacritty_colorscheme.py <CR> <cmd>lua readAlacrittyColorscheme()<CR>")
-
+vim.keymap.set("n", "<C-b>", "<cmd>!/home/baum/.config/alacritty/alacritty_colorscheme.py <CR><cmd>lua readAlacrittyColorscheme()<CR>")
+--<cmd>!/home/baum/.config/waybar/hotswapcolor.py<CR>
 
 --vim.cmd('autocmd ColorScheme * if g:Alacritty_Colorscheme == "*dark" then colorscheme material else colorscheme catppuccin end');
 --vim.keymap.set("n", "<leader>cl", "<cmd>material_style=\"lighter\"<CR>");
