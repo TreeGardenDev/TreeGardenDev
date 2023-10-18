@@ -1,9 +1,9 @@
 {
      "position": "bottom", // Waybar position (top|bottom|left|right)
     "spacing": 4, // Gaps between modules (4px)
-    "modules-left": ["sway/workspaces", "sway/mode", "sway/scratchpad", "custom/media"],
-    "modules-center": ["sway/window"],
-    "modules-right": ["idle_inhibitor","pulseaudio", "network", "cpu", "memory", "temperature", "backlight",  "custom/betterbattery", "clock", "tray"],
+    "modules-left": ["sway/workspaces","sway/window", "sway/mode", "sway/scratchpad", "custom/media"],
+    "modules-center": [],
+    "modules-right": ["idle_inhibitor","pulseaudio", "network", "cpu", "custom/governor", "memory", "temperature", "backlight",  "custom/betterbattery", "clock", "tray"],
     "sway/workspaces": {
 		"disable-scroll": true,
 		"all-outputs": true,
@@ -114,14 +114,18 @@
     },
     "custom/betterbattery": {
         "return-type": "json",
+        "exec": "$HOME/.config/waybar/checkbothbatteries.py",
         "format": " {percentage}% {icon} ",
         "tooltip": true,
         "tooltip-format": "{percentage}% {icon} {remaining} remaining",
-        "exec": "$HOME/.config/waybar/checkbothbatteries.py",
         "interval": 30,
         "format-icons": ["", "", "", "", ""]
     },
-    
+    "custom/governor":{
+        "interval": 5,
+        "exec": "$HOME/.config/waybar/checkcurrentgovernor.py",
+        "format": "{}",
+    },
     
     "network": {
         "format-wifi": "{essid} ({signalStrength}%) ",
