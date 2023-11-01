@@ -28,16 +28,16 @@ set $output-primary DP-5
 #
 #workspace_layout default
 #
-workspace 1 output $output-primary
-workspace 2 output $output-primary
-workspace 3 output $output-primary
-workspace 4 output $output-primary
-workspace 5 output $output-primary
-workspace 6 output $output-secondary
-workspace 7 output $output-secondary
-workspace 8 output $output-secondary
-workspace 9 output $output-secondary
-workspace 10 output $output-secondary
+#workspace 1 output $output-primary
+#workspace 2 output $output-primary
+#workspace 3 output $output-primary
+#workspace 4 output $output-primary
+#workspace 5 output $output-primary
+#workspace 6 output $output-secondary
+#workspace 7 output $output-secondary
+#workspace 8 output $output-secondary
+#workspace 9 output $output-secondary
+#workspace 10 output $output-secondary
 
 
 
@@ -97,7 +97,7 @@ floating_modifier $mod
 #bindsym $mod+x exec '--no-startup-id xmodmap  ~/.Xmodmap'
 bindsym $mod+Tab workspace next
 bindsym $mod+Shift+Tab workspace prev
-bindsym $mod+Shift+f exec alacritty -e ranger
+bindsym $mod+Shift+f exec alacritty -e joshuto
 bindsym $mod+Ctrl+f exec thunar
 bindsym $mod+i exec torguard
 #bindsym fn3 exec xbacklight +10 && notify-send "Brightness - $(xbacklight -get | cut -d '.' -f 1)%"
@@ -239,7 +239,7 @@ bindsym $mod+o split v
 # enter fullscreen mode for the focused container
 bindsym $mod+f fullscreen toggle
 bindsym $mod+e exec 'code-oss  --password-store="gnome"'
-bindsym $mod+Shift+e exec obsidian
+#bindsym $mod+Shift+e exec obsidian
 #bindsym $mod+e exec /opt/clion-2023.2/bin/clion.sh
 #for_window [app_id="copyq"] floating enable, sticky enable, resize set height 600px width 550px, move position cursor, move down 330
 #bindsym $mod+Shift+t exec copyq toggle
@@ -300,7 +300,7 @@ bindsym XF86AudioPrev exec playerctl previous
 bindsym $mod+w exec /usr/bin/librewolf
 #bindsym $mod+w exec firefox-nightly
 #bindsym $mod+n exec /usr/bin/thunar
-bindsym $mod+n exec iwgtk
+bindsym $mod+n exec alacritty -e nmtui
 bindsym $mod+b exec alacritty -e bluetuith
 #bindsym $mod+b exec blueman-manager
 bindsym $mod+m exec thunderbird
@@ -472,10 +472,11 @@ bindsym Shift+print exec grim -g "$(slurp)" - | swappy -f -
 
     floating_modifier $mod normal
 #		-config ~/.config/rofi/rofidmenu.rasi
+#xkb_variant "qwerty, colemak_dh"
+#xkb_options grp:rshift_toggle
 input type:keyboard {
     xkb_layout "us"
     xkb_options "caps:escape"
-    
 }
 input "2:10:TPPS/2_IBM_TrackPoint" {
    dwt enabled

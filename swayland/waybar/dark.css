@@ -90,6 +90,9 @@ window#waybar {
 #network {
 	color: #e8e8e8;
 }
+#idle_inhibitor {
+    color: #e8e8e8;
+}
 
 #pulseaudio {
 	color: #e8e8e8;

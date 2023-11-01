@@ -10,12 +10,6 @@ vim.keymap.set("n", "J", "mzJ`z")
 vim.keymap.set("n", "n", "nzzzv")
 vim.keymap.set("n", "N", "Nzzzv")
 
---vim.keymap.set("n", "<leader>vwm", function()
---    require("vim-with-me").StartVimWithMe()
---end)
---vim.keymap.set("n", "<leader>svwm", function()
---    require("vim-with-me").StopVimWithMe()
---end)
 
 -- greatest remap ever
 vim.keymap.set("x", "<leader>p", [["_dP]])
@@ -25,8 +19,12 @@ vim.keymap.set({ "n", "v" }, "<leader>y", [["+y]])
 vim.keymap.set("n", "<leader>Y", [["+Y]])
 
 vim.keymap.set({ "n", "v" }, "<leader>d", [["_d]])
+vim.keymap.set("i", "<Alt>h", "<left>")
+vim.keymap.set("i", "<Alt>j", "<down>")
+vim.keymap.set("i", "<Alt>k", "<up>")
+vim.keymap.set("i", "<Alt>l", "<right>")
 
--- This is going to get me cancelled
+
 
 vim.keymap.set("n", "q", "<nop>")
 vim.keymap.set("n", "Q", "<nop>")
@@ -37,12 +35,14 @@ vim.keymap.set("n", "<leader>gr", vim.lsp.buf.references)
 vim.keymap.set("n", "<leader>gi", vim.lsp.buf.implementation)
 vim.keymap.set("n", "<leader>gh", vim.lsp.buf.hover)
 vim.keymap.set("n", "<leader>bf", "<cmd>%!xxd<CR>")
+--vim.keymap.set("n", "O", "O<Esc>")
+--vim.keymap.set("n", "o", "o<Esc>")
 
 vim.keymap.set("n", "<leader>tn", "<cmd>tabnew<CR>")
 
 --vim.keymap.set("n", "<leader>tn", "<cmd>lua newtabbuffersamefiletype()<CR>")
 --end tab and buffer
-vim.keymap.set("n", "<leader>tc", "<cmd>q!<CR>")
+--vim.keymap.set("n", "<leader>tc", "<cmd>q!<CR>")
 vim.keymap.set("n", "<leader>tt", "<cmd>tabnext<CR>")
 vim.keymap.set("n", "<leader>tT", "<cmd>tabprev<CR>")
 

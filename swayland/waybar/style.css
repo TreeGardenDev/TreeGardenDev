@@ -1,8 +1,8 @@
 * {
     border: none;
     border-radius: 0;
-    font-family: blexmono;
     font-size: 12px;
+    font-family: "blexmono";
     min-height: 0;
     font-weight: bold;
 }

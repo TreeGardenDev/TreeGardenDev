@@ -11,13 +11,14 @@ windows=$(swaymsg -t get_workspaces | jq -r '.[] | "\(.name) \(.representation) 
 #windows=$(swaymsg -t get_tree | jq -r '.nodes | .[] | .nodes | . [] | select(.nodes != null) | .nodes | .[] | select(.name != null) | "\(.id?) \(.name?)"')
 
 selected=$(echo "$windows" | wofi --xoffset 0 --yoffset 0 --width 1000 --height 400 --dmenu -i | awk '{print $1}')
-echo $selected
+#echo $selected
 
 ##grep swaymsg get tree where workspace is $selected
 #tree=$(swaymsg -t get_tree | jq -r '.nodes | .[] | .nodes | . [] | select(. | contains($selected)) |  "\(.name?)"')
 #tree=$(swaymsg -t get_tree | jq -r --arg selected "$selected" '.nodes | .[] | .nodes | .[] | select(.name == $selected) | "\(.name)"')
-tree=$(swaymsg -t get_tree | jq -r --arg selected "$selected" '.nodes | .[] | .nodes | .[] | select(.name == $selected) |  .nodes | .[] | select(.name != null) | "\(.id?) \(.name?)"' | awk '{print $1}') 
-echo $tree
+#tree=$(swaymsg -t get_tree | jq -r --arg selected "$selected" '.nodes | .[] | .nodes | .[] | select(.name == $selected) |  .nodes | .[] | select(.name != null) | "\(.id?) \(.name?)"' | awk '{print $1}' | head -n 1) 
+tree=$(swaymsg -t get_tree | jq -r --arg selected "$selected" '.nodes | .[] | .nodes | .[] | select(.name == $selected) |  .nodes | .[] | "\(.id?) \(.name?)"' | awk '{print $1}' | head -n 1) 
+#echo $tree
 # Filter the tree variable based on the selected value
 #
 #window=$(echo "$tree" | jq -r --arg selected "$selected" '. | select(. | contains($selected))')
@@ -31,4 +32,4 @@ echo $tree
 
 
 # Tell sway to focus said window
-swaymsg [con_id="$tree"] focus
+swaymsg -q [con_id="$tree"] focus

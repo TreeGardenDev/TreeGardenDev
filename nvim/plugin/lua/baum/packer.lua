@@ -11,8 +11,12 @@ return require('packer').startup(function(use)
     use 'hrsh7th/cmp-path'
     use 'ThePrimeagen/lsp-debug-tools.nvim'
     use 'lvimuser/lsp-inlayhints.nvim'
+    --use { "rcarriga/nvim-dap-ui", requires = {"mfussenegger/nvim-dap"} }
     --use 'simrat39/rust-tools.nvim'
-    --use 'p00f/clangd_extensions.nvim'
+    --use {
+    --    'serenevoid/kiwi.nvim',
+    --    requires = { { 'nvim-lua/plenary.nvim' } }
+    --}
     use({
         "L3MON4D3/LuaSnip",
         -- follow latest release.
@@ -48,7 +52,7 @@ return require('packer').startup(function(use)
                 models = {
                     {
                         name = "openai",
-                        model = "gpt-3.5-turbo",
+                        model = "gpt-3.5-turbo-16k",
                         params = nil,
                     },
                 },
@@ -69,6 +73,36 @@ return require('packer').startup(function(use)
                     api_key = {
                         env = "OPENAI_API_KEY",
                         value = nil,
+                    },
+                },
+                shortcuts = {
+                    {
+                        name = "textify",
+                        key = "<leader>as",
+                        desc = "fix text with AI",
+                        use_context = true,
+                        prompt = [[
+                Please rewrite the text to make it more readable, clear,
+                concise, and fix any grammatical, punctuation, or spelling
+                errors
+            ]],
+                        modes = { "v" },
+                        strip_function = nil,
+                    },
+                    {
+                        name = "gitcommit",
+                        key = "<leader>ag",
+                        desc = "generate git commit message",
+                        use_context = false,
+                        prompt = function()
+                            return [[
+                    Using the following git diff generate a consise and
+                    clear git commit message, with a short title summary
+                    that is 75 characters or less:
+                ]] .. vim.fn.system("git diff --cached")
+                        end,
+                        modes = { "n" },
+                        strip_function = nil,
                     },
                 },
             })
