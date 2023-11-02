@@ -1,0 +1,11 @@
+#!/bin/bash
+#run swaymsg -rt get_workspaces to see the structure of the json
+workspace_num=$(swaymsg -rt get_workspaces | grep -B 47 -A 2 'focused": true' | grep name | cut -d '"' -f 4)
+#| grep 'name' | cut -d '"' -f 4)
+
+#get display of the workspace'
+height=$(swaymsg -rt get_outputs | grep -B 3 '"current_workspace": "'$workspace_num'"'|grep transform|cut -d ':' -f 2|cut -d ',' -f 1)
+
+
+#| grep name | cut -d '"' -f 4)
+echo $height
