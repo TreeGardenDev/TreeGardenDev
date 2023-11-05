@@ -3,7 +3,7 @@
     "spacing": 4, // Gaps between modules (4px)
     "modules-left": ["sway/workspaces","sway/window", "sway/mode", "sway/scratchpad", "custom/media"],
     "modules-center": [],
-    "modules-right": ["idle_inhibitor","pulseaudio", "network", "cpu", "custom/governor", "memory", "temperature", "backlight",  "custom/betterbattery", "clock"],
+    "modules-right": ["idle_inhibitor","pulseaudio", "network", "cpu", "custom/governor", "memory", "temperature", "backlight",  "custom/betterbattery", "clock", "tray"],
     "sway/workspaces": {
 		"disable-scroll": true,
 		"all-outputs": true,
@@ -91,7 +91,7 @@
         "spacing": 10
     },
     "clock": {
-        // "timezone": "America/New_York",
+        "timezone": "EST",
         "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
         "format-alt": "{:%Y-%m-%d}"
     } ,
