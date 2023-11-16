@@ -18,6 +18,9 @@ lsp.ensure_installed({
     'tsserver',
     'rust_analyzer',
 })
+lsp.setup_servers({'dartls', force = true})
+--setup web assembly lsp
+--lsp.setup_servers({'wasm-language-server', force = true})
 
 -- Fix Undefined global 'vim'
 lsp.nvim_workspace()
@@ -64,7 +67,7 @@ lsp.on_attach(function(client, bufnr)
     vim.keymap.set("n", "<leader>gd", function() vim.lsp.buf.definition() end, opts)
     vim.keymap.set("n", "K", function() vim.lsp.buf.hover() end, opts)
     vim.keymap.set("n", "<leader>vws", function() vim.lsp.buf.workspace_symbol() end, opts)
-    vim.keymap.set("n", "<leader>vd", function() vim.diagnostic.open_float() end, opts)
+    vim.keymap.set("n", "<leader>er", function() vim.diagnostic.open_float() end, opts)
     vim.keymap.set("n", "[d", function() vim.diagnostic.goto_next() end, opts)
     vim.keymap.set("n", "]d", function() vim.diagnostic.goto_prev() end, opts)
     vim.keymap.set("n", "<leader>vca", function() vim.lsp.buf.code_action() end, opts)
