@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+
+#volume=$(pactl list sinks | sed -n '10 p' | awk '{print $5}'); 
+
+op=$((pactl list sinks | grep Name | awk '{print $2}' ; ) | cat |  
+     wofi -c ~/.config/wofi/scripts/listsysconf -s ~/.config/wofi/scripts/listsys.css --xoffset 0 --yoffset 0 --width 400 --height 400 -i --dmenu | awk '{print ($1)}')
+
+pactl set-default-sink $op
