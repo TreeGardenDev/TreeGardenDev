@@ -4,15 +4,19 @@
 ##~/.config/polybar/launch.sh
 #exec_always --no-startup-id export TUIR_EDITOR=nvim
 #exec_always --no-startup-id copyq
+#exec_always --no-startup-id gsettings set org.gnome.desktop.interface icon-theme 'Papirus-Dark'
+
 exec_always --no-startup-id kanshi
 exec_always --no-startup-id spotifyd 
+exec_always --no-startup-id nm-applet
+exec_always --no-startup-id blueman-applet
 focus_follows_mouse yes
 
 #######################
 # config starts here: #
 #######################
 
-font pango: BlexMono Nerd Font 12
+font pango: BlexMono Nerd Font Propo 12
 #font pango: JetBrainsMono Medium 10
 
 # set the mod key to the winkey:
@@ -63,6 +67,7 @@ bindsym $mod+end exec '~/.config/wofi/scripts/wofi-power-menu'
 bindsym $mod+Shift+z exec zathura
 bindsym $mod+Shift+p exec cpupower-gui -p
 bindsym $mod+Shift+o exec cpupower-gui -b
+bindsym $mod+Ctrl+e exec alacritty -e 'emulator -avd flutter_emulator'
 # bindsym $mod+Shift+b exec bitwarden-desktop
 
 bindsym $mod+Shift+w exec killall -SIGUSR1 waybar
@@ -98,7 +103,7 @@ floating_modifier $mod
 bindsym $mod+Tab workspace next
 bindsym $mod+Shift+Tab workspace prev
 bindsym $mod+Shift+f exec alacritty -e joshuto
-bindsym $mod+Ctrl+f exec thunar
+bindsym $mod+Ctrl+f exec nautilus
 bindsym $mod+i exec torguard
 #bindsym fn3 exec xbacklight +10 && notify-send "Brightness - $(xbacklight -get | cut -d '.' -f 1)%"
 
@@ -239,8 +244,6 @@ bindsym $mod+o split v
 # enter fullscreen mode for the focused container
 bindsym $mod+f fullscreen toggle
 bindsym $mod+e exec 'code-oss  --password-store="gnome"'
-#bindsym $mod+Shift+e exec obsidian
-#bindsym $mod+e exec /opt/clion-2023.2/bin/clion.sh
 #for_window [app_id="copyq"] floating enable, sticky enable, resize set height 600px width 550px, move position cursor, move down 330
 #bindsym $mod+Shift+t exec copyq toggle
 
@@ -286,6 +289,7 @@ bindsym XF86AudioMute exec '/home/baum/.config/pactl/mute_all_sinks.sh'
 #mute microphone
 bindsym XF86AudioMicMute exec '/home/baum/.config/pactl/mute_all_mics.sh'
 #pactl set-source-mute 0 toggle
+bindsym $mod+Alt+p exec '/home/baum/.config/wofi/scripts/wofi-change-audio'
 
 # audio control
 bindsym XF86AudioPlay exec playerctl play
@@ -383,7 +387,7 @@ output * bg '/home/baum/Pictures/mandel.png' fill
 
 # Desktop notifications
 #exec --no-startup-id dbus-launch dunst --config ~/.config/dunst/dunstrc
-exec --no-startup-id dbus-launch mako
+exec_always --no-startup-id dbus-launch mako
 # alternative if you installed aside with XFCE4:
 # exec --no-startup-id /usr/lib/xfce4/notifyd/xfce4-notifyd &
 
@@ -391,6 +395,9 @@ exec --no-startup-id dbus-launch mako
 # https://github.com/nwg-piotr/autotiling
 # `yay -S autotiling ;) (it is in AUR)
 #exec_always --no-startup-id autotiling
+
+#open scrachpad
+bindsym $mod+Shift+minus scratchpad show
 
 # set floating (nontiling) for apps needing it
 for_window [class="Yad" instance="yad"] floating enable
@@ -400,6 +407,9 @@ for_window [class="Bitwarden" instance="bitwarden"] floating enable, resize set 
 for_window [class="obsidian" instance="obsidian"] floating enable, move absolute position 0 0
 
 # set floating (nontiling) for special apps
+for_window [title="Emulator" window_type="utility"] move scratchpad
+for_window [title="Android Emulator - *"] floating enable, resize set 320 480
+
 for_window [class="Xsane" instance="xsane"] floating enable
 for_window [class="Pavucontrol" instance="pavucontrol"] floating enable
 for_window [class="qt5ct" instance="qt5ct"] floating enable
@@ -483,6 +493,26 @@ input "2:10:TPPS/2_IBM_TrackPoint" {
    pointer_accel 0.75
    scroll_factor .05
 }
+input 1386:770:Wacom_Intuos_PT_S_Finger {
+    click_method clickfinger
+    drag enabled
+    scroll_method two_finger
+    natural_scroll enabled
+    tap enabled
+    accel_profile adaptive
+}
+input 1386:770:Wacom_Intuos_PT_S_Pad {
+    scroll_method two_finger
+    natural_scroll enabled
+    tap enabled
+    drag enabled
+    dwt enable
+}
+
+input 1386:770:Wacom_Intuos_PT_S_Pen {
+    map_to_output DP-4
+}
+
 #set $my_cursor volantes_cursors
 #set $my_cursor_size 1
 
