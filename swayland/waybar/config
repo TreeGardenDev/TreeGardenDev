@@ -3,10 +3,10 @@
     "spacing": 4, // Gaps between modules (4px)
     "modules-left": ["sway/workspaces","sway/window", "sway/mode", "sway/scratchpad", "custom/media"],
     "modules-center": [],
-    "modules-right": ["idle_inhibitor","pulseaudio", "network", "cpu", "custom/governor", "memory", "temperature", "backlight",  "custom/betterbattery", "clock", "tray"],
+    "modules-right": ["idle_inhibitor","custom/clipboard","pulseaudio", "network", "cpu", "custom/governor", "memory", "temperature", "backlight",  "custom/betterbattery", "clock", "tray"],
     "sway/workspaces": {
 		"disable-scroll": true,
-		"all-outputs": true,
+		"all-outputs": false,
 		"format": "{icon}",
 	 	"nonpersistent_workspaces": {
 	 		"1": [],
@@ -96,11 +96,11 @@
         "format-alt": "{:%Y-%m-%d}"
     } ,
     "cpu": {
-        "format": "CPU: {usage}% ",
+        "format": "cpu: {usage}% ",
         "tooltip":true 
     },
     "memory": {
-        "format": "MEM: {}%"
+        "format": "mem: {}%"
     },
     "temperature": {
         "critical-threshold": 80,
@@ -152,6 +152,16 @@
             "default": [" ", " ", " "]
         },
         "on-click": "pavucontrol"
+    },
+    "custom/clipboard": {
+      "format": "🄯",
+      "interval": "once",
+      "return-type": "json",
+      "on-click": "swaymsg -q exec '$clipboard'; pkill -RTMIN+9 waybar",
+      "on-click-right": "swaymsg -q exec '$clipboard-del'; pkill -RTMIN+9 waybar",
+      "on-click-middle": "swaymsg -q exec '$clipboard-del-all'",
+      "exec": "printf '{\"tooltip\":\"%s\"}' $(cliphist list | wc -l)",
+      "signal": 9
     },
 //    "custom/media": {
 //        "format": "{icon} {}",

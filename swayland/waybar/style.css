@@ -2,7 +2,7 @@
     border: none;
     border-radius: 1;
     font-size: 12px;
-    font-family: "blexmono";
+    font-family: "blexmono propo";
     min-height: 0;
     font-weight: bold;
 }
@@ -36,7 +36,7 @@ window#waybar {
 	border-radius: 2px;
 }
 
-#custom-date,#cpu, #clock, #battery, #pulseaudio, #network, #custom-governor, #custom-betterbattery, #idle_inhibitor, #tray{
+#custom-date,#custom-clipboard,#cpu, #clock, #battery, #pulseaudio, #network, #custom-governor, #custom-betterbattery, #idle_inhibitor, #tray{
 	padding: 0px 5px;
 	margin: 0px 0px;
 }
