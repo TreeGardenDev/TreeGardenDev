@@ -22,10 +22,11 @@ set $mod Mod4
 set $width /home/baum/.local/bin/getmidwidthsh
 set $height /home/baum/.local/bin/getmidleheightsh
 #set $menu wofi --hide-scroll -xoffset $width -yoffset $height --dmenu--height 800 --width 400 --dmenu --insensitive --case-sensitive --allow-markup --allow-images --cache-file /dev/null --show drun --prompt "Run: " --no-custom --icon-theme "Papirus" --monitor 1 --location 0 --columns 1 --font "BlexMono Nerd Font 12" --show-icons --icon-theme "Papirus" --dpi 96 --color-window "#000000, #000000, #000000" --color-normal "#000000, #ffffff, #000000, #000000, #ffffff" --color-active "#000000, #ffffff, #000000, #000000, #ffffff" --color-urgent "#000000, #ffffff, #000000, #000000, #ffffff" --color-active-urgent "#000000, #ffffff, #000000, #000000, #ffffff" --color-input "#000000, #ffffff, #000000, #000000, #ffffff" --color-block "#000000, #ffffff, #000000, #000000, #ffffff" --color-separator "#000000, #ffffff, #000000, #000000, #ffffff" --color-normal-elevated "#000000, #ffffff, #000000, #000000, #ffffff" --color-active-elevated "#000000, #ffffff, #000000, #000000, #ffffff" --color-urgent-elevated "#000000, #ffffff, #000000, #000000, #ffffff" --color-active-urgent-elevated "#000000, #ffffff, #000000, #000000, #ffffff" --color-window-elevated "#000000, #000000, #000000" --color-separator-elevated "#000000, #000000, #000000" --color-input-elevated "#000000, #000000, #000000" --color-block-elevated "#000000, #000000, #000000" --color-normal-elevated "#000000, #000000, #000000" --color-active-elevated "#000000, #000000, #000000" --color-urgent-elevated "#000000, #000000, #000000" --color-active-
-set $menu /home/baum/.local/bin/execwoficmd
+#set $menu /home/baum/.local/bin/execwoficmd
+set $menu tofi-drun
 bindgesture swipe:right workspace prev 
 bindgesture swipe:left workspace next
-bindgesture swipe:up exec '~/.config/wofi/scripts/wofi-list-system'
+bindgesture swipe:up exec '~/.config/tofi/scripts/tofi-list-system'
 bindgesture swipe:down exec $menu
 #| xargs swaymsg exec --
 
@@ -38,8 +39,8 @@ set $clipboard-del-all "rm -f ~/.cache/cliphist/db; pkill -RTMIN+9 waybar
 
 #bindsym $mod+space exec $menu
 bindsym $mod+d exec $menu
-bindsym $mod+Ctrl+p exec '~/.config/wofi/scripts/wofi-power-menu'
-bindsym $mod+end exec '~/.config/wofi/scripts/wofi-power-menu'
+bindsym $mod+Ctrl+p exec '~/.config/tofi/scripts/tofi-power-menu'
+bindsym $mod+end exec '~/.config/tofi/scripts/tofi-power-menu'
 
 bindsym $mod+Shift+z exec zathura
 bindsym $mod+Shift+p exec cpupower-gui -p
@@ -117,7 +118,7 @@ bindsym $mod+Shift+Return exec alacritty -e tmux
 bindsym $mod+q kill
 
 # bindsym $mod+Shift+t exec kitty -e tuir --no-flash
-bindsym $mod+t exec "cliphist list | wofi -dmenu | cliphist decode | wl-copy"
+bindsym $mod+t exec "cliphist list | tofi -c /home/baum/.config/tofi/clipboardconfig | cliphist decode | wl-copy"
 bindsym $mod+Shift+y exec alacritty -e ytfzf -s
 bindsym $mod+Shift+v exec alacritty -e ytfzf -s -m
 bindsym $mod+Shift+m exec alacritty -e spt
@@ -177,7 +178,7 @@ bindsym $mod+s layout toggle split
 bindsym $mod+Shift+space floating toggle
 
 # change focus between tiling / floating windows
-bindsym $mod+Ctrl+space focus mode_toggle
+bindsym $mod+Ctrl+t focus mode_toggle
 
 # focus the parent container
 bindsym $mod+a focus parent
@@ -203,7 +204,7 @@ bindsym XF86AudioMute exec '/home/baum/.config/pactl/mute_all_sinks.sh'
 #mute microphone
 bindsym XF86AudioMicMute exec '/home/baum/.config/pactl/mute_all_mics.sh'
 #pactl set-source-mute 0 toggle
-bindsym $mod+Alt+p exec '/home/baum/.config/wofi/scripts/wofi-change-audio'
+bindsym $mod+Alt+p exec '/home/baum/.config/tofi/scripts/tofi-change-audio'
 
 # audio control
 bindsym XF86AudioPlay exec playerctl play
@@ -215,8 +216,8 @@ bindsym XF86AudioPrev exec playerctl previous
 #bindsym $mod+p exec /usr/local/bin/switch-audio-port
 
 ## App shortcuts
+#bindsym $mod+w exec /usr/bin/firefox
 bindsym $mod+w exec /usr/bin/librewolf
-#bindsym $mod+w exec firefox-nightly
 bindsym $mod+n exec alacritty -e nmtui
 bindsym $mod+b exec alacritty -e bluetuith
 bindsym $mod+m exec thunderbird
@@ -224,7 +225,7 @@ bindsym $mod+m exec thunderbird
 ##########################################
 
 for_window [class=Alacritty] focus
-for_window [class=(?i)librewolf] focus
+for_window [class=(?i)firefox] focus
 for_window [class=Nautilus] focus
 for_window [class=Thunderbird] focus
 
@@ -236,7 +237,8 @@ for_window [class=Thunderbird] focus
 exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 
 #output * bg '/home/baum/Pictures/img/mactree.jpg' fill
-output * bg '/home/baum/Pictures/mandel.png' fill
+#output * bg '/home/baum/Pictures/mandel.png' fill
+output * bg '/home/baum/Pictures/screenshots/swappy-20231121_194056.png' fill
 #output * bg '/home/baum/Pictures/4lucie.jpeg' fill
 #output * bg '/home/baum/Pictures/archprd.png' fill
 
@@ -247,10 +249,13 @@ exec_always --no-startup-id dbus-launch mako
 bindsym $mod+Shift+minus scratchpad show
 
 # set floating (nontiling) for apps needing it
-for_window [class="Bitwarden" instance="bitwarden"] floating enable, resize set 480 480, move absolute position 0 0 
+for_window [class="Bitwarden" instance="bitwarden"] floating enable
+# for_window [class="Extension: (Bitwarden - Free Password Manager) - *"] floating enable
+#for_window [app_id="firefox" u] floating enable, resize set 1800 1000
+for_window [app_id="firefox" title="Extension: *"] floating enable
 # set floating (nontiling) for special apps
 for_window [title="Emulator" window_type="utility"] move scratchpad
-for_window [title="Android Emulator - *"] floating enable, resize set 320 480
+for_window [title="Android Emulator - *"] floating enable
 
 for_window [class="Pavucontrol" instance="pavucontrol"] floating enable
 for_window [class="Bluetooth-sendto" instance="bluetooth-sendto"] floating enable
