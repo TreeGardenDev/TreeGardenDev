@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+
+#volume=$(pactl list sinks | sed -n '10 p' | awk '{print $5}'); 
+
+op=$((acpi --battery | awk '{print $2, $3, $4, $5}' ; 
+echo "CPU Usage: "$(iostat -c | awk '{print $1+$3}'  | sed -n '4 p')"%" ; 
+echo "Memory Remaining: "$(cat /proc/meminfo | sed -n '2 p'  | awk '{print $2, $3}') ; 
+echo "CPU Temp "$(sensors | grep CPU | awk '{print $2}') ; 
+iwconfig wlan0 | sed -n '1 p' |awk '{print $4}' ;
+echo "Brightness: "$(light -G) ;
+echo "Volume : $(pactl list sinks | rg front-left: | awk '{print $5}' | tail -1)";
+echo "Fan: "$(sensors | grep fan1 | awk '{print $2, $3}');
+timedatectl | sed -n '1 p' | awk '{print $3,$4, $5}')| cat |  
+     tofi | awk '{print tolower($2)}')

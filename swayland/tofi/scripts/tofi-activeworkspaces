@@ -1,0 +1,18 @@
+#!/bin/bash
+
+# Get available windows
+#swaymsg -t get_tree | jq -r '.nodes[1].nodes[].nodes[] | .. | (.id|tostring) + " " + .name?' | grep -e "[0-9]* ."  )
+#swaymsg -t get_tree | jq -r '.nodes | .[] | .nodes | . [] | select(.nodes != null) | .nodes | .[] | select(.name != null) | "\(.id?) \(.name?)"'
+
+#print the workspace number and representation with the json attribut name focus on the workspace based on the id
+#
+windows=$(swaymsg -t get_workspaces | jq -r '.[] | "\(.name) \(.representation) \(.num)"')
+
+#windows=$(swaymsg -t get_tree | jq -r '.nodes | .[] | .nodes | . [] | select(.nodes != null) | .nodes | .[] | select(.name != null) | "\(.id?) \(.name?)"')
+
+selected=$(echo "$windows" | tofi | awk '{print $1}')
+#echo $selected
+
+tree=$(swaymsg -t get_tree | jq -r --arg selected "$selected" '.nodes | .[] | .nodes | .[] | select(.name == $selected) |  .nodes | .[] | "\(.id?) \(.name?)"' | awk '{print $1}' | head -n 1) 
+# Tell sway to focus said window
+swaymsg -q [con_id="$tree"] focus
