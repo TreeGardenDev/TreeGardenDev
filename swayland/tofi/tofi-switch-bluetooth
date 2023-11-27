@@ -1,13 +1,10 @@
 #!/usr/bin/env bash
 
-#volume=$(pactl list sinks | sed -n '10 p' | awk '{print $5}'); 
-
-
 op=$((bluetoothctl devices | awk '{print $2 " " $3 " " $4}' ; ) | cat |  
     tofi -c /home/baum/.config/tofi/clipboardconfig | awk '{print ($1)}')
-
-echo $op
-
+if [[ -z "$op" ]]; then
+    exit
+fi
 connected=$(bluetoothctl devices Connected | grep $op)
 status=""
 #check if connected returns something
@@ -20,4 +17,3 @@ else
     bluetoothctl disconnect $op
     status="disconnected"
 fi
-
