@@ -10,7 +10,9 @@ require("lsp-inlayhints").setup({
         enabled = { "TypeHint", "ChainingHint", "ParameterHint" },
     },
 })
---local lspconfig = require("lspconfig")
+require('lspconfig')['hls'].setup{
+    filetypes={'haskell', 'lhaskell', 'cabal'},
+}
 
 --lsp.preset("recommended")
 lsp.preset({})
