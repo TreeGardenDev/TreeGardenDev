@@ -6,6 +6,7 @@ SETUVAR --export EDITOR:nvim
 SETUVAR --export LIBSEAT_BACKEND:logind
 SETUVAR --export MOZ_ENABLE_WAYLAND:1
 SETUVAR --export NO_AT_BRIDGE:1
+SETUVAR --export PAGER:nvimpager
 SETUVAR --export VISUAL:nvim
 SETUVAR --export WLR_DRM_NO_MODIFIERS:1
 SETUVAR --export XDG_CONFIG_HOME:/home/baum/\x2econfig
@@ -42,4 +43,6 @@ SETUVAR fish_pager_color_description:B3A06D\x1eyellow\x1e\x2di
 SETUVAR fish_pager_color_prefix:normal\x1e\x2d\x2dbold\x1e\x2d\x2dunderline
 SETUVAR fish_pager_color_progress:brwhite\x1e\x2d\x2dbackground\x3dcyan
 SETUVAR fish_pager_color_selected_background:\x2dr
-SETUVAR fish_user_paths:/home/baum/git/emsdk\x1e/home/baum/Android/Sdk/cmdline\x2dtools/latest/bin\x1e/home/baum/Android/Sdk/platform\x2dtools\x1e/home/baum/Android/Sdk/emulator\x1e/home/baum/git/flutter/bin\x1e/usr/lib/emscripten/system/include\x1e/home/baum/\x2eemscripten_cache/sysroot/include\x1e/home/baum/\x2ecargo/bin
+SETUVAR fish_user_paths:/home/baum/git/theme\x2esh/bin\x1e/home/baum/git/emsdk\x1e/home/baum/Android/Sdk/cmdline\x2dtools/latest/bin\x1e/home/baum/Android/Sdk/platform\x2dtools\x1e/home/baum/Android/Sdk/emulator\x1e/home/baum/git/flutter/bin\x1e/usr/lib/emscripten/system/include\x1e/home/baum/\x2eemscripten_cache/sysroot/include\x1e/home/baum/\x2ecargo/bin
+SETUVAR night:day
+SETUVAR --export scheme:night

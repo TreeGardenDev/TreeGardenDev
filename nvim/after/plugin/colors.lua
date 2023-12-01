@@ -1,20 +1,24 @@
 vim.opt.termguicolors = true
 vim.opt.list = true
-function ReadAlacrittyColorscheme()
-    local config_file = '/home/baum/.config/alacritty/alacritty.yml';
-    local pattern = '[*]light'
-    local handle = io.popen('rg "' .. pattern .. '" ' .. config_file);
-    local result = handle:read("*a");
-    handle:close()
-    local match = string.match(result, pattern)
+--read env variable
+--
+Current=""
+function ReadColorscheme()
+    local environ=os.getenv("scheme")
+
+    environ = tostring(environ)
+    local pattern = "day"
+    local match = string.match(environ, pattern)
     if match then
         vim.cmd 'colorscheme delek'
+        Current="day"
     else
         vim.cmd 'colorscheme slate'
+        Current="night"
     end
 end
 
-vim.cmd 'autocmd VimEnter * lua ReadAlacrittyColorscheme()';
+--vim.cmd 'autocmd VimEnter * lua ReadColorscheme()';
 
-vim.keymap.set("n", "<C-b>",
-    "<cmd>!/home/baum/.config/alacritty/alacritty_colorscheme.py <CR><cmd>lua ReadAlacrittyColorscheme()<CR>")
+--vim.keymap.set("n", "<C-b>",
+--    "<cmd>!/home/baum/.config/fish/functions/changescheme.sh <CR><cmd>lua ReadColorscheme()<CR>")

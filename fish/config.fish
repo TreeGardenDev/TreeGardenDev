@@ -10,7 +10,8 @@ set fish_greeting ""
 #fish open in external editor command set
 bind \ce "edit_command_buffer"
 bind \cf "tmux new ~/.local/bin/tmux-sessionizer;"
-bind \cb "python /home/baum/.config/alacritty/alacritty_colorscheme.py"
+bind \cb "/home/baum/.config/fish/functions/changescheme.sh"
+
 
 
 if status is-interactive
@@ -35,6 +36,8 @@ abbr -a conan '/home/baum/.local/bin/conan/conan'
 abbr -a tofi 'tofi --font /usr/share/fonts/nerd-fonts-git/TTF/BlexMonoNerdFont-Bold.ttf'
 abbr -a tofi-drun 'tofi-drun --font /usr/share/fonts/nerd-fonts-git/TTF/BlexMonoNerdFont-Bold.ttf'
 abbr -a tofi-run 'tofi-run --font /usr/share/fonts/nerd-fonts-git/TTF/BlexMonoNerdFont-Bold.ttf'
+abbr -a zathura 'zathura -d /home/baum/pdf/'
+abbr -a themeswitch '/home/baum/.config/fish/functions/changescheme.sh'
 #abbr -a emscript 'echo set PATH=/home/baum/.emscripten_cache/sysroot/include/":"/usr/lib/emscripten/system/include/":$PATH\n'
 abbr -a emscript 'fish_add_path /home/baum/.emscripten_cache/sysroot/include/; fish_add_path /usr/lib/emscripten/system/include/; fish_add_path /home/baum/git/emsdk; fish_add_path /home/baum/emsdk/upstream/emscripten'
 function fish_hybrid_key_bindings --description \
@@ -45,7 +48,7 @@ function fish_hybrid_key_bindings --description \
     fish_vi_key_bindings --no-erase
 end
 set -g fish_key_bindings fish_hybrid_key_bindings
-#set -g fish_vi_key_bindings command
+set -g fish_vi_key_bindings command
 
 set -xU NO_AT_BRIDGE 1
 set -xU XDG_CURRENT_DESKTOP sway
@@ -60,6 +63,15 @@ set -xU ANDROID_AVD_HOME "/home/baum/.config/.android/avd"
 set -xU EDITOR nvim
 set -xU VISUAL nvim
 set -xU ZSH_TMUX_AUTOSTART true
+set -xU PAGER nvimpager
+#set -xU scheme "night"
+
+
+if test "$scheme" = "day"
+    theme.sh windows-nt-light
+else
+    theme.sh gruvbox-dark-hard
+end
 #set PATH "/home/baum/.cargo/bin":~/.local/bin:$PATH
 #set PATH "/home/baum/git/flutter/bin/":$PATH
 #set PATH "$ANDROID_HOME/emulator/":$PATH
@@ -69,6 +81,27 @@ set -xU ZSH_TMUX_AUTOSTART true
 source ~/.env/openai
 #[[ ! -r /home/baum/.opam/opam-init/init.fish ]] || source /home/baum/.opam/opam-init/init.fish  > /dev/null 2> /dev/null
 
+if type -q theme.sh
+	if test -e ~/.theme_history
+	theme.sh (theme.sh -l|tail -n1)
+	end
+
+	# Optional
+	# Bind C-o to the last theme.
+	function last_theme
+		theme.sh (theme.sh -l|tail -n2|head -n1)
+	end
+
+	bind \co last_theme
+
+	alias th='theme.sh -i'
+
+	# Interactively load a light theme
+	alias thl='theme.sh --light -i'
+
+	# Interactively load a dark theme
+	alias thd='theme.sh --dark -i'
+end
 
 
 #set PATH="/home/baum/.emscripten_cache/sysroot/include/":$PATH
