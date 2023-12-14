@@ -15,6 +15,7 @@ return require('packer').startup(function(use)
         'nvim-treesitter/nvim-treesitter',
         run = ':TSUpdate'
     }
+    --use 'p00f/clangd_extensions.nvim'
        --use({
     --    "L3MON4D3/LuaSnip",
     --    -- follow latest release.
@@ -106,6 +107,17 @@ return require('packer').startup(function(use)
     --        })
     --    end,
     --})
+    use({
+  "jackMort/ChatGPT.nvim",
+    config = function()
+      require("chatgpt").setup()
+    end,
+    requires = {
+      "MunifTanjim/nui.nvim",
+      "nvim-lua/plenary.nvim",
+      "nvim-telescope/telescope.nvim"
+    }
+})
     use {
         'nvim-telescope/telescope.nvim',
         -- or                            , branch = '0.1.x',

@@ -1,15 +1,17 @@
 exec_always --no-startup-id kanshi
-exec_always --no-startup-id spotifyd 
+# exec_always --no-startup-id spotifyd 
 exec_always --no-startup-id nm-applet
 exec_always --no-startup-id blueman-applet
 exec_always --no-startup-id wl-paste --watch cliphist store
+exec_always --no-startup-id proton-mail-bridge
+exec_always --no-startup-id spotify_player --daemon
 focus_follows_mouse yes
 
 #######################
 # config starts here: #
 #######################
 
-font pango: BlexMono Nerd Font Propo 12
+font pango: BerkeleyMono Nerd Font 12
 #font pango: JetBrainsMono Medium 10
 
 # set the mod key to the winkey:
@@ -43,9 +45,9 @@ bindsym $mod+Ctrl+p exec '~/.config/tofi/scripts/tofi-power-menu'
 bindsym $mod+end exec '~/.config/tofi/scripts/tofi-power-menu'
 
 bindsym $mod+Shift+z exec zathura
-bindsym $mod+Shift+p exec cpupower-gui -p
-bindsym $mod+Shift+o exec cpupower-gui -b
-bindsym $mod+Ctrl+e exec alacritty -e 'emulator -avd flutter_emulator'
+#bindsym $mod+Shift+p exec cpupower-gui -p
+#bindsym $mod+Shift+o exec cpupower-gui -b
+bindsym $mod+Ctrl+e exec foot -e 'emulator -avd flutter_emulator'
 # bindsym $mod+Shift+b exec bitwarden-desktop
 
 bindsym $mod+Shift+w exec killall -SIGUSR1 waybar
@@ -73,7 +75,7 @@ floating_modifier $mod
 
 bindsym $mod+Tab workspace next
 bindsym $mod+Shift+Tab workspace prev
-bindsym $mod+Shift+f exec alacritty -e joshuto
+bindsym $mod+Shift+f exec foot -e ranger
 bindsym $mod+Ctrl+f exec nautilus
 
 # switch to workspace
@@ -111,17 +113,17 @@ bindsym $mod+Ctrl+l resize grow width 50 px or 50 ppt
 ######################################
 
 # start a terminal
-bindsym $mod+Return exec alacritty
-bindsym $mod+Shift+Return exec alacritty -e tmux
+bindsym $mod+Return exec foot
+bindsym $mod+Shift+Return exec foot -e tmux
 
 # kill focused window
 bindsym $mod+q kill
 
 # bindsym $mod+Shift+t exec kitty -e tuir --no-flash
 bindsym $mod+t exec "cliphist list | tofi -c /home/baum/.config/tofi/clipboardconfig | cliphist decode | wl-copy"
-bindsym $mod+Shift+y exec alacritty -e ytfzf -s
-bindsym $mod+Shift+v exec alacritty -e ytfzf -s -m
-bindsym $mod+Shift+m exec alacritty -e spt
+bindsym $mod+Shift+y exec foot -e ytfzf -s
+bindsym $mod+Shift+v exec foot -e ytfzf -s -m
+bindsym $mod+Shift+m exec foot -e spotify_player
 
 # reload the configuration file
 bindsym $mod+Shift+c reload
@@ -178,7 +180,7 @@ bindsym $mod+s layout toggle split
 bindsym $mod+Shift+space floating toggle
 
 # change focus between tiling / floating windows
-bindsym $mod+Ctrl+t focus mode_toggle
+bindsym $mod+Ctrl+space focus mode_toggle
 
 # focus the parent container
 bindsym $mod+a focus parent
@@ -218,13 +220,14 @@ bindsym XF86AudioPrev exec playerctl previous
 ## App shortcuts
 #bindsym $mod+w exec /usr/bin/firefox
 bindsym $mod+w exec /usr/bin/librewolf
-bindsym $mod+n exec alacritty -e nmtui
-bindsym $mod+b exec alacritty -e bluetuith
+bindsym $mod+n exec foot -e nmtui
+bindsym $mod+b exec foot -e bluetuith
+bindsym $mod+Shift+b exec /home/baum/.config/tofi/scripts/tofi-switch-bluetooth
 bindsym $mod+m exec thunderbird
 #
 ##########################################
 
-for_window [class=Alacritty] focus
+for_window [class=foot] focus
 for_window [class=(?i)firefox] focus
 for_window [class=Nautilus] focus
 for_window [class=Thunderbird] focus
@@ -296,7 +299,8 @@ bindsym Shift+print exec grim -g "$(slurp)" - | swappy -f -
 #		-config ~/.config/rofi/rofidmenu.rasi
 input type:keyboard {
     xkb_layout "us"
-    xkb_options "caps:escape"
+    xkb_options "caps:escape, grp:win_space_toggle"
+    xkb_variant "qwerty, colemak"
 }
 input "2:10:TPPS/2_IBM_TrackPoint" {
    dwt enabled
@@ -328,5 +332,11 @@ default_floating_border none
 bar {
     swaybar_command waybar
 }
+#bar {
+# swaybar_command swaybar
+#font pango: BerkeleyMono Nerd Font 12
+# status_command while ~/.config/sway/scripts/swaybar_status.sh; do sleep 5; done
+#}
+
 
 include /etc/sway/config.d/*

@@ -13,13 +13,9 @@ profile {
     output 'Acer Technologies R240HY T4BAA0012411' enable mode 1920x1080@60Hz position 0,0
     output 'Samsung Electric Company LF27T35 HCNT603304' enable mode 1920x1080@60Hz transform 270 position 1920,0
 }
-profile {
+profile{
 	output eDP-1 disable
-	output HDMI-A-2 mode 3840x2160@60Hz position 0,0
-}
-profile {
-	output eDP-1 disable
-    output 'Samsung Electric Company SAMSUNG Unknown' mode 3840x2160@60Hz position 0,0
+    output 'Samsung Electric Company SAMSUNG Unknown' mode 2560x1440 position 0,0
 }
 profile {
 	output  eDP-1 disable

@@ -13,6 +13,10 @@ require("lsp-inlayhints").setup({
 require('lspconfig')['hls'].setup{
     filetypes={'haskell', 'lhaskell', 'cabal'},
 }
+require('lspconfig').clangd.setup{
+    filetypes = { "c", "cpp", "objc", "objcpp" },
+        cmd={"clangd", "--offset-encoding=utf-16"},
+}
 
 --lsp.preset("recommended")
 lsp.preset({})

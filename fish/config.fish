@@ -32,14 +32,16 @@ abbr -a yay 'paru'
 abbr -a dbg 'cgdb'
 abbr -a reflectsimple "sudo reflector -p https -n 5 -l 150 --sort rate --save /etc/pacman.d/mirrorlist --threads 300"
 abbr -a armgdb 'arm-none-eabi-gdb'
-abbr -a conan '/home/baum/.local/bin/conan/conan'
+#abbr -a conanlocal '/home/baum/.local/bin/conan/conan'
 abbr -a tofi 'tofi --font /usr/share/fonts/nerd-fonts-git/TTF/BlexMonoNerdFont-Bold.ttf'
 abbr -a tofi-drun 'tofi-drun --font /usr/share/fonts/nerd-fonts-git/TTF/BlexMonoNerdFont-Bold.ttf'
 abbr -a tofi-run 'tofi-run --font /usr/share/fonts/nerd-fonts-git/TTF/BlexMonoNerdFont-Bold.ttf'
 abbr -a zathura 'zathura -d /home/baum/pdf/'
 abbr -a themeswitch '/home/baum/.config/fish/functions/changescheme.sh'
+abbr -a lightmode 'theme.sh windows-nt-light'
+abbr -a darkmode 'theme.sh gruvbox-dark-hard'
 #abbr -a emscript 'echo set PATH=/home/baum/.emscripten_cache/sysroot/include/":"/usr/lib/emscripten/system/include/":$PATH\n'
-abbr -a emscript 'fish_add_path /home/baum/.emscripten_cache/sysroot/include/; fish_add_path /usr/lib/emscripten/system/include/; fish_add_path /home/baum/git/emsdk; fish_add_path /home/baum/emsdk/upstream/emscripten'
+#abbr -a emscript 'fish_add_path /home/baum/.emscripten_cache/sysroot/include/; fish_add_path /usr/lib/emscripten/system/include/; fish_add_path /home/baum/git/emsdk; fish_add_path /home/baum/emsdk/upstream/emscripten'
 function fish_hybrid_key_bindings --description \
 "Vi-style bindings that inherit emacs-style bindings in all modes"
     for mode in default insert visual
@@ -49,7 +51,7 @@ function fish_hybrid_key_bindings --description \
 end
 set -g fish_key_bindings fish_hybrid_key_bindings
 set -g fish_vi_key_bindings command
-
+set -xU _JAVA_AWT_WM_NONREPARENTING 1
 set -xU NO_AT_BRIDGE 1
 set -xU XDG_CURRENT_DESKTOP sway
 set -xU XDG_CONFIG_HOME "$HOME/.config"
@@ -62,16 +64,38 @@ set -xU ANDROID_HOME "/home/baum/Android/Sdk"
 set -xU ANDROID_AVD_HOME "/home/baum/.config/.android/avd"
 set -xU EDITOR nvim
 set -xU VISUAL nvim
+set -xU TERMINAL foot
+set -xU TERM foot-256color
+set -xU TerminalEmulator foot
 set -xU ZSH_TMUX_AUTOSTART true
 set -xU PAGER nvimpager
+# set -xU CPATH $CPATH:/usr/include/gtk-3.0
+# set -xU CPATH $CPATH:/usr/include/glib-2.0
+# set -xU CPATH $CPATH:/usr/lib/glib-2.0/include
+# set -xU CPATH $CPATH:/usr/include/pango-1.0
+# set -xU CPATH $CPATH:/usr/include/harfbuzz
+# set -xU CPATH $CPATH:/usr/include/freetype2
+# set -xU CPATH $CPATH:/usr/include/libpng16
+# set -xU CPATH $CPATH:/usr/include/cairo
+# set -xU CPATH $CPATH:/usr/include/pixman-1
+set -xU CFLAGS $CFLAGS:-I/usr/include/gtk-4.0 -I/usr/include/pango-1.0 -I/usr/include/gdk-pixbuf-2.0 -I/usr/include/cairo -I/usr/include/harfbuzz -I/usr/include/freetype2 -I/usr/include/graphene-1.0 -I/usr/lib/graphene-1.0/include -mfpmath=sse -msse -msse2 -I/usr/include/glib-2.0 -I/usr/lib/glib-2.0/include -I/usr/include/fribidi -I/usr/include/libpng16 -I/usr/include/pixman-1 -I/usr/include/libmount -I/usr/include/blkid -I/usr/include/sysprof-6 -pthread
 #set -xU scheme "night"
 
-
-if test "$scheme" = "day"
+if test (cat $HOME/.config/.theme_history|tail -n1) = "windows-nt-light"
+    set -xU scheme "day"
     theme.sh windows-nt-light
 else
+    set -xU scheme "night"
     theme.sh gruvbox-dark-hard
 end
+
+
+
+#if test "$scheme" = "day"
+#    theme.sh windows-nt-light
+#else
+#    theme.sh gruvbox-dark-hard
+#end
 #set PATH "/home/baum/.cargo/bin":~/.local/bin:$PATH
 #set PATH "/home/baum/git/flutter/bin/":$PATH
 #set PATH "$ANDROID_HOME/emulator/":$PATH
