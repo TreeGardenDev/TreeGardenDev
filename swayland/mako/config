@@ -1,0 +1,7 @@
+default-timeout=4000
+max-visible=1
+max-history=1
+[app-name="blueman"]
+invisible=1
+[app-name="NetworkManager Applet"]
+invisible=1
