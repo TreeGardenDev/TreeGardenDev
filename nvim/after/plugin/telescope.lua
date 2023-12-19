@@ -10,16 +10,18 @@ require('telescope').setup {
     }
   }
 }
--- To get fzf loaded and working with telescope, you need to call
--- load_extension, somewhere after setup function:
-require('telescope').load_extension('fzf')
+---- To get fzf loaded and working with telescope, you need to call
+---- load_extension, somewhere after setup function:
+--require('telescope').load_extension('fzf')
 --.setup{
 --    pickers={
 --        find_files={
 --            hidden=true
 --        }
 --    }
----}
+--}
+require ('telescope').load_extension('fzf')
+--local telescope = require('telescope')
 --nnoremap <leader>ff <cmd>lua require('telescope.builtin').find_files()<cr>;
 vim.keymap.set('n', '<C-n>', telescope.find_files, {})
 vim.keymap.set('n', '<C-p>', telescope.git_files, {})

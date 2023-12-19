@@ -74,12 +74,6 @@ end
 time([[try_loadstring definition]], false)
 time([[Defining packer_plugins]], true)
 _G.packer_plugins = {
-  ["ChatGPT.nvim"] = {
-    config = { "\27LJ\2\n5\0\0\3\0\3\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\nsetup\fchatgpt\frequire\0" },
-    loaded = true,
-    path = "/home/baum/.local/share/nvim/site/pack/packer/start/ChatGPT.nvim",
-    url = "https://github.com/jackMort/ChatGPT.nvim"
-  },
   LuaSnip = {
     loaded = true,
     path = "/home/baum/.local/share/nvim/site/pack/packer/start/LuaSnip",
@@ -118,21 +112,6 @@ _G.packer_plugins = {
     path = "/home/baum/.local/share/nvim/site/pack/packer/start/harpoon",
     url = "https://github.com/ThePrimeagen/harpoon"
   },
-  ["lazygit.nvim"] = {
-    loaded = true,
-    path = "/home/baum/.local/share/nvim/site/pack/packer/start/lazygit.nvim",
-    url = "https://github.com/kdheepak/lazygit.nvim"
-  },
-  ["lsp-debug-tools.nvim"] = {
-    loaded = true,
-    path = "/home/baum/.local/share/nvim/site/pack/packer/start/lsp-debug-tools.nvim",
-    url = "https://github.com/ThePrimeagen/lsp-debug-tools.nvim"
-  },
-  ["lsp-inlayhints.nvim"] = {
-    loaded = true,
-    path = "/home/baum/.local/share/nvim/site/pack/packer/start/lsp-inlayhints.nvim",
-    url = "https://github.com/lvimuser/lsp-inlayhints.nvim"
-  },
   ["lsp-zero.nvim"] = {
     loaded = true,
     path = "/home/baum/.local/share/nvim/site/pack/packer/start/lsp-zero.nvim",
@@ -147,11 +126,6 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/baum/.local/share/nvim/site/pack/packer/start/mason.nvim",
     url = "https://github.com/williamboman/mason.nvim"
-  },
-  ["nui.nvim"] = {
-    loaded = true,
-    path = "/home/baum/.local/share/nvim/site/pack/packer/start/nui.nvim",
-    url = "https://github.com/MunifTanjim/nui.nvim"
   },
   ["nvim-cmp"] = {
     loaded = true,
@@ -192,19 +166,10 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/baum/.local/share/nvim/site/pack/packer/start/undotree",
     url = "https://github.com/mbbill/undotree"
-  },
-  vimtex = {
-    loaded = true,
-    path = "/home/baum/.local/share/nvim/site/pack/packer/start/vimtex",
-    url = "https://github.com/lervag/vimtex"
   }
 }
 
 time([[Defining packer_plugins]], false)
--- Config for: ChatGPT.nvim
-time([[Config for ChatGPT.nvim]], true)
-try_loadstring("\27LJ\2\n5\0\0\3\0\3\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\nsetup\fchatgpt\frequire\0", "config", "ChatGPT.nvim")
-time([[Config for ChatGPT.nvim]], false)
 -- Load plugins in order defined by `after`
 time([[Sequenced loading]], true)
 vim.cmd [[ packadd copilot.lua ]]

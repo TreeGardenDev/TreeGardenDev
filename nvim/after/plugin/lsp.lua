@@ -1,15 +1,15 @@
 local lsp = require("lsp-zero")
 
 
-require("lsp-inlayhints").setup({
-    inlay_hints = {
-        highlight = "Comment",
-        prefix = " > ",
-        aligned = false,
-        only_current_line = false,
-        enabled = { "TypeHint", "ChainingHint", "ParameterHint" },
-    },
-})
+--require("lsp-inlayhints").setup({
+--    inlay_hints = {
+--        highlight = "Comment",
+--        prefix = " > ",
+--        aligned = false,
+--        only_current_line = false,
+--        enabled = { "TypeHint", "ChainingHint", "ParameterHint" },
+--    },
+--})
 require('lspconfig')['hls'].setup{
     filetypes={'haskell', 'lhaskell', 'cabal'},
 }
@@ -83,19 +83,19 @@ lsp.on_attach(function(client, bufnr)
     vim.keymap.set("n", "<leader>ff", function() vim.lsp.buf.format() end, opts)
 end)
 
-vim.api.nvim_create_augroup("LspAttach_inlayhints", {})
-vim.api.nvim_create_autocmd("LspAttach", {
-  group = "LspAttach_inlayhints",
-  callback = function(args)
-    if not (args.data and args.data.client_id) then
-      return
-    end
-
-    local bufnr = args.buf
-    local client = vim.lsp.get_client_by_id(args.data.client_id)
-    require("lsp-inlayhints").on_attach(client, bufnr)
-  end,
-})
+--vim.api.nvim_create_augroup("LspAttach_inlayhints", {})
+--vim.api.nvim_create_autocmd("LspAttach", {
+--  group = "LspAttach_inlayhints",
+--  callback = function(args)
+--    if not (args.data and args.data.client_id) then
+--      return
+--    end
+--
+--    local bufnr = args.buf
+--    local client = vim.lsp.get_client_by_id(args.data.client_id)
+--    --require("lsp-inlayhints").on_attach(client, bufnr)
+--  end,
+--})
 
 --vim.cmd [[autocmd BufWritePre * lua vim.lsp.buf.format()]]
 

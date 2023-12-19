@@ -13,7 +13,7 @@ vim.cmd('highlight! HarpoonNumberActive guibg=NONE guifg=#7aa2f7')
 vim.cmd('highlight! HarpoonNumberInactive guibg=NONE guifg=#7aa2f7')
 vim.cmd('highlight! TabLineFill guibg=NONE guifg=white')
 
-require("telescope").load_extension('harpoon')
+--require("telescope").load_extension('harpoon')
 vim.keymap.set("n", "<leader>af", mark.add_file)
 vim.keymap.set("n", "<C-f>", ui.toggle_quick_menu)
 
