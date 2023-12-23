@@ -112,6 +112,11 @@ _G.packer_plugins = {
     path = "/home/baum/.local/share/nvim/site/pack/packer/start/harpoon",
     url = "https://github.com/ThePrimeagen/harpoon"
   },
+  ["lsp-inlayhints.nvim"] = {
+    loaded = true,
+    path = "/home/baum/.local/share/nvim/site/pack/packer/start/lsp-inlayhints.nvim",
+    url = "https://github.com/lvimuser/lsp-inlayhints.nvim"
+  },
   ["lsp-zero.nvim"] = {
     loaded = true,
     path = "/home/baum/.local/share/nvim/site/pack/packer/start/lsp-zero.nvim",
@@ -166,6 +171,11 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/baum/.local/share/nvim/site/pack/packer/start/undotree",
     url = "https://github.com/mbbill/undotree"
+  },
+  vimtex = {
+    loaded = true,
+    path = "/home/baum/.local/share/nvim/site/pack/packer/start/vimtex",
+    url = "https://github.com/lervag/vimtex"
   }
 }
 

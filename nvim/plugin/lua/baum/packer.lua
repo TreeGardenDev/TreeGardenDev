@@ -10,7 +10,7 @@ return require('packer').startup(function(use)
     use 'hrsh7th/cmp-buffer'
     use 'hrsh7th/cmp-path'
     --use 'ThePrimeagen/lsp-debug-tools.nvim'
-    --use 'lvimuser/lsp-inlayhints.nvim'
+    use 'lvimuser/lsp-inlayhints.nvim'
     use {
         'nvim-treesitter/nvim-treesitter',
         run = ':TSUpdate'
@@ -23,7 +23,7 @@ return require('packer').startup(function(use)
     --    -- or                            , branch = '0.1.x',
     --    requires = { { 'nvim-lua/plenary.nvim' }}
     --}
-    --use 'lervag/vimtex'
+    use 'lervag/vimtex'
     use('nvim-lua/plenary.nvim')
     use 'ThePrimeagen/harpoon'
     use('mbbill/undotree')

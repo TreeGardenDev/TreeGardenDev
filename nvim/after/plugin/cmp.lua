@@ -1,5 +1,3 @@
-local import_luasnip, luasnip = pcall(require, 'luasnip')
-if not import_luasnip then return end
 local cmp              = require "cmp"
 local has_words_before = function()
     if vim.api.nvim_buf_get_option(0, "buftype") == "prompt" then return false end
@@ -47,8 +45,6 @@ cmp.setup({
         --    if cmp.visible() and has_words_before()
         --    then
         --        cmp.select_next_item()
-        --    elseif luasnip.expand_or_jumpable() then
-        --        luasnip.expand_or_jump()
         --    else
         --        fallback()
         --    end
