@@ -1,10 +1,13 @@
+#exec dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY SWAYSOCK XDG_CURRENT_DESKTOP=sway
 exec_always --no-startup-id kanshi
-# exec_always --no-startup-id spotifyd 
 exec_always --no-startup-id nm-applet
 exec_always --no-startup-id blueman-applet
 exec_always --no-startup-id wl-paste --watch cliphist store
-exec_always --no-startup-id proton-mail-bridge
-exec_always --no-startup-id spotify_player --daemon
+exec_always --no-startup-id protonmail-bridge -n
+
+
+#exec_always --no-startup-id gnome-keyring-daemon --start --components=secrets
+#exec_always --no-startup-id spotify_player -d
 focus_follows_mouse yes
 
 #######################
@@ -219,7 +222,8 @@ bindsym XF86AudioPrev exec playerctl previous
 
 ## App shortcuts
 #bindsym $mod+w exec /usr/bin/firefox
-bindsym $mod+w exec /usr/bin/librewolf
+#bindsym $mod+w exec /usr/bin/librewolf
+bindsym $mod+w exec /usr/bin/floorp
 bindsym $mod+n exec foot -e nmtui
 bindsym $mod+b exec foot -e bluetuith
 bindsym $mod+Shift+b exec /home/baum/.config/tofi/scripts/tofi-switch-bluetooth
@@ -241,7 +245,7 @@ exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 
 #output * bg '/home/baum/Pictures/img/mactree.jpg' fill
 #output * bg '/home/baum/Pictures/mandel.png' fill
-output * bg '/home/baum/Pictures/screenshots/swappy-20231121_194056.png' fill
+output * bg '/home/baum/Pictures/bun.png' fill
 #output * bg '/home/baum/Pictures/4lucie.jpeg' fill
 #output * bg '/home/baum/Pictures/archprd.png' fill
 
@@ -297,6 +301,7 @@ bindsym Shift+print exec grim -g "$(slurp)" - | swappy -f -
 
     floating_modifier $mod normal
 #		-config ~/.config/rofi/rofidmenu.rasi
+
 input type:keyboard {
     xkb_layout "us"
     xkb_options "caps:escape, grp:win_space_toggle"
