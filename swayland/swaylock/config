@@ -25,7 +25,6 @@ caps-lock-key-hl-color=00000000
 separator-color=00000000
 
 scaling=fill
-indicator
 clock
 timestr=%I:%M %p
 datestr=%A, %d %B
