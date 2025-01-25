@@ -1,12 +1,12 @@
 {
-     "position": "bottom",
-    "spacing": 4,
-    "modules-left": ["sway/workspaces","sway/window", "sway/mode", "sway/scratchpad", "custom/media"],
-    "modules-center": ["custom/spotify"],
-    "modules-right": ["idle_inhibitor","custom/clipboard","pulseaudio","mpd", "network", "cpu", "custom/governor", "memory", "temperature", "backlight",  "custom/betterbattery", "clock", "tray"],
+     "position": "bottom", // Waybar position (top|bottom|left|right)
+    "spacing": 5, // Gaps between modules (4px)
+    "modules-left": ["sway/workspaces", "sway/mode", "sway/scratchpad", "custom/media"],
+    "modules-center": ["clock"],
+    "modules-right": ["idle_inhibitor","pulseaudio", "network", "cpu", "custom/governor", "memory", "temperature", "backlight",  "custom/betterbattery"],
     "sway/workspaces": {
 		"disable-scroll": true,
-		"all-outputs": false,
+		"all-outputs": true,
 		"format": "{icon}",
 	 	"nonpersistent_workspaces": {
 	 		"1": [],
@@ -87,18 +87,21 @@
         }
     },
     "tray": {
+        // "icon-size": 21,
         "spacing": 10
     },
     "clock": {
-        "format-alt": "{:%Y-%m-%d}",
-        "tooltip": false
+         "timezone": "America/New_York",
+        "format": "{:%H:%M}",
+       // "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
+        "format-alt": "{:%Y-%m-%d}"
     } ,
     "cpu": {
-        "format": "cpu: {usage}% ",
+        "format": "CPU: {usage}% ",
         "tooltip":true 
     },
     "memory": {
-        "format": "mem: {}%"
+        "format": "MEM: {}%"
     },
     "temperature": {
         "critical-threshold": 80,
@@ -106,6 +109,7 @@
         "format-icons": ["", "", ""]
     },
     "backlight": {
+        // "device": "acpi_video1",
         "format": "{percent}% {icon}",
         "format-icons": ["", "", "", "", "", "", "", "", ""]
     },
@@ -114,14 +118,14 @@
         "exec": "$HOME/.config/waybar/checkbothbatteries.py",
         "format": " {percentage}% {icon} ",
         "tooltip": true,
-        "tooltip-format": " {text}% {discharging} ",
+        "tooltip-format": "{percentage}% {icon} {remaining} remaining",
         "interval": 30,
         "format-icons": ["", "", "", "", ""]
     },
     "custom/governor":{
         "interval": 5,
         "exec": "$HOME/.config/waybar/checkcurrentgovernor.py",
-        "format": "{}"
+        "format": "{}",
     },
     
     "network": {
@@ -150,49 +154,15 @@
         },
         "on-click": "pavucontrol"
     },
-    "custom/spotify": {
-        "format": "{icon} {}",
-        "escape": true,
-        "return-type": "json",
-        "max-length": 40,
-        "on-click": "playerctl play-pause",
-        "on-click-right": "playerctl stop",
-        "smooth-scrolling-threshold": 10, 
-        "on-scroll-up": "playerctl next",
-        "on-scroll-down": "playerctl previous",
-        "exec": "$HOME/.config/waybar/mediaplayer.py 2> /dev/null", 
-        },
-        "mpd": {
-        "format": "{stateIcon} {consumeIcon}{randomIcon}{repeatIcon}{singleIcon}{artist} - {album} - {title} ({elapsedTime:%M:%S}/{totalTime:%M:%S}) ",
-        "format-disconnected": "Disconnected ",
-        "format-stopped": "{consumeIcon}{randomIcon}{repeatIcon}{singleIcon}Stopped ",
-        "interval": 10,
-        "consume-icons": {"on": " "}
-    },
-    "random-icons": {
-        "off": "<span color=\"#f53c3c\"></span> ", // Icon grayed out when "random" is off
-        "on": " "
-    },
-    "repeat-icons": {
-        "on": " "
-    },
-    "single-icons": {
-        "on": "1 "
-    },
-    "state-icons": {
-        "paused": "",
-        "playing": ""
-    },
-    "tooltip-format": "MPD (connected)",
-    "tooltip-format-disconnected": "MPD (disconnected)"
-    },
-    "custom/clipboard": {
-      "format": "ï",
-      "interval": "once",
-      "return-type": "json",
-      "on-click": "swaymsg -q exec '$clipboard'; pkill -RTMIN+9 waybar",
-      "on-click-right": "swaymsg -q exec '$clipboard-del'; pkill -RTMIN+9 waybar",
-      "on-click-middle": "swaymsg -q exec '$clipboard-del-all'",
-      "exec": "printf '{\"tooltip\":\"%s\"}' $(cliphist list | wc -l)",
-      "signal": 9
-    }}
+//    "custom/media": {
+//        "format": "{icon} {}",
+//        "return-type": "json",
+//        "max-length": 40,
+//        "format-icons": {
+//            "spotify": "",
+//            "default": ""
+//        },
+//        "escape": true,
+//        "exec": "$HOME/.config/waybar/mediaplayer.py 2> /dev/null" // Script in resources folder
+//    }
+}

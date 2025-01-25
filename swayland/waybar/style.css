@@ -2,7 +2,7 @@
     border: none;
     border-radius: 1;
     font-size: 12px;
-    font-family: "blexmono propo";
+    font-family: "BerkeleyMono Nerd Font";
     min-height: 0;
     font-weight: bold;
 }
@@ -78,6 +78,10 @@ window#waybar {
 }
 
 #custom-betterbattery.charging {
+    color: #e8e8e8;
+}
+
+#custom-spotify {
     color: #e8e8e8;
 }
 
