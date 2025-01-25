@@ -21,7 +21,6 @@ require('lspconfig').clangd.setup {
 --lsp.preset("recommended")
 lsp.preset({})
 lsp.ensure_installed({
-    'tsserver',
     'rust_analyzer',
 })
 lsp.setup_servers({ 'dartls', force = true })
@@ -97,7 +96,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
     end,
 })
 
-vim.cmd [[autocmd BufWritePre * lua vim.lsp.buf.format()]]
+--vim.cmd [[autocmd BufWritePre * lua vim.lsp.buf.format()]]
 
 lsp.setup()
 
