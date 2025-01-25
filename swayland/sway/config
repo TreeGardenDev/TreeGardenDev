@@ -135,11 +135,11 @@ bindsym $mod+Shift+c reload
 bindsym $mod+Shift+r exec liferea
 
 
-bindsym XF86MonBrightnessUp exec light -A 10 
-bindsym $mod+XF86MonBrightnessUp exec light -A 1 
+bindsym XF86MonBrightnessUp exec "/home/baum/.local/bin/adjustbacklight.py 10"
+bindsym $mod+XF86MonBrightnessUp exec "/home/baum/.local/bin/adjustbacklight.py 1" 
 #&& notify-send "Brightness  $(cat /sys/class/backlight/amdgpu_bl0/brightness)%"
-bindsym XF86MonBrightnessDown exec light -U 10 
-bindsym $mod+XF86MonBrightnessDown exec light -U 1 
+bindsym XF86MonBrightnessDown exec "/home/baum/.local/bin/adjustbacklight.py -10"
+bindsym $mod+XF86MonBrightnessDown exec "/home/baum/.local/bin/adjustbacklight.py -1" 
 #&& notify-send "Brightness $(cat /sys/class/backlight/amdgpu_bl0/brightness)%" 
 
 # change focus
@@ -223,7 +223,7 @@ bindsym XF86AudioPrev exec playerctl previous
 ## App shortcuts
 #bindsym $mod+w exec /usr/bin/firefox
 #bindsym $mod+w exec /usr/bin/librewolf
-bindsym $mod+w exec /usr/bin/floorp
+bindsym $mod+w exec /usr/bin/librewolf
 bindsym $mod+n exec foot -e nmtui
 bindsym $mod+b exec foot -e bluetuith
 bindsym $mod+Shift+b exec /home/baum/.config/tofi/scripts/tofi-switch-bluetooth
@@ -243,11 +243,7 @@ for_window [class=Thunderbird] focus
 #get auth work with polkit-gnome
 exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 
-#output * bg '/home/baum/Pictures/img/mactree.jpg' fill
-#output * bg '/home/baum/Pictures/mandel.png' fill
-output * bg '/home/baum/Pictures/bun.png' fill
-#output * bg '/home/baum/Pictures/4lucie.jpeg' fill
-#output * bg '/home/baum/Pictures/archprd.png' fill
+output * bg '/home/baum/Pictures/canoe_upscaled.png' fill
 
 # Desktop notifications
 exec_always --no-startup-id dbus-launch mako
@@ -327,6 +323,10 @@ input 1386:770:Wacom_Intuos_PT_S_Pad {
     drag enabled
     dwt enable
 }
+#input 5050:24:Barcode_Reader {
+#    xkb_options "altwin:swap_alt_win, caps:escape"
+#
+#}
 
 input 1386:770:Wacom_Intuos_PT_S_Pen {
     map_to_output DP-4
