@@ -1,0 +1,12 @@
+[Unit]
+Description=Searxng Container
+Requires=docker.service
+After=docker.service
+
+[Service]
+Restart=always
+ExecStart=/usr/bin/docker start -a mysearx
+ExecStop=/usr/bin/docker stop -t 2 mysearx
+
+[Install]
+WantedBy=default.target
