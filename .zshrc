@@ -12,8 +12,9 @@ zle -N edit-command-line
 bindkey -v '^v' edit-command-line
 
 
-bindkey -s ^f "tmux new ~/.local/bin/tmux-sessionizer\n"
-bindkey -v '^r' vi-search-backward
+bindkey -s '^f' 'tmux new ~/.local/bin/tmux-sessionizer\n'
+#bindkey -v '^r' vi-search-backward
+bindkey '^r' history-incremental-search-backward
 
 typeset -g -A key
 
@@ -89,7 +90,7 @@ export VISUAL='nvim'
 #export TERM='alacritty'
 export EDITOR='nvim'
 export TERMINAL=/usr/bin/foot
-export CHROME_EXECUTABLE='/usr/bin/brave'
+#export CHROME_EXECUTABLE='/usr/bin/brave'
 #export BROWSER='librewolf'
 export NO_AT_BRIDGE=1
 export XDG_CURRENT_DESKTOP=sway
