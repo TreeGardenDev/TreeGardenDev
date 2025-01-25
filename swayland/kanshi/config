@@ -23,8 +23,12 @@ profile {
     output 'Samsung Electric Company LF27T35 HCNT603304' enable mode 1920x1080@60Hz transform 270 position 1920,0
 }
 profile {
-	output  eDP-1 disable
+	output  eDP-1 enable mode 1920x1080 position 0,0
     output 'Samsung Electric Company LF27T35 HCNT603304' enable mode 1920x1080@60Hz transform 270 position 1920,0
+}
+profile{
+    output eDP-1 enable mode 1920x1080 position 0,0
+    output 'Samsung Electric Company C27F390 HCNR702879' enable mode 1920x1080@60Hz position 1920,0
 }
 profile {
 	output  eDP-1 enable mode 1920x1080 position 0,0

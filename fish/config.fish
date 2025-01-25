@@ -7,16 +7,14 @@ if test (tty) = "/dev/tty2"
 end
 set fish_greeting ""
 
-#fish open in external editor command set
-bind \ce "edit_command_buffer"
-bind \cf "tmux new ~/.local/bin/tmux-sessionizer;"
-bind \cb "/home/baum/.config/fish/functions/changescheme.sh"
+bind  -M insert \cC "fish_clipboard_copy"
+
+bind -M insert \cc kill-whole-line repaint
 
 
-
-if status is-interactive
-    # Commands to run in interactive sessions can go here
-end
+#if status is-interactive
+#    # Commands to run in interactive sessions can go here
+#end
 
 set fish_color_error red --bold
 
@@ -40,15 +38,17 @@ abbr -a zathura 'zathura -d /home/baum/pdf/'
 abbr -a themeswitch '/home/baum/.config/fish/functions/changescheme.sh'
 abbr -a lightmode 'theme.sh windows-nt-light'
 abbr -a darkmode 'theme.sh gruvbox-dark-hard'
+abbr -a gcc "zsh -c 'gcc"
+abbr -a g++ "zsh -c 'g++"
 #abbr -a emscript 'echo set PATH=/home/baum/.emscripten_cache/sysroot/include/":"/usr/lib/emscripten/system/include/":$PATH\n'
 #abbr -a emscript 'fish_add_path /home/baum/.emscripten_cache/sysroot/include/; fish_add_path /usr/lib/emscripten/system/include/; fish_add_path /home/baum/git/emsdk; fish_add_path /home/baum/emsdk/upstream/emscripten'
-function fish_hybrid_key_bindings --description \
-"Vi-style bindings that inherit emacs-style bindings in all modes"
-    for mode in default insert visual
-        fish_default_key_bindings -M $mode
-    end
-    fish_vi_key_bindings --no-erase
-end
+#function fish_hybrid_key_bindings --description \
+#"Vi-style bindings that inherit emacs-style bindings in all modes"
+#    for mode in default insert visual
+#        fish_default_key_bindings -M $mode
+#    end
+#    fish_vi_key_bindings --no-erase
+#end
 set -g fish_key_bindings fish_hybrid_key_bindings
 set -g fish_vi_key_bindings command
 set -xU _JAVA_AWT_WM_NONREPARENTING 1
@@ -60,7 +60,7 @@ set -xU XDG_SESSION_TYPE wayland
 set -xU XDG_SESSION_DESKTOP sway
 set -xU WLR_DRM_NO_MODIFIERS 1
 set -xU MOZ_ENABLE_WAYLAND 1
-set -xU ANDROID_HOME "/home/baum/Android/Sdk"
+set -xU ANDROID_HOME "/home/baum/andstore/Android/Sdk"
 set -xU ANDROID_AVD_HOME "/home/baum/.config/.android/avd"
 set -xU EDITOR nvim
 set -xU VISUAL nvim
@@ -69,17 +69,6 @@ set -xU TERM foot-256color
 set -xU TerminalEmulator foot
 set -xU ZSH_TMUX_AUTOSTART true
 set -xU PAGER nvimpager
-# set -xU CPATH $CPATH:/usr/include/gtk-3.0
-# set -xU CPATH $CPATH:/usr/include/glib-2.0
-# set -xU CPATH $CPATH:/usr/lib/glib-2.0/include
-# set -xU CPATH $CPATH:/usr/include/pango-1.0
-# set -xU CPATH $CPATH:/usr/include/harfbuzz
-# set -xU CPATH $CPATH:/usr/include/freetype2
-# set -xU CPATH $CPATH:/usr/include/libpng16
-# set -xU CPATH $CPATH:/usr/include/cairo
-# set -xU CPATH $CPATH:/usr/include/pixman-1
-set -xU CFLAGS $CFLAGS:-I/usr/include/gtk-4.0 -I/usr/include/pango-1.0 -I/usr/include/gdk-pixbuf-2.0 -I/usr/include/cairo -I/usr/include/harfbuzz -I/usr/include/freetype2 -I/usr/include/graphene-1.0 -I/usr/lib/graphene-1.0/include -mfpmath=sse -msse -msse2 -I/usr/include/glib-2.0 -I/usr/lib/glib-2.0/include -I/usr/include/fribidi -I/usr/include/libpng16 -I/usr/include/pixman-1 -I/usr/include/libmount -I/usr/include/blkid -I/usr/include/sysprof-6 -pthread
-#set -xU scheme "night"
 
 if test (cat $HOME/.config/.theme_history|tail -n1) = "windows-nt-light"
     set -xU scheme "day"
@@ -89,6 +78,17 @@ else
     theme.sh gruvbox-dark-hard
 end
 
+
+#set -g fish_key_bindings fish_vi_key_bindings
+bind -M insert \cc kill-whole-line repaint
+#fish open in external editor command set
+bind -M insert \cv edit_command_buffer
+bind -M insert \cf 'tmux new ~/.local/bin/tmux-sessionizer'
+bind -M default \cm history-search-forward
+bind -M default \cn history-search-backward
+#bind -M insert \cm history-search-forward
+#bind -M insert \cn history-search-backward
+bind -M default \cr history-pager
 
 
 #if test "$scheme" = "day"
@@ -102,7 +102,7 @@ end
 #set PATH "$ANDROID_HOME/platform-tools/":$PATH
 #set PATH "$ANDROID_HOME/cmdline-tools/latest/bin/":$PATH
 
-source ~/.env/openai
+#source ~/.env/openai
 #[[ ! -r /home/baum/.opam/opam-init/init.fish ]] || source /home/baum/.opam/opam-init/init.fish  > /dev/null 2> /dev/null
 
 if type -q theme.sh
@@ -133,6 +133,5 @@ end
 #set PATH="$HOME/.cargo/env":$PATH
 
 #source ~/.zshenv
-
+bind -M insert \cg 'git diff; commandline -f repaint'
 eval "$(starship init fish)"
-
