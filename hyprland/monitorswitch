@@ -1,0 +1,25 @@
+#!/bin/bash
+op=$(echo -e "Bedroom3\n Bedroom2\n LivingRoom\n Solo" | tofi | awk '{print tolower($1)}')
+case $op in 
+    'bedroom3')
+        hyprctl keyword monitor 'desc:AU Optronics 0x103D,1920x1080,0x0,1'
+        hyprctl keyword monitor 'desc:Samsung Electric Company C27F390 HCNR702879,1920x1080,1920x0,1'
+        hyprctl keyword monitor 'desc:Samsung Electric Company LF27T35 HCNT603304,1920x1080,3840x0,1,transform,3'
+        exit 0
+        ;;
+    'bedroom2')
+        hyprctl keyword monitor 'desc:AU Optronics 0x103D,1920x1080,0x0,1'
+        hyprctl keyword monitor 'desc:Samsung Electric Company LF27T35 HCNT603304,1920x1080,3840x0,1,transform,3'
+        exit 0
+        ;;
+    'livingroom')
+        hyprctl keyword monitor 'desc:AU Optronics 0x103D,1920x1080,3840x0,1'
+        hyprctl keyword monitor 'desc:Samsung Electric Company SAMSUNG, 3840x2160,0x0,1' # Change this to your actual 4k monitor's desc
+        exit 0
+        ;;
+    'solo')
+        hyprctl keyword monitor 'desc:AU Optronics 0x103D,1920x1080,0x0,1'
+        exit 0
+        ;;
+esac
+

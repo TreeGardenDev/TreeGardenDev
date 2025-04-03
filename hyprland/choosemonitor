@@ -1,0 +1,36 @@
+#!/bin/bash
+
+monlist=$(hyprctl monitors | grep "Monitor " | awk '{ print $2 }')
+printf "%s\n" $monlist
+countmon=$(echo "$monlist" | wc -l)
+printf "$countmon\n"
+if [ "$countmon" -eq 1 ]; then
+    # if there is only one monitor, just return it
+    hyprctl keyword monitor 'desc:AU Optronics 0x103D,1920x1080,0x0,1'
+    exit 0
+fi
+if [ "$countmon" -eq 2 ]; then
+    montype=$(hyprctl monitors | grep " at " | awk '{ print $1 }')
+    # Search for if a monitor is in 4k from output like 1920x1080 or 3840x2160
+    fourk=$(echo "$montype" | grep -c "3840x2160")
+    if [ $fourk -gt 0 ]; then
+        printf "Detected a 4k monitor, returning it as the primary monitor.\n"
+        # if there is a 4k monitor, return it
+        hyprctl keyword monitor 'desc:AU Optronics 0x103D,disable'
+        hyprctl keyword monitor 'desc:Samsung Electric Company SAMSUNG, 3840x2160,0x0,1' # Change this to your actual 4k monitor's desc
+        exit 0
+        # kanshi
+    else
+        # otherwise return the first monitor in the list
+        hyprctl keyword monitor 'desc:AU Optronics 0x103D,1920x1080,0x0,1'
+        hyprctl keyword monitor 'desc:Samsung Electric Company LF27T35 HCNT603304,1920x1080,3840x0,1,transform,3'
+        exit 0
+    fi
+fi
+if [ "$countmon" -eq 3 ]; then
+        hyprctl keyword monitor 'desc:AU Optronics 0x103D,1920x1080,0x0,1'
+        hyprctl keyword monitor 'desc:Samsung Electric Company C27F390 HCNR702879,1920x1080,1920x0,1'
+        hyprctl keyword monitor 'desc:Samsung Electric Company LF27T35 HCNT603304,1920x1080,3840x0,1,transform,3'
+        exit 0
+fi
+
