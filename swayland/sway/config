@@ -3,7 +3,7 @@ exec_always --no-startup-id kanshi
 exec_always --no-startup-id nm-applet
 exec_always --no-startup-id blueman-applet
 exec_always --no-startup-id wl-paste --watch cliphist store
-exec_always --no-startup-id protonmail-bridge -n
+#exec --no-startup-id protonmail-bridge -n
 
 
 #exec_always --no-startup-id gnome-keyring-daemon --start --components=secrets
@@ -26,12 +26,13 @@ set $mod Mod4
 
 set $width /home/baum/.local/bin/getmidwidthsh
 set $height /home/baum/.local/bin/getmidleheightsh
-#set $menu wofi --hide-scroll -xoffset $width -yoffset $height --dmenu--height 800 --width 400 --dmenu --insensitive --case-sensitive --allow-markup --allow-images --cache-file /dev/null --show drun --prompt "Run: " --no-custom --icon-theme "Papirus" --monitor 1 --location 0 --columns 1 --font "BlexMono Nerd Font 12" --show-icons --icon-theme "Papirus" --dpi 96 --color-window "#000000, #000000, #000000" --color-normal "#000000, #ffffff, #000000, #000000, #ffffff" --color-active "#000000, #ffffff, #000000, #000000, #ffffff" --color-urgent "#000000, #ffffff, #000000, #000000, #ffffff" --color-active-urgent "#000000, #ffffff, #000000, #000000, #ffffff" --color-input "#000000, #ffffff, #000000, #000000, #ffffff" --color-block "#000000, #ffffff, #000000, #000000, #ffffff" --color-separator "#000000, #ffffff, #000000, #000000, #ffffff" --color-normal-elevated "#000000, #ffffff, #000000, #000000, #ffffff" --color-active-elevated "#000000, #ffffff, #000000, #000000, #ffffff" --color-urgent-elevated "#000000, #ffffff, #000000, #000000, #ffffff" --color-active-urgent-elevated "#000000, #ffffff, #000000, #000000, #ffffff" --color-window-elevated "#000000, #000000, #000000" --color-separator-elevated "#000000, #000000, #000000" --color-input-elevated "#000000, #000000, #000000" --color-block-elevated "#000000, #000000, #000000" --color-normal-elevated "#000000, #000000, #000000" --color-active-elevated "#000000, #000000, #000000" --color-urgent-elevated "#000000, #000000, #000000" --color-active-
+#set $menu wofi --hide-scroll -xoffset $width -yoffset $height --dmenu--height 1000 --width 400 --dmenu --insensitive --case-sensitive --allow-markup --allow-images --cache-file /dev/null --show drun --prompt "Run: " --no-custom --icon-theme "Papirus" --monitor 1 --location 0 --columns 1 --font "BlexMono Nerd Font 12" --show-icons --icon-theme "Papirus" --dpi 96 --color-window "#000000, #000000, #000000" --color-normal "#000000, #ffffff, #000000, #000000, #ffffff" --color-active "#000000, #ffffff, #000000, #000000, #ffffff" --color-urgent "#000000, #ffffff, #000000, #000000, #ffffff" --color-active-urgent "#000000, #ffffff, #000000, #000000, #ffffff" --color-input "#000000, #ffffff, #000000, #000000, #ffffff" --color-block "#000000, #ffffff, #000000, #000000, #ffffff" --color-separator "#000000, #ffffff, #000000, #000000, #ffffff" --color-normal-elevated "#000000, #ffffff, #000000, #000000, #ffffff" --color-active-elevated "#000000, #ffffff, #000000, #000000, #ffffff" --color-urgent-elevated "#000000, #ffffff, #000000, #000000, #ffffff" --color-active-urgent-elevated "#000000, #ffffff, #000000, #000000, #ffffff" --color-window-elevated "#000000, #000000, #000000" --color-separator-elevated "#000000, #000000, #000000" --color-input-elevated "#000000, #000000, #000000" --color-block-elevated "#000000, #000000, #000000" --color-normal-elevated "#000000, #000000, #000000" --color-active-elevated "#000000, #000000, #000000" --color-urgent-elevated "#000000, #000000, #000000" --color-active-
 #set $menu /home/baum/.local/bin/execwoficmd
-set $menu tofi-drun
+set $menu rofi -show drun
+#set $menu wmenu-run
 bindgesture swipe:right workspace prev 
 bindgesture swipe:left workspace next
-bindgesture swipe:up exec '~/.config/tofi/scripts/tofi-list-system'
+bindgesture swipe:up exec '~/.local/bin/rofi/rofi-activeworkspaces'
 bindgesture swipe:down exec $menu
 #| xargs swaymsg exec --
 
@@ -44,8 +45,8 @@ set $clipboard-del-all "rm -f ~/.cache/cliphist/db; pkill -RTMIN+9 waybar
 
 #bindsym $mod+space exec $menu
 bindsym $mod+d exec $menu
-bindsym $mod+Ctrl+p exec '~/.config/tofi/scripts/tofi-power-menu'
-bindsym $mod+end exec '~/.config/tofi/scripts/tofi-power-menu'
+bindsym $mod+Ctrl+p exec '~/.local/bin/rofi/rofi-power-menu'
+bindsym $mod+end exec '~/.local/bin/rofi/rofi-power-menu'
 
 bindsym $mod+Shift+z exec zathura
 #bindsym $mod+Shift+p exec cpupower-gui -p
@@ -123,7 +124,7 @@ bindsym $mod+Shift+Return exec foot -e tmux
 bindsym $mod+q kill
 
 # bindsym $mod+Shift+t exec kitty -e tuir --no-flash
-bindsym $mod+t exec "cliphist list | tofi -c /home/baum/.config/tofi/clipboardconfig | cliphist decode | wl-copy"
+bindsym $mod+t exec "cliphist list | rofi -dmenu | cliphist decode | wl-copy"
 bindsym $mod+Shift+y exec foot -e ytfzf -s
 bindsym $mod+Shift+v exec foot -e ytfzf -s -m
 bindsym $mod+Shift+m exec foot -e spotify_player
@@ -209,7 +210,7 @@ bindsym XF86AudioMute exec '/home/baum/.config/pactl/mute_all_sinks.sh'
 #mute microphone
 bindsym XF86AudioMicMute exec '/home/baum/.config/pactl/mute_all_mics.sh'
 #pactl set-source-mute 0 toggle
-bindsym $mod+Alt+p exec '/home/baum/.config/tofi/scripts/tofi-change-audio'
+bindsym $mod+Alt+p exec '/home/baum/.local/bin/rofi/rofi-change-audio'
 
 # audio control
 bindsym XF86AudioPlay exec playerctl play
@@ -226,7 +227,7 @@ bindsym XF86AudioPrev exec playerctl previous
 bindsym $mod+w exec /usr/bin/librewolf
 bindsym $mod+n exec foot -e nmtui
 bindsym $mod+b exec foot -e bluetuith
-bindsym $mod+Shift+b exec /home/baum/.config/tofi/scripts/tofi-switch-bluetooth
+bindsym $mod+Shift+b exec /home/baum/.local/bin/rofi/rofi-switch-bluetooth
 bindsym $mod+m exec thunderbird
 #
 ##########################################
@@ -243,10 +244,11 @@ for_window [class=Thunderbird] focus
 #get auth work with polkit-gnome
 exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 
-output * bg '/home/baum/Pictures/canoe_upscaled.png' fill
+#output * bg '/home/baum/Pictures/canoe_upscaled.png' fill
+output * bg '/home/baum/Pictures/flow.png' fit
 
 # Desktop notifications
-exec_always --no-startup-id dbus-launch mako
+exec_always mako
 
 #open scrachpad
 bindsym $mod+Shift+minus scratchpad show
@@ -299,9 +301,7 @@ bindsym Shift+print exec grim -g "$(slurp)" - | swappy -f -
 #		-config ~/.config/rofi/rofidmenu.rasi
 
 input type:keyboard {
-    xkb_layout "us"
     xkb_options "caps:escape, grp:win_space_toggle"
-    xkb_variant "qwerty, colemak"
 }
 input "2:10:TPPS/2_IBM_TrackPoint" {
    dwt enabled
@@ -322,6 +322,7 @@ input 1386:770:Wacom_Intuos_PT_S_Pad {
     tap enabled
     drag enabled
     dwt enable
+    map_to_output 'Samsung Electric Company LF27T35 HCNT603304'
 }
 #input 5050:24:Barcode_Reader {
 #    xkb_options "altwin:swap_alt_win, caps:escape"
@@ -329,7 +330,7 @@ input 1386:770:Wacom_Intuos_PT_S_Pad {
 #}
 
 input 1386:770:Wacom_Intuos_PT_S_Pen {
-    map_to_output DP-4
+    map_to_output 'Samsung Electric Company LF27T35 HCNT603304'
 }
 
 default_floating_border none
@@ -340,8 +341,5 @@ bar {
 #bar {
 # swaybar_command swaybar
 #font pango: BerkeleyMono Nerd Font 12
-# status_command while ~/.config/sway/scripts/swaybar_status.sh; do sleep 5; done
 #}
 
-
-include /etc/sway/config.d/*
