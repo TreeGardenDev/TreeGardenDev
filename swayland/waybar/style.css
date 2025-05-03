@@ -23,10 +23,14 @@ window#waybar {
     padding: 0 1px;
     color: #e8e8e8;
 }
-
+#workspaces button.active{
+    color: #1A1A1A;
+	background-color: white;
+	border-radius: 2px;
+}
 #workspaces button.focused {
-    color: #2e3440;
-    background-color: #e8e8e8;
+    color: #1A1A1A;
+    background-color: white;
     border-radius: 2px;
 }
 

@@ -2,11 +2,22 @@
 
 #get the battery status from  sys/class/power_supply/BAT1/energy_now
 bat0 = open('/sys/class/power_supply/BAT0/energy_now', 'r')
+bat0= int(bat0.read())
 bat1 = open('/sys/class/power_supply/BAT1/energy_now', 'r')
+bat1= int(bat1.read())
+
 bat0full = open('/sys/class/power_supply/BAT0/energy_full', 'r')
+bat0full=int(bat0full.read())
 bat1full = open('/sys/class/power_supply/BAT1/energy_full', 'r')
-bat1full=int(bat1full.read())*.8
-total = (int(bat0.read()) + int(bat1.read())) / (int(bat0full.read()) + int(bat1full)) * 100
+#Adjust to account for the 93% full issue on some batteries
+bat1full=int(bat1full.read())
+
+bat0five=int(bat0full)*.05
+bat1full80=int(bat1full)*.8
+bat1five=int(bat1full)*.05
+bat5five=int(bat0five+bat1five)
+
+total = ((bat0 + (bat1))-bat5five) / ((bat0full + (bat1full))-bat5five) * 100
 #take to 2 decimal places
 total = round(total, 2)
 #print(total)
