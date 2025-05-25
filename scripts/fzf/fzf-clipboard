@@ -1,0 +1,3 @@
+#!/bin/sh
+
+op=$( cliphist list | fzf  --layout=reverse-list --border=rounded --border-label="Fuzzy Clipboard" | cliphist decode | wl-copy )

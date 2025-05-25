@@ -1,0 +1,12 @@
+#!/bin/sh
+
+for desktop_file in /usr/share/applications/*.desktop; do
+    # Skip files with Terminal=true
+    if rg -q "Terminal=true" "$desktop_file"; then
+        continue
+    fi
+    # Extract the application name and filter using rg and fzf
+    basename "$desktop_file" .desktop
+done | rg -v "gnome-*|electron*|java*|kde*|kcm*" | \
+fzf --layout=reverse-list --border=rounded --border-label="Fuzzy Launcher" --color=dark | \
+xargs swaymsg exec

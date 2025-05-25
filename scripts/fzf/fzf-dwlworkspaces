@@ -1,0 +1,9 @@
+#!/bin/bash
+# List workspaces (tags in dwl)
+workspaces=$(wlrctl tags | awk '{print $1 " " $2}')
+
+# Select workspace
+selected=$(echo "$workspaces" | fzf --layout=reverse-list --border=rounded --border-label="Fuzzy Workspaces" | awk '{print $1}')
+
+# Switch to selected workspace
+[ -n "$selected" ] && wlrctl tag "$selected"
