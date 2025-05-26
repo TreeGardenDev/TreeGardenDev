@@ -1,0 +1,362 @@
+#exec dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY SWAYSOCK XDG_CURRENT_DESKTOP=sway
+exec_always --no-startup-id kanshi
+exec_always --no-startup-id "/home/baum/.cargo/bin/spotify_player -d"
+exec_always --no-startup-id nm-applet
+exec_always --no-startup-id blueman-applet
+exec_always --no-startup-id wl-paste --watch cliphist store
+exec systemctl --user import-environment DISPLAY WAYLAND_DISPLAY SWAYSOCK XDG_CURRENT_DESKTOP
+exec_always systemctl --user start sway-session.target
+#exec --no-startup-id protonmail-bridge -n
+
+
+#exec_always --no-startup-id gnome-keyring-daemon --start --components=secrets
+#exec_always --no-startup-id spotify_player -d
+focus_follows_mouse yes
+
+#######################
+# config starts here: #
+#######################
+
+font pango: BerkeleyMono Nerd Font 12
+#font pango: JetBrainsMono Medium 10
+
+# set the mod key to the winkey:
+set $mod Mod4
+
+#####################
+# workspace layout: #
+#####################
+
+set $width /home/baum/.local/bin/getmidwidthsh
+set $height /home/baum/.local/bin/getmidleheightsh
+set $launcher /home/baum/.local/bin/fzf/fzf-menu-py.py
+set $menu j4-dmenu-desktop
+set $menu2 'alacritty -e sh -c \'$launcher\'\n'
+bindgesture swipe:right workspace prev 
+bindgesture swipe:left workspace next
+#bindgesture swipe:up exec '~/.local/bin/rofi/rofi-activeworkspaces'
+bindgesture swipe:up exec 'alacritty -T "Workspace Swap" -e /home/baum/.local/bin/fzf/fzf-activeworkspaces'
+bindgesture swipe:down exec 'alacritty -T "List System" -e /home/baum/.local/bin/fzf/fzf-list-system'
+#| xargs swaymsg exec --
+
+set $bemenu bemenu
+set $clipboard cliphist list $bemenu --no-exec -p "copy" | cliphist decode | wl-copy
+
+set $clipboard-del cliphist list | $bemenu --no-exec -p "delete" | cliphist delete && pkill -RTMIN+9 waybar
+
+set $clipboard-del-all "rm -f ~/.cache/cliphist/db; pkill -RTMIN+9 waybar
+
+#bindsym $mod+space exec $menu
+bindsym $mod+d exec $menu2
+bindsym $mod+Shift+d exec $menu
+#bindsym $mod+d exec 'alacritty -e $launcher'
+#bindsym $mod+Ctrl+p exec '~/.local/bin/rofi/rofi-power-menu'
+bindsym $mod+Ctrl+p exec 'alacritty -e /home/baum/.local/bin/fzf/fzf-power-menu'
+bindsym $mod+end exec 'alacritty -e /home/baum/.local/bin/fzf/fzf-power-menu'
+#bindsym $mod+end exec '~/.local/bin/rofi/rofi-power-menu'
+
+bindsym $mod+Shift+z exec zathura
+#bindsym $mod+Shift+p exec cpupower-gui -p
+#bindsym $mod+Shift+o exec cpupower-gui -b
+bindsym $mod+Ctrl+e exec footclient -e 'emulator -avd updated_flut'
+# bindsym $mod+Shift+b exec bitwarden-desktop
+
+bindsym $mod+Shift+q exec killall -SIGUSR1 waybar
+# bindsym $mod+Shift+w exec '~/.config/wofi/scripts/wofi-list-system'
+bindsym $mod+Shift+w exec alacritty -T "Workspace Swap" -e '/home/baum/.local/bin/fzf/fzf-activeworkspaces'
+#bindsym $mod+Ctrl+w exec '~/.config/wofi/scripts/activeworkspaces' ; exec '~/.config/wofi/scripts/wofi-list-system' 
+##############################
+# extra options for windows: #
+##############################
+
+#border indicator on windows:
+default_border pixel 1
+
+# thin borders
+hide_edge_borders smart
+
+# Set inner/outer gaps
+gaps inner 2
+gaps outer 0
+
+title_align center
+
+# Use Mouse+$mod to drag floating windows to their wanted position
+floating_modifier $mod
+
+bindsym $mod+Tab workspace next
+bindsym $mod+Shift+Tab workspace prev
+bindsym $mod+Shift+f exec footclient -e ranger
+bindsym $mod+Ctrl+f exec nautilus
+
+# switch to workspace
+bindsym $mod+1    workspace  1
+bindsym $mod+2    workspace  2
+bindsym $mod+3    workspace  3
+bindsym $mod+4    workspace  4
+bindsym $mod+5    workspace  5
+bindsym $mod+6    workspace  6
+bindsym $mod+7    workspace  7
+bindsym $mod+8    workspace  8
+bindsym $mod+9    workspace  9
+bindsym $mod+0    workspace  10
+
+# move focused container to workspace
+bindsym $mod+Shift+1    move container to workspace  1
+bindsym $mod+Shift+2    move container to workspace  2
+bindsym $mod+Shift+3    move container to workspace  3
+bindsym $mod+Shift+4    move container to workspace  4
+bindsym $mod+Shift+5    move container to workspace  5
+bindsym $mod+Shift+6    move container to workspace  6
+bindsym $mod+Shift+7    move container to workspace  7
+bindsym $mod+Shift+8    move container to workspace  8
+bindsym $mod+Shift+9    move container to workspace  9
+bindsym $mod+Shift+0    move container to workspace  10
+
+# Pressing down will grow the window's height.
+bindsym $mod+Ctrl+h resize shrink width 50 px or 50 ppt
+bindsym $mod+Ctrl+k resize grow height 50 px or 50 ppt
+bindsym $mod+Ctrl+j resize shrink height 50 px or 50 ppt
+bindsym $mod+Ctrl+l resize grow width 50 px or 50 ppt
+
+######################################
+# keybindings for different actions: #
+######################################
+
+# start a terminal
+bindsym $mod+Return exec footclient
+bindsym $mod+Shift+Return exec footclient -e tmux
+
+# kill focused window
+bindsym $mod+q kill
+
+# bindsym $mod+Shift+t exec kitty -e tuir --no-flash
+#bindsym $mod+t exec "cliphist list | rofi -dmenu | cliphist decode | wl-copy"
+bindsym $mod+t exec alacritty -T "Clipboard" -e "/home/baum/.local/bin/fzf/fzf-clipboard"
+bindsym $mod+Shift+y exec footclient -e ytfzf -s
+bindsym $mod+Shift+v exec footclient -e ytfzf -s -m
+bindsym $mod+Shift+m exec footclient -e spotify_player
+
+# reload the configuration file
+bindsym $mod+Shift+c reload
+
+# restart i3 inplace (preserves your layout/session, can be used to update i3)
+bindsym $mod+Shift+r exec liferea
+
+
+bindsym XF86MonBrightnessUp exec "/home/baum/.local/bin/adjustbacklight.py 10"
+bindsym $mod+XF86MonBrightnessUp exec "/home/baum/.local/bin/adjustbacklight.py 1" 
+#&& notify-send "Brightness  $(cat /sys/class/backlight/amdgpu_bl0/brightness)%"
+bindsym XF86MonBrightnessDown exec "/home/baum/.local/bin/adjustbacklight.py -10"
+bindsym $mod+XF86MonBrightnessDown exec "/home/baum/.local/bin/adjustbacklight.py -1" 
+#&& notify-send "Brightness $(cat /sys/class/backlight/amdgpu_bl0/brightness)%" 
+
+# change focus
+bindsym $mod+h focus left
+bindsym $mod+j focus down
+bindsym $mod+k focus up
+bindsym $mod+l focus right
+
+# alternatively, you can use the cursor keys:
+bindsym $mod+Left focus left
+bindsym $mod+Down focus down
+bindsym $mod+Up focus up
+bindsym $mod+Right focus right
+
+# move focused window
+bindsym $mod+Shift+h move left
+bindsym $mod+Shift+j move down
+bindsym $mod+Shift+k move up
+bindsym $mod+Shift+l move right
+
+# alternatively, you can use the cursor keys:
+bindsym $mod+Shift+Left move left
+bindsym $mod+Shift+Down move down
+bindsym $mod+Shift+Up move up
+bindsym $mod+Shift+Right move right
+
+# split in horizontal orientation
+bindsym $mod+p split h
+
+# split in vertical orientation
+bindsym $mod+o split v
+
+# enter fullscreen mode for the focused container
+bindsym $mod+f fullscreen toggle
+bindsym $mod+e exec 'alacritty -e /home/baum/git/fzftasks/fzftasks'
+
+bindsym $mod+g layout tabbed
+bindsym $mod+s layout toggle split
+bindsym $mod+Shift+s exec "alacritty -T 'FZF Spotify' -e python /home/baum/git/fzfspot/fzfspotify.py"
+
+# toggle tiling / floating
+bindsym $mod+Shift+space floating toggle
+
+# change focus between tiling / floating windows
+bindsym $mod+Ctrl+space focus mode_toggle
+
+# focus the parent container
+bindsym $mod+a focus parent
+
+# Multimedia Keys
+
+# volume
+bindsym XF86AudioRaiseVolume exec '/home/baum/.config/pactl/raise_volume.sh'
+#pactl set-sink-volume bluez_output.74_45_CE_6F_AB_89.1 +10%
+bindsym XF86AudioLowerVolume exec '/home/baum/.config/pactl/lower_volume.sh'
+#pactl set-sink-volume 0 -10%; 
+#exec pactl set-sink-volume bluez_output.74_45_CE_6F_AB_89.1 -10%
+
+# gradular volume control
+bindsym $mod+XF86AudioRaiseVolume exec '/home/baum/.config/pactl/raise_volume_one_percent.sh'
+#exec pactl set-sink-volume 0 +1%
+bindsym $mod+XF86AudioLowerVolume exec '/home/baum/.config/pactl/lower_volume_one_percent.sh'
+#pactl set-sink-volume 0 -1%
+
+# mute
+bindsym XF86AudioMute exec '/home/baum/.config/pactl/mute_all_sinks.sh'
+
+#mute microphone
+bindsym XF86AudioMicMute exec '/home/baum/.config/pactl/mute_all_mics.sh'
+#pactl set-source-mute 0 toggle
+#bindsym $mod+Alt+p exec '/home/baum/.local/bin/rofi/rofi-change-audio'
+bindsym $mod+Alt+p exec alacritty -T "Audio Swap" -e '/home/baum/.local/bin/fzf/fzf-change-audio'
+
+# audio control
+bindsym XF86AudioPlay exec playerctl play
+bindsym XF86AudioPause exec playerctl pause
+bindsym XF86AudioNext exec playerctl next
+bindsym XF86AudioPrev exec playerctl previous
+
+# Redirect sound to headphones
+#bindsym $mod+p exec /usr/local/bin/switch-audio-port
+
+## App shortcuts
+#bindsym $mod+w exec /usr/bin/firefox
+#bindsym $mod+w exec /usr/bin/librewolf
+bindsym $mod+w exec /usr/bin/firefox
+bindsym $mod+n exec footclient -e nmtui
+bindsym $mod+b exec footclient -e bluetuith
+#bindsym $mod+Shift+b exec /home/baum/.local/bin/rofi/rofi-switch-bluetooth
+bindsym $mod+Shift+b exec alacritty -T "Bluetooth Swap" -e "/home/baum/.local/bin/fzf/fzf-switch-bluetooth"
+bindsym $mod+m exec thunderbird
+#
+##########################################
+
+for_window [class=footclient] focus
+for_window [class=(?i)firefox] focus
+for_window [class=Nautilus] focus
+for_window [class=Thunderbird] focus
+
+##############
+# compositor #
+##############
+
+#get auth work with polkit-gnome
+#exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
+#exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
+#output * bg '/home/baum/Pictures/canoe_upscaled.png' fill
+output * bg '/home/baum/Pictures/flow.png' fit
+
+# Desktop notifications
+exec_always mako
+
+#open scrachpad
+bindsym $mod+Shift+minus scratchpad show
+
+# set floating (nontiling) for apps needing it
+for_window [class="Bitwarden" instance="bitwarden"] floating enable
+# for_window [class="Extension: (Bitwarden - Free Password Manager) - *"] floating enable
+#for_window [app_id="firefox" u] floating enable, resize set 1800 1000
+for_window [app_id="firefox" title="Extension: *"] floating enable
+# set floating (nontiling) for special apps
+for_window [title="Emulator" window_type="utility"] move scratchpad
+for_window [title="Android Emulator - *"] floating enable
+for_window [title="Alacritty"] floating enable
+for_window [title="Clipboard"] floating enable, resize set 1500 900
+for_window [title="Audio Swap"] floating enable, resize set 500 300 
+for_window [title="Workspace Swap"] floating enable, resize set 600 400 
+for_window [title="List System"] floating enable, resize set 600 400 
+for_window [title="Bluetooth Swap"] floating enable, resize set 500 300 
+for_window [title="FZF Spotify"] floating enable, resize set 500 300 
+for_window [class="Pavucontrol" instance="pavucontrol"] floating enable
+for_window [class="Bluetooth-sendto" instance="bluetooth-sendto"] floating enable
+
+# set border of floating window
+for_window [class="urxvt"] border pixel 1
+
+# Define colors variables:
+set $darkbluetrans	#08052b
+set $darkblue		#1A1A1A
+set $lightblue		#5294e2
+set $urgentred		#e53935
+set $white		#e8e8e8
+set $black		#000000
+set $purple		#e345ff
+set $darkgrey		#383c4a
+set $grey		#b0b5bd
+set $mediumgrey		#8b8b8b
+set $yellowbrown	#e1b700
+
+# define colors for windows:
+#class		        	border		bground		text		indicator	child_border
+client.unfocused		    	$darkblue $darkblue $white $darkblue $darkblue
+client.focused	    	$white $white $darkblue $white $white
+client.focused_inactive		$darkblue	$darkblue	$grey		$black		$black
+client.urgent		    	$darkblue $urgentred	$white		$yellowbrown	$yellowbrown
+#
+bindsym $mod+Shift+Ctrl+l exec swaylock
+
+exec swayidle -w timeout 300 'swaylock -f -c 000000' timeout 600 'swaymsg "output * power off"' resume 'swaymsg "output * power on"' before-sleep 'swaylock -f -c 000000'
+
+
+bindsym print exec grim - | swappy -f -
+# bindsym print exec flameshot full
+bindsym Shift+print exec grim -g "$(slurp)" - | swappy -f -
+
+    floating_modifier $mod normal
+#		-config ~/.config/rofi/rofidmenu.rasi
+
+input type:keyboard {
+    xkb_options "caps:escape, grp:win_space_toggle"
+}
+input "2:10:TPPS/2_IBM_TrackPoint" {
+   dwt enabled
+   pointer_accel 0.75
+   scroll_factor .05
+}
+input 1386:770:Wacom_Intuos_PT_S_Finger {
+    click_method clickfinger
+    drag enabled
+    scroll_method two_finger
+    natural_scroll enabled
+    tap enabled
+    accel_profile adaptive
+}
+input 1386:770:Wacom_Intuos_PT_S_Pad {
+    scroll_method two_finger
+    natural_scroll enabled
+    tap enabled
+    drag enabled
+    dwt enable
+    map_to_output 'Samsung Electric Company LF27T35 HCNT603304'
+}
+#input 5050:24:Barcode_Reader {
+#    xkb_options "altwin:swap_alt_win, caps:escape"
+#
+#}
+
+input 1386:770:Wacom_Intuos_PT_S_Pen {
+    map_to_output 'Samsung Electric Company LF27T35 HCNT603304'
+}
+
+default_floating_border none
+
+bar {
+    swaybar_command waybar
+}
+#bar {
+# swaybar_command swaybar
+#font pango: BerkeleyMono Nerd Font 12
+#}
+
