@@ -1,6 +1,2 @@
---require("plugin");
---require("pack");
---function to source packer.lua automatically
---vim.b.copilot_enabled = false
-
---vim.cmd("intro")
+-- bootstrap lazy.nvim, LazyVim and your plugins
+require("config.lazy")
