@@ -128,7 +128,6 @@ return {
 
             require('mason-lspconfig').setup({
                 ensure_installed = {},
-                
                 handlers = {
                     -- this first function is the "default handler"
                     -- it applies to every language server without a "custom handler"
