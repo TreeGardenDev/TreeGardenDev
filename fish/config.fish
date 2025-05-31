@@ -51,24 +51,24 @@ abbr -a g++ "zsh -c 'g++"
 #end
 set -g fish_key_bindings fish_hybrid_key_bindings
 set -g fish_vi_key_bindings command
-set -xU _JAVA_AWT_WM_NONREPARENTING 1
-set -xU NO_AT_BRIDGE 1
-set -xU XDG_CURRENT_DESKTOP sway
-set -xU XDG_CONFIG_HOME "$HOME/.config"
-set -xU LIBSEAT_BACKEND logind
-set -xU XDG_SESSION_TYPE wayland
-set -xU XDG_SESSION_DESKTOP sway
-set -xU WLR_DRM_NO_MODIFIERS 1
-set -xU MOZ_ENABLE_WAYLAND 1
-set -xU ANDROID_HOME "/home/baum/andstore/Android/Sdk"
-set -xU ANDROID_AVD_HOME "/home/baum/.config/.android/avd"
-set -xU EDITOR nvim
-set -xU VISUAL nvim
-set -xU TERMINAL foot
-set -xU TERM foot-256color
-set -xU TerminalEmulator foot
-set -xU ZSH_TMUX_AUTOSTART true
-set -xU PAGER nvimpager
+#set -xU _JAVA_AWT_WM_NONREPARENTING 1
+#set -xU NO_AT_BRIDGE 1
+#set -xU XDG_CURRENT_DESKTOP sway
+#set -xU XDG_CONFIG_HOME "$HOME/.config"
+#set -xU LIBSEAT_BACKEND logind
+#set -xU XDG_SESSION_TYPE wayland
+#set -xU XDG_SESSION_DESKTOP sway
+#set -xU WLR_DRM_NO_MODIFIERS 1
+#set -xU MOZ_ENABLE_WAYLAND 1
+#set -xU ANDROID_HOME "/home/baum/andstore/Android/Sdk"
+#set -xU ANDROID_AVD_HOME "/home/baum/.config/.android/avd"
+#set -xU EDITOR nvim
+#set -xU VISUAL nvim
+#set -xU TERMINAL foot
+#set -xU TERM xterm-256color
+#set -xU TerminalEmulator foot
+#set -xU ZSH_TMUX_AUTOSTART true
+#set -xU PAGER nvimpager
 
 if test (cat $HOME/.config/.theme_history|tail -n1) = "windows-nt-light"
     set -xU scheme "day"
@@ -90,6 +90,9 @@ bind -M default \cn history-search-backward
 #bind -M insert \cn history-search-backward
 bind -M default \cr history-pager
 
+function fish_prompt
+        echo (pwd) '> '
+end
 
 #if test "$scheme" = "day"
 #    theme.sh windows-nt-light

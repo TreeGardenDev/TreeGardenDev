@@ -1,0 +1,126 @@
+* {
+    border: none;
+    border-radius: 1;
+    font-size: 12px;
+    font-family: "BerkeleyMono Nerd Font";
+    min-height: 0;
+    font-weight: bold;
+}
+
+window#waybar {
+    background: #1A1A1A;
+    color: white;
+}
+
+#workspaces {
+	background-color: #211e20;
+	margin: 2px;
+	margin-left: 2px;
+	border-radius: 2px;
+
+}
+#workspaces button {
+    padding: 0 1px;
+    color: #e8e8e8;
+}
+#workspaces button.active{
+    color: #1A1A1A;
+	background-color: white;
+	border-radius: 2px;
+}
+#workspaces button.focused {
+    color: #1A1A1A;
+    background-color: white;
+    border-radius: 2px;
+}
+
+#workspaces button:hover {
+    color: #1A1A1A;
+	background-color: #5e81ac;
+	border-radius: 2px;
+}
+#tags button {
+	color: #343A40;
+	padding: 0 3px;
+	
+}
+
+#tags button.occupied {
+	color: #bbbbbb;
+	
+}
+
+#tags button.focused {
+	color: #9EE9EA;
+}
+
+#tags button.urgent {
+	color: #E49186;
+}
+
+#custom-date,#custom-clipboard,#cpu, #clock, #battery, #pulseaudio, #network, #custom-governor, #custom-betterbattery, #idle_inhibitor, #tray{
+	padding: 0px 5px;
+	margin: 0px 0px;
+}
+
+#custom-date {
+	color: #e8e8e8;
+}
+#cpu {
+    color: #e8e8e8;
+}
+#memory {
+    color: #e8e8e8;
+}
+#temperature {
+    color: #e8e8e8;
+}
+#backlight {
+    color: #e8e8e8;
+}
+#idle_inhibitor {
+    color: #e8e8e8;
+}
+
+#clock {
+    color: #e8e8e8;
+    border-radius: 0px 5px 5px 0px;
+    margin-right: 3px;
+}
+
+#battery {
+    color: #e8e8e8;
+}
+
+@keyframes blink {
+    to {
+        background-color: #e8e8e8;
+        color: black;
+    }
+}
+
+#custom-betterbattery.charging {
+    color: #e8e8e8;
+}
+
+#custom-spotify {
+    color: #e8e8e8;
+}
+
+#battery.critical:not(.charging) {
+    background-color: #f53c3c;
+    color: #ffffff;
+    animation-name: blink;
+    animation-duration: 0.5s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+}
+#network {
+	color: #e8e8e8;
+}
+
+#pulseaudio {
+	color: #e8e8e8;
+	border-radius: 5px 3px 3px 5px;
+}
