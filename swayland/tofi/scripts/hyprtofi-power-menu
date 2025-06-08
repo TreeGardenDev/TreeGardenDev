@@ -13,6 +13,6 @@ case $op in
                 systemctl $op
                 ;;
         logout)
-                swaymsg exit
+                hyprctl dispatch exit
                 ;;
 esac

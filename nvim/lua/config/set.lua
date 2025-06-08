@@ -29,7 +29,7 @@ vim.cmd("set list")
 vim.cmd("set listchars=eol:¬,tab:>·")
 --set listchars=eol:¬,tab:>·,trail:~,extends:>,precedes:<,space:.
 --set colorscheme
-vim.cmd("colorscheme retrobox")
+--vim.cmd("colorscheme kanagawa")
 vim.lsp.inlay_hint.enable(true, {0})
 
 vim.keymap.set('n', '<C-n>', telescope.find_files, {})

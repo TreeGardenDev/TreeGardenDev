@@ -11,4 +11,4 @@ echo "Brightness: "$(light -G) ;
 echo "Volume : $(pactl list sinks | rg front-left: | awk '{print $5}' | tail -1)";
 echo "Fan: "$(sensors | grep fan1 | awk '{print $2, $3}');
 timedatectl | sed -n '1 p' | awk '{print $3,$4, $5}')| cat |  
-    fzf | awk '{print tolower($2)}')
+     tofi | awk '{print tolower($2)}')

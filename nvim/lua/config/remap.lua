@@ -26,9 +26,11 @@ vim.keymap.set("i", "<Alt>h", "<left>")
 vim.keymap.set("i", "<Alt>j", "<down>")
 vim.keymap.set("i", "<Alt>k", "<up>")
 vim.keymap.set("i", "<Alt>l", "<right>")
---vim.g.copilot_assume_mapped = true 
+vim.g.copilot_assume_mapped = true 
 --vim.keymap.del('i', '<Tab>')
+--vim.keymap.del('i', '<S-Tab>')
 --vim.g.copilot_no_tab_map = true
+----vim.g.copilot_no_tab_fallback = true
 --vim.keymap.set('i', '<C-y>', 'copilot#Accept("\\<CR>")', {
 --  expr = true,
 --  replace_keycodes = false
@@ -38,7 +40,7 @@ vim.keymap.set("i", "<Alt>l", "<right>")
 
 vim.keymap.set("n", "q", "<nop>")
 vim.keymap.set("n", "Q", "<nop>")
-vim.keymap.set("n", "<C-f>", "<cmd>silent !tmux neww ~/.local/bin/tmux-sessionizer<CR>")
+vim.keymap.set("n", "<C-f>", "<cmd>silent !tmux new ~/.local/bin/tmux-sessionizer<CR>")
 vim.keymap.set("n", "<leader>f", vim.lsp.buf.format)
 vim.keymap.set("n", "<leader>gd", vim.lsp.buf.definition)
 vim.keymap.set("n", "<leader>gr", vim.lsp.buf.references)

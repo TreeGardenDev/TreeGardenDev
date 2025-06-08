@@ -1,8 +1,11 @@
 #exec dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY SWAYSOCK XDG_CURRENT_DESKTOP=sway
 exec_always --no-startup-id kanshi
+exec_always --no-startup-id "/home/baum/.cargo/bin/spotify_player -d"
 exec_always --no-startup-id nm-applet
 exec_always --no-startup-id blueman-applet
 exec_always --no-startup-id wl-paste --watch cliphist store
+exec systemctl --user import-environment DISPLAY WAYLAND_DISPLAY SWAYSOCK XDG_CURRENT_DESKTOP
+exec_always systemctl --user start sway-session.target
 #exec --no-startup-id protonmail-bridge -n
 
 
@@ -26,14 +29,14 @@ set $mod Mod4
 
 set $width /home/baum/.local/bin/getmidwidthsh
 set $height /home/baum/.local/bin/getmidleheightsh
-#set $menu wofi --hide-scroll -xoffset $width -yoffset $height --dmenu--height 1000 --width 400 --dmenu --insensitive --case-sensitive --allow-markup --allow-images --cache-file /dev/null --show drun --prompt "Run: " --no-custom --icon-theme "Papirus" --monitor 1 --location 0 --columns 1 --font "BlexMono Nerd Font 12" --show-icons --icon-theme "Papirus" --dpi 96 --color-window "#000000, #000000, #000000" --color-normal "#000000, #ffffff, #000000, #000000, #ffffff" --color-active "#000000, #ffffff, #000000, #000000, #ffffff" --color-urgent "#000000, #ffffff, #000000, #000000, #ffffff" --color-active-urgent "#000000, #ffffff, #000000, #000000, #ffffff" --color-input "#000000, #ffffff, #000000, #000000, #ffffff" --color-block "#000000, #ffffff, #000000, #000000, #ffffff" --color-separator "#000000, #ffffff, #000000, #000000, #ffffff" --color-normal-elevated "#000000, #ffffff, #000000, #000000, #ffffff" --color-active-elevated "#000000, #ffffff, #000000, #000000, #ffffff" --color-urgent-elevated "#000000, #ffffff, #000000, #000000, #ffffff" --color-active-urgent-elevated "#000000, #ffffff, #000000, #000000, #ffffff" --color-window-elevated "#000000, #000000, #000000" --color-separator-elevated "#000000, #000000, #000000" --color-input-elevated "#000000, #000000, #000000" --color-block-elevated "#000000, #000000, #000000" --color-normal-elevated "#000000, #000000, #000000" --color-active-elevated "#000000, #000000, #000000" --color-urgent-elevated "#000000, #000000, #000000" --color-active-
-#set $menu /home/baum/.local/bin/execwoficmd
-set $menu rofi -show drun
-#set $menu wmenu-run
+set $launcher /home/baum/.local/bin/fzf/fzf-menu-py.py
+set $menu j4-dmenu-desktop
+set $menu2 'alacritty -e sh -c \'$launcher\'\n'
 bindgesture swipe:right workspace prev 
 bindgesture swipe:left workspace next
-bindgesture swipe:up exec '~/.local/bin/rofi/rofi-activeworkspaces'
-bindgesture swipe:down exec $menu
+#bindgesture swipe:up exec '~/.local/bin/rofi/rofi-activeworkspaces'
+bindgesture swipe:up exec 'alacritty -T "Workspace Swap" -e /home/baum/.local/bin/fzf/fzf-activeworkspaces'
+bindgesture swipe:down exec 'alacritty -T "List System" -e /home/baum/.local/bin/fzf/fzf-list-system'
 #| xargs swaymsg exec --
 
 set $bemenu bemenu
@@ -44,19 +47,23 @@ set $clipboard-del cliphist list | $bemenu --no-exec -p "delete" | cliphist dele
 set $clipboard-del-all "rm -f ~/.cache/cliphist/db; pkill -RTMIN+9 waybar
 
 #bindsym $mod+space exec $menu
-bindsym $mod+d exec $menu
-bindsym $mod+Ctrl+p exec '~/.local/bin/rofi/rofi-power-menu'
-bindsym $mod+end exec '~/.local/bin/rofi/rofi-power-menu'
+bindsym $mod+d exec $menu2
+bindsym $mod+Shift+d exec $menu
+#bindsym $mod+d exec 'alacritty -e $launcher'
+#bindsym $mod+Ctrl+p exec '~/.local/bin/rofi/rofi-power-menu'
+bindsym $mod+Ctrl+p exec 'alacritty -e /home/baum/.local/bin/fzf/fzf-power-menu'
+bindsym $mod+end exec 'alacritty -e /home/baum/.local/bin/fzf/fzf-power-menu'
+#bindsym $mod+end exec '~/.local/bin/rofi/rofi-power-menu'
 
 bindsym $mod+Shift+z exec zathura
 #bindsym $mod+Shift+p exec cpupower-gui -p
 #bindsym $mod+Shift+o exec cpupower-gui -b
-bindsym $mod+Ctrl+e exec foot -e 'emulator -avd flutter_emulator'
+bindsym $mod+Ctrl+e exec footclient -e 'emulator -avd updated_flut'
 # bindsym $mod+Shift+b exec bitwarden-desktop
 
-bindsym $mod+Shift+w exec killall -SIGUSR1 waybar
+bindsym $mod+Shift+q exec killall -SIGUSR1 waybar
 # bindsym $mod+Shift+w exec '~/.config/wofi/scripts/wofi-list-system'
-bindsym $mod+Shift+q exec '~/.config/wofi/scripts/activeworkspaces'
+bindsym $mod+Shift+w exec alacritty -T "Workspace Swap" -e '/home/baum/.local/bin/fzf/fzf-activeworkspaces'
 #bindsym $mod+Ctrl+w exec '~/.config/wofi/scripts/activeworkspaces' ; exec '~/.config/wofi/scripts/wofi-list-system' 
 ##############################
 # extra options for windows: #
@@ -79,7 +86,7 @@ floating_modifier $mod
 
 bindsym $mod+Tab workspace next
 bindsym $mod+Shift+Tab workspace prev
-bindsym $mod+Shift+f exec foot -e ranger
+bindsym $mod+Shift+f exec footclient -e ranger
 bindsym $mod+Ctrl+f exec nautilus
 
 # switch to workspace
@@ -117,17 +124,18 @@ bindsym $mod+Ctrl+l resize grow width 50 px or 50 ppt
 ######################################
 
 # start a terminal
-bindsym $mod+Return exec foot
-bindsym $mod+Shift+Return exec foot -e tmux
+bindsym $mod+Return exec footclient
+bindsym $mod+Shift+Return exec footclient -e tmux
 
 # kill focused window
 bindsym $mod+q kill
 
 # bindsym $mod+Shift+t exec kitty -e tuir --no-flash
-bindsym $mod+t exec "cliphist list | rofi -dmenu | cliphist decode | wl-copy"
-bindsym $mod+Shift+y exec foot -e ytfzf -s
-bindsym $mod+Shift+v exec foot -e ytfzf -s -m
-bindsym $mod+Shift+m exec foot -e spotify_player
+#bindsym $mod+t exec "cliphist list | rofi -dmenu | cliphist decode | wl-copy"
+bindsym $mod+t exec alacritty -T "Clipboard" -e "/home/baum/.local/bin/fzf/fzf-clipboard"
+bindsym $mod+Shift+y exec footclient -e ytfzf -s
+bindsym $mod+Shift+v exec footclient -e ytfzf -s -m
+bindsym $mod+Shift+m exec footclient -e spotify_player
 
 # reload the configuration file
 bindsym $mod+Shift+c reload
@@ -175,10 +183,11 @@ bindsym $mod+o split v
 
 # enter fullscreen mode for the focused container
 bindsym $mod+f fullscreen toggle
-bindsym $mod+e exec 'code-oss  --password-store="gnome"'
+bindsym $mod+e exec 'alacritty -e /home/baum/git/fzftasks/fzftasks'
 
 bindsym $mod+g layout tabbed
 bindsym $mod+s layout toggle split
+bindsym $mod+Shift+s exec "alacritty -T 'FZF Spotify' -e python /home/baum/git/fzfspot/fzfspotify.py"
 
 # toggle tiling / floating
 bindsym $mod+Shift+space floating toggle
@@ -210,7 +219,8 @@ bindsym XF86AudioMute exec '/home/baum/.config/pactl/mute_all_sinks.sh'
 #mute microphone
 bindsym XF86AudioMicMute exec '/home/baum/.config/pactl/mute_all_mics.sh'
 #pactl set-source-mute 0 toggle
-bindsym $mod+Alt+p exec '/home/baum/.local/bin/rofi/rofi-change-audio'
+#bindsym $mod+Alt+p exec '/home/baum/.local/bin/rofi/rofi-change-audio'
+bindsym $mod+Alt+p exec alacritty -T "Audio Swap" -e '/home/baum/.local/bin/fzf/fzf-change-audio'
 
 # audio control
 bindsym XF86AudioPlay exec playerctl play
@@ -224,15 +234,16 @@ bindsym XF86AudioPrev exec playerctl previous
 ## App shortcuts
 #bindsym $mod+w exec /usr/bin/firefox
 #bindsym $mod+w exec /usr/bin/librewolf
-bindsym $mod+w exec /usr/bin/librewolf
-bindsym $mod+n exec foot -e nmtui
-bindsym $mod+b exec foot -e bluetuith
-bindsym $mod+Shift+b exec /home/baum/.local/bin/rofi/rofi-switch-bluetooth
+bindsym $mod+w exec /usr/bin/firefox
+bindsym $mod+n exec footclient -e nmtui
+bindsym $mod+b exec footclient -e bluetuith
+#bindsym $mod+Shift+b exec /home/baum/.local/bin/rofi/rofi-switch-bluetooth
+bindsym $mod+Shift+b exec alacritty -T "Bluetooth Swap" -e "/home/baum/.local/bin/fzf/fzf-switch-bluetooth"
 bindsym $mod+m exec thunderbird
 #
 ##########################################
 
-for_window [class=foot] focus
+for_window [class=footclient] focus
 for_window [class=(?i)firefox] focus
 for_window [class=Nautilus] focus
 for_window [class=Thunderbird] focus
@@ -242,8 +253,8 @@ for_window [class=Thunderbird] focus
 ##############
 
 #get auth work with polkit-gnome
-exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
-
+#exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
+#exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 #output * bg '/home/baum/Pictures/canoe_upscaled.png' fill
 output * bg '/home/baum/Pictures/flow.png' fit
 
@@ -261,7 +272,14 @@ for_window [app_id="firefox" title="Extension: *"] floating enable
 # set floating (nontiling) for special apps
 for_window [title="Emulator" window_type="utility"] move scratchpad
 for_window [title="Android Emulator - *"] floating enable
-
+for_window [title="Alacritty"] floating enable
+for_window [title="swgemu.exe"] floating enable
+for_window [title="Clipboard"] floating enable, resize set 1500 900
+for_window [title="Audio Swap"] floating enable, resize set 500 300 
+for_window [title="Workspace Swap"] floating enable, resize set 600 400 
+for_window [title="List System"] floating enable, resize set 600 400 
+for_window [title="Bluetooth Swap"] floating enable, resize set 500 300 
+for_window [title="FZF Spotify"] floating enable, resize set 500 300 
 for_window [class="Pavucontrol" instance="pavucontrol"] floating enable
 for_window [class="Bluetooth-sendto" instance="bluetooth-sendto"] floating enable
 
