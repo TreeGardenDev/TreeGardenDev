@@ -1,6 +1,5 @@
 return {
-    'nvim-telescope/telescope.nvim',
-    version = '*',
+    'nvim-telescope/telescope.nvim',branch= '0.1.x',
     dependencies = {
         'nvim-telescope/telescope-fzf-native.nvim', build = 'make',
         'nvim-lua/plenary.nvim'
@@ -13,7 +12,6 @@ return {
     },
     config = function()
         require('telescope').setup({})
-        require('telescope').load_extension('fzf')
 
         local telescope = require('telescope.builtin')
         vim.keymap.set('n', '<leader>u', vim.cmd.UndotreeToggle)
@@ -24,5 +22,8 @@ return {
         vim.keymap.set('n', '<C-s>', function()
             telescope.grep_string({ search = vim.fn.input("Grep > ") });
         end)
+    end,
+    telescopeload = function()
+        require('telescope').load_extension('fzf')
     end
 }
