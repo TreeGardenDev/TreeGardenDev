@@ -27,25 +27,12 @@ vim.keymap.set("i", "<Alt>j", "<down>")
 vim.keymap.set("i", "<Alt>k", "<up>")
 vim.keymap.set("i", "<Alt>l", "<right>")
 vim.g.copilot_assume_mapped = true 
---vim.keymap.del('i', '<Tab>')
---vim.keymap.del('i', '<S-Tab>')
---vim.g.copilot_no_tab_map = true
-----vim.g.copilot_no_tab_fallback = true
---vim.keymap.set('i', '<C-y>', 'copilot#Accept("\\<CR>")', {
---  expr = true,
---  replace_keycodes = false
---})
 
 
 
 vim.keymap.set("n", "q", "<nop>")
 vim.keymap.set("n", "Q", "<nop>")
 vim.keymap.set("n", "<C-f>", "<cmd>silent !tmux new ~/.local/bin/tmux-sessionizer<CR>")
-vim.keymap.set("n", "<leader>f", vim.lsp.buf.format)
-vim.keymap.set("n", "<leader>gd", vim.lsp.buf.definition)
-vim.keymap.set("n", "<leader>gr", vim.lsp.buf.references)
-vim.keymap.set("n", "<leader>gi", vim.lsp.buf.implementation)
-vim.keymap.set("n", "<leader>gh", vim.lsp.buf.hover)
 vim.keymap.set("n", "<leader>bf", "<cmd>%!xxd<CR>")
 --vim.keymap.set("n", "O", "O<Esc>")
 --vim.keymap.set("n", "o", "o<Esc>")
@@ -66,20 +53,3 @@ vim.keymap.set("n", "<leader>j", "<cmd>lprev<CR>zz")
 vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
 vim.keymap.set("n", "<leader>x", "<cmd>!chmod +x %<CR>", { silent = true })
 
-vim.api.nvim_set_hl(0, "CmpItemKindCopilot", { fg = "#6CC644" })
-vim.api.nvim_set_hl(0, "CmpItemKindCopilotSnippet", { fg = "#6CC644" })
-vim.api.nvim_create_autocmd('LspAttach', {
-    desc = 'LSP actions',
-    callback = function(event)
-        local opts = { buffer = event.buf }
-        vim.keymap.set("n", "<leader>gd", function() vim.lsp.buf.definition() end, opts)
-        vim.keymap.set("n", "K", function() vim.lsp.buf.hover() end, opts)
-        vim.keymap.set("n", "<leader>vws", function() vim.lsp.buf.workspace_symbol() end, opts)
-        vim.keymap.set("n", "<leader>er", function() vim.diagnostic.open_float() end, opts)
-        vim.keymap.set("n", "<leader>ca", function() vim.lsp.buf.code_action() end, opts)
-        vim.keymap.set("n", "<leader>gr", function() vim.lsp.buf.references() end, opts)
-        vim.keymap.set("n", "<leader>vr", function() vim.lsp.buf.rename() end, opts)
-        --vim.keymap.set("i", "<C-h>", function() vim.lsp.buf.signature_help() end, opts)
-        vim.keymap.set("n", "<leader>ff", function() vim.lsp.buf.format() end, opts)
-    end,
-})

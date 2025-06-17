@@ -96,18 +96,16 @@ return {
             -- Reserve a space in the gutter
             -- This will avoid an annoying layout shift in the screen
             vim.opt.signcolumn = 'yes'
-
         end,
         config = function()
             local lsp_defaults = require('lspconfig').util.default_config
-                        -- Add cmp_nvim_lsp capabilities settings to lspconfig
+            -- Add cmp_nvim_lsp capabilities settings to lspconfig
             -- This should be executed before you configure any language server
             lsp_defaults.capabilities = vim.tbl_deep_extend(
                 'force',
                 lsp_defaults.capabilities,
                 require('cmp_nvim_lsp').default_capabilities()
             )
-
             -- LspAttach is where you enable features that only work
             -- if there is a language server active in the file
             vim.api.nvim_create_autocmd('LspAttach', {
@@ -121,8 +119,15 @@ return {
                     vim.keymap.set("n", "<leader>ca", function() vim.lsp.buf.code_action() end, opts)
                     vim.keymap.set("n", "<leader>gr", function() vim.lsp.buf.references() end, opts)
                     vim.keymap.set("n", "<leader>vr", function() vim.lsp.buf.rename() end, opts)
+                    vim.keymap.set("n", "<leader>f", vim.lsp.buf.format)
+                    vim.keymap.set("n", "<leader>gd", vim.lsp.buf.definition)
+                    vim.keymap.set("n", "<leader>gr", vim.lsp.buf.references)
+                    vim.keymap.set("n", "<leader>gi", vim.lsp.buf.implementation)
+                    vim.keymap.set("n", "<leader>gh", vim.lsp.buf.hover)
                     --vim.keymap.set("i", "<C-h>", function() vim.lsp.buf.signature_help() end, opts)
                     vim.keymap.set("n", "<leader>ff", function() vim.lsp.buf.format() end, opts)
+                    vim.api.nvim_set_hl(0, "CmpItemKindCopilot", { fg = "#6CC644" })
+                    vim.api.nvim_set_hl(0, "CmpItemKindCopilotSnippet", { fg = "#6CC644" })
                 end,
             })
 
