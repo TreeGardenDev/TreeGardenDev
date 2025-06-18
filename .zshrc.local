@@ -68,8 +68,6 @@ export PATH="/home/baum/games/dfu_linux_64bit-v1.1.1/DaggerfallUnity.x86_64":$PA
 #export DBUS_SESSION_BUS_ADDRESS
 #export DBUS_SESSION_BUS_PID
 #export DBUS_SESSION_BUS_WINDOWID
-source /home/baum/git/fzf-tab-completion/zsh/fzf-zsh-completion.sh
-bindkey '^I' fzf_completion
 
 
 
@@ -85,7 +83,7 @@ _fzf_compgen_dir() {
 }
 
 # Use ~~ as the trigger sequence instead of the default **
-export FZF_COMPLETION_TRIGGER='~~'
+export FZF_COMPLETION_TRIGGER=',,'
 
 # Options to fzf command
 export FZF_COMPLETION_OPTS='--border --info=inline'
