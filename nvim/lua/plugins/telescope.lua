@@ -1,19 +1,15 @@
 return {
-    'nvim-telescope/telescope.nvim',branch= '0.1.x',
+    'nvim-telescope/telescope.nvim',
+    branch = '0.1.x',
     dependencies = {
-        'nvim-telescope/telescope-fzf-native.nvim', build = 'make',
         'nvim-lua/plenary.nvim'
-    },
-    extensions = {
-        fuzzy = true,
-        override_generic_sorter = true,
-        override_file_sorter = true,
-        case_mode = "smart_case"
     },
     config = function()
         require('telescope').setup({})
+        require("telescope").load_extension('harpoon')
 
         local telescope = require('telescope.builtin')
+        local harpoon = require("telescope").extensions.harpoon
         vim.keymap.set('n', '<leader>u', vim.cmd.UndotreeToggle)
         vim.keymap.set('n', '<C-n>', telescope.find_files, {})
         vim.keymap.set('n', '<C-p>', telescope.git_files, {})
@@ -22,8 +18,6 @@ return {
         vim.keymap.set('n', '<C-s>', function()
             telescope.grep_string({ search = vim.fn.input("Grep > ") });
         end)
+        vim.keymap.set('n', '<leader>h', harpoon.marks, {})
     end,
-    telescopeload = function()
-        require('telescope').load_extension('fzf')
-    end
 }

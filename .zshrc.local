@@ -1,0 +1,133 @@
+autoload edit-command-line; 
+zle -N edit-command-line
+bindkey -v '^v' edit-command-line
+
+
+bindkey -s '^f' 'tmux new ~/.local/bin/tmux-sessionizer\n'
+#bindkey -v '^r' vi-search-backward
+#bindkey '^r' history-incremental-search-backward
+bindkey -s '^u'  '~/.local/bin/rgfzf.sh\n'
+
+typeset -g -A key
+# Path to your Oh My Zsh installation.
+
+
+if [[ ! -v ZSH_TMUX_AUTOSTART ]]; then
+    export ZSH_TMUX_AUTOSTART=true
+fi
+alias dockgres='psql -U postgres -h localhost -p 5432 -d home_demo'
+alias curlpost ='/home/baum/.local/bin/curlpost.sh'
+alias vi='/usr/bin/vim'
+alias hyprmon='/home/baum/.local/bin/choosemonitor'
+alias vim='nvim'
+alias flutemulator='export PATH=$ANDROID_HOME/cmdline-tools/latest/bin/:$ANDROID_HOME/platform-tools/:$ANDROID_HOME/emulator/:$PATH; emulator -avd updated_flut -no-snapshot-load -debug-init'
+alias flutemulator2='export PATH=$ANDROID_HOME/cmdline-tools/latest/bin/:$ANDROID_HOME/platform-tools/:$ANDROID_HOME/emulator/:$PATH; emulator -avd flutter_emulator -no-snapshot-load -debug-init'
+#alias flutemulator2='emulator -avd Resizable_Experimental_API_34'
+alias gdb='gdb -tui'
+alias balena='/home/baum/AppImages/balenaEtcher-1.18.4-x64.AppImage'
+alias yay='paru'
+alias dbg='cgdb'
+alias reflectsimple="sudo reflector -p https -n 5 -l 150 --sort rate --save /etc/pacman.d/mirrorlist --threads 300"
+alias armgdb='arm-none-eabi-gdb'
+alias conan='/home/baum/.local/bin/conan/conan'
+alias tofi='tofi --font /usr/share/fonts/nerd-fonts-git/TTF/BlexMonoNerdFont-Bold.ttf'
+alias tofi-drun='tofi-drun --font /usr/share/fonts/nerd-fonts-git/TTF/BlexMonoNerdFont-Bold.ttf'
+alias tofi-run='tofi-run --font /usr/share/fonts/nerd-fonts-git/TTF/BlexMonoNerdFont-Bold.ttf'
+alias spt='spotify_player'
+alias fzf-preview='fzf --preview "bat --style=numbers --color=always {}"'
+
+setopt HIST_IGNORE_ALL_DUPS
+bindkey '^n' history-search-backward
+bindkey '^b' history-search-forward
+
+source ~/.zshenv
+source <(fzf --zsh)
+export VISUAL='nvim'
+export TERM='xterm-256color'
+export EDITOR='nvim'
+export TERMINAL=/usr/bin/foot
+
+export NO_AT_BRIDGE=1
+#export XDG_CURRENT_DESKTOP=sway
+export XDG_CONFIG_HOME="$HOME/.config"
+export LIBSEAT_BACKEND=logind
+export XDG_SESSION_TYPE=wayland
+
+export ANDROID_HOME="/home/baum/andstore/Android/Sdk"
+
+alias emscript=echo 'export PATH=/home/baum/.emscripten_cache/sysroot/include/":"/usr/lib/emscripten/system/include/":$PATH\n'
+export PATH="/home/baum/.cargo/bin":~/.local/bin:$PATH
+export PATH="/home/baum/git/flutter/bin/":$PATH
+#export PATH=$ANDROID_HOME/emulator/:$PATH
+#export PATH=$ANDROID_HOME/platform-tools/:$PATH
+#export PATH=$ANDROID_HOME/cmdline-tools/latest/bin/:$PATH
+export PATH="/home/baum/games/dfu_linux_64bit-v1.1.1/DaggerfallUnity.x86_64":$PATH
+
+#export NO_AT_BRIDGE=1
+#eval $(dbus-launch --sh-syntax)
+#export DBUS_SESSION_BUS_ADDRESS
+#export DBUS_SESSION_BUS_PID
+#export DBUS_SESSION_BUS_WINDOWID
+source /home/baum/git/fzf-tab-completion/zsh/fzf-zsh-completion.sh
+bindkey '^I' fzf_completion
+
+
+
+ZSH_CASE=smart
+
+setopt PROMPT_SUBST
+_fzf_compgen_path() {
+    rg --files --glob "!.git" . "$1"
+}
+
+_fzf_compgen_dir() {
+   fd --type d --hidden --follow --exclude ".git" . "$1"
+}
+
+# Use ~~ as the trigger sequence instead of the default **
+export FZF_COMPLETION_TRIGGER='~~'
+
+# Options to fzf command
+export FZF_COMPLETION_OPTS='--border --info=inline'
+
+# Options for path completion (e.g. vim **<TAB>)
+export FZF_COMPLETION_PATH_OPTS='--walker file,dir,follow,hidden'
+
+# Options for directory completion (e.g. cd **<TAB>)
+export FZF_COMPLETION_DIR_OPTS='--walker dir,follow'
+#export FZF_COMPLETION_DIR_COMMANDS="cd pushd rmdir tree"
+
+export FZF_DEFAULT_OPTS="
+	--color=fg:#908caa,bg:#191724,hl:#ebbcba
+	--color=fg+:#e0def4,bg+:#26233a,hl+:#ebbcba
+	--color=border:#403d52,header:#31748f,gutter:#191724
+	--color=spinner:#f6c177,info:#9ccfd8
+	--color=pointer:#c4a7e7,marker:#eb6f92,prompt:#908caa"
+
+# Advanced customization of fzf options via _fzf_comprun function
+# - The first argument to the function is the name of the command.
+# - You should make sure to pass the rest of the arguments ($@) to fzf.
+_fzf_comprun() {
+  local command=$1
+  shift
+
+  case "$command" in
+    cd)           fzf --preview 'tree -C {} | head -200'   "$@" ;;
+    export|unset) fzf --preview "eval 'echo \$'{}"         "$@" ;;
+    ssh)          fzf --preview 'dig {}'                   "$@" ;;
+    *)            fzf --preview 'bat -n --color=always {}' "$@" ;;
+  esac
+}
+# Use fd (https://github.com/sharkdp/fd) for listing path candidates.
+# - The first argument to the function ($1) is the base path to start traversal
+# - See the source code (completion.{bash,zsh}) for the details.
+_fzf_compgen_path() {
+  fd --hidden --follow --exclude ".git" . "$1"
+}
+
+# Use fd to generate the list for directory completion
+_fzf_compgen_dir() {
+  fd --type d --hidden --follow --exclude ".git" . "$1"
+}
+
+

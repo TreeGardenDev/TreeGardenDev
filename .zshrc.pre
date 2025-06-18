@@ -1,0 +1,22 @@
+if [ -z $DISPLAY ] && [ "$(tty)" = "/dev/tty1" ]; then 
+    #export WLR_DRM_NO_MODIFIER=1
+    export XDG_CURRENT_DESKTOP=sway
+    #export XDG_SESSION_DESKTOP=sway
+	exec sway > /dev/null 2>&1 
+fi
+if [ -z $DISPLAY ] && [ "$(tty)" = "/dev/tty2" ]; then 
+    export XDG_CURRENT_DESKTOP=sway
+    export XDG_RUNTIME_DIR=/tmp/xdg-runtime-$(id -u)
+    mkdir -p $XDG_RUNTIME_DIR
+	exec dwl -s waybar > /dev/null 2>&1 
+    ## Start dwl from tty2
+    #if uwsm check may-start; then
+    #    exec uwsm start hyprland.desktop
+    #fi
+
+fi
+if [ -z $DISPLAY ] && [ "$(tty)" = "/dev/tty3" ]; then 
+   # export XDG_CURRENT_DESKTOP=sway
+    #mkdir -p $XDG_RUNTIME_DIR
+    start-cosmic > /dev/nul 2>&1
+fi
