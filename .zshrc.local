@@ -25,7 +25,7 @@ alias flutemulator2='export PATH=$ANDROID_HOME/cmdline-tools/latest/bin/:$ANDROI
 #alias flutemulator2='emulator -avd Resizable_Experimental_API_34'
 alias gdb='gdb -tui'
 alias balena='/home/baum/AppImages/balenaEtcher-1.18.4-x64.AppImage'
-alias yay='paru'
+alias yay='/home/baum/.local/bin/archnews.sh; paru'
 alias dbg='cgdb'
 alias reflectsimple="sudo reflector -p https -n 5 -l 150 --sort rate --save /etc/pacman.d/mirrorlist --threads 300"
 alias armgdb='arm-none-eabi-gdb'
