@@ -1,9 +1,9 @@
 {
-     "position": "bottom",
+    "position": "top",
     "spacing": 4,
     "modules-left": ["sway/workspaces","sway/window", "sway/mode", "sway/scratchpad", "custom/media"],
-    "modules-center": ["custom/spotify"],
-    "modules-right": ["idle_inhibitor","custom/clipboard","pulseaudio","mpd", "network", "cpu", "custom/governor", "memory", "temperature", "backlight",  "custom/betterbattery", "clock", "tray"],
+    "modules-center": ["mpris"],
+    "modules-right": ["idle_inhibitor","custom/clipboard","pulseaudio","mpd", "network", "cpu", "custom/governor", "memory", "temperature", "backlight",  "battery", "clock", "tray"],
     "sway/workspaces": {
 		"disable-scroll": true,
 		"all-outputs": false,
@@ -109,6 +109,18 @@
         "format": "{percent}% {icon}",
         "format-icons": ["", "", "", "", "", "", "", "", ""]
     },
+    "battery": {
+        	"states": {
+            		"warning": 30,
+            		"critical": 15
+        	},
+        	"format": "{icon}  {capacity}%",
+        	"format-charging": "C {capacity}%",
+        	"format-plugged": "P {capacity}%",
+        	"format-alt": "{time} {icon}",
+        	"format-full": "'' {capacity}%",
+            "format-icons": ["", "", "", "", ""]
+	},
     "custom/betterbattery": {
         "return-type": "json",
         "exec": "$HOME/.config/waybar/checkbothbatteries.py",
@@ -150,6 +162,18 @@
         },
         "on-click": "pavucontrol"
     },
+    "mpris": {
+	"format": "DEFAULT: {player_icon} {title}",
+	"format-paused": "DEFAULT: {status_icon} <i>{title}</i>",
+	"player-icons": {
+		"default": "▶",
+		"mpv": "🎵"
+	},
+	"status-icons": {
+		"paused": "⏸"
+	},
+	// "ignored-players": ["firefox"]
+},
     "custom/spotify": {
         "format": "{icon} {}",
         "escape": true,
