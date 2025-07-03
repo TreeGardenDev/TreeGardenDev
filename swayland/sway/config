@@ -323,25 +323,27 @@ input 1386:770:Wacom_Intuos_PT_S_Pen {
 
 default_floating_border none
 
-bar {
-    swaybar_command waybar
-}
 #bar {
-#    status_command "/home/baum/.local/bin/read_status.sh"
-#    colors {
-#        # Text color of status bar
-#        statusline #26233a
-#        # Background of status bar
-#        background #191724
-#        separator  #26233a
-#
-#         #                  border  bckgrnd text
-#        focused_workspace  #1f1d2e #26233a #e0def4
-#        active_workspace   #1f1d2e #191724 #6e6a86
-#        inactive_workspace #1f1d2e #191724 #6e6a86
-#        urgent_workspace   #1f1d2e #ebbcba #e0def4
-#    }
-#    font pango:BerkleyMono Nerd Font 12
-#    height 20
+#    swaybar_command waybar
 #}
+bar {
+    status_command "/home/baum/.local/bin/read_status.sh"
+    colors {
+        # Text color of status bar
+        statusline #26233a
+        # Background of status bar
+        background #191724
+        separator  #26233a
+
+         #                  border  bckgrnd text
+        focused_workspace  #1f1d2e #26233a #e0def4
+        active_workspace   #1f1d2e #191724 #6e6a86
+        inactive_workspace #1f1d2e #191724 #6e6a86
+        urgent_workspace   #1f1d2e #ebbcba #e0def4
+    }
+    font pango:BerkleyMono Nerd Font 10
+    height 15
+    position top
+    
+}
 
