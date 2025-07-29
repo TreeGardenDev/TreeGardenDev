@@ -19,6 +19,7 @@ return {
             cmp.setup({
                 sources = {
                     { name = "copilot",  group_index = 2 },
+                    { name = 'luasnip', group_index= 2,  option = { use_show_condition = false } },
                     { name = "nvim_lsp", group_index = 2 },
                     {
                         name = 'buffer',
@@ -126,6 +127,11 @@ return {
                     vim.keymap.set("n", "<leader>ff", function() vim.lsp.buf.format() end, opts)
                     vim.api.nvim_set_hl(0, "CmpItemKindCopilot", { fg = "#6CC644" })
                     vim.api.nvim_set_hl(0, "CmpItemKindCopilotSnippet", { fg = "#6CC644" })
+                    --if language is c autoformat
+                    if vim.bo[event.buf].filetype == 'c' or vim.bo[event.buf].filetype == 'py' then
+                        vim.cmd [[autocmd BufWritePre * lua vim.lsp.buf.format()]]
+
+                    end
                 end,
             })
 
@@ -145,6 +151,8 @@ return {
                     end,
                 }
             })
-        end
+        end,
+
+            
     }
 }

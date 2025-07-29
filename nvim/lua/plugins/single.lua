@@ -3,4 +3,5 @@ return {
     {'hrsh7th/cmp-path'},
     {'nvim-lua/plenary.nvim'},
     {'mbbill/undotree'},
+    {'saadparwaiz1/cmp_luasnip'},
 }
