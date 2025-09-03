@@ -15,7 +15,7 @@ vim.keymap.set("n", "N", "Nzzzv")
 
 
 -- greatest remap ever
-vim.keymap.set("x", "<leader>p", [["_dP]])
+vim.keymap.set("n", "<leader>p", [["_dP]])
 
 -- next greatest remap ever : asbjornHaland
 vim.keymap.set({ "n", "v" }, "<leader>y", [["+y]])
@@ -29,6 +29,43 @@ vim.keymap.set("i", "<Alt>l", "<right>")
 vim.g.copilot_assume_mapped = true 
 
 
+vim.keymap.set('n', "<leader>ga", "<cmd>silent !git add %<CR>")
+vim.keymap.set('n', "<leader>gg", "<cmd>silent !git add .<CR>")
+vim.keymap.set('n',"<leader>gc", function()
+  local message = vim.fn.input("Commit message: ")
+  if message ~= "" then
+    vim.cmd("silent !git commit -m '" .. message .. "'")
+    print("Committed with message: " .. message)
+  else
+    print("Commit message cannot be empty.")
+  end
+end)
+vim.keymap.set('n',"<leader>gp", function()
+    local remote=vim.fn.input("Remote name (default 'origin'): ")
+    if remote == "" then
+        remote = "origin"
+    end
+    local branch=vim.fn.input("Branch name: ")
+    if branch ~= "" then
+        vim.cmd("silent !git push " .. remote .. " " .. branch)
+        print("Pushed to " .. remote .. "/" .. branch)
+    else
+        print("Branch name cannot be empty.")
+    end
+end)
+vim.keymap.set('n',"<leader>gq", function()
+    local remote=vim.fn.input("Remote name (default 'origin'): ")
+    if remote == "" then
+        remote = "origin"
+    end
+    local branch=vim.fn.input("Branch name: ")
+    if branch ~= "" then
+        vim.cmd("silent !git pull" .. remote .. " " .. branch)
+        print("Pulled from " .. remote .. "/" .. branch)
+    else
+        print("Branch name cannot be empty.")
+    end
+end)
 
 vim.keymap.set("n", "q", "<nop>")
 vim.keymap.set("n", "Q", "<nop>")
