@@ -11,8 +11,12 @@ return
           suggestion = { enabled = false },
           panel = { enabled = false },
         });
+              --  vim.cmd("Copilot disable")
       end,
     },
+        --vim.keymap.set("n", "<leader>co", ":Copilot enable<CR>", { noremap = true, silent = true }),
+        --vim.keymap.set("n", "<leader>cd", ":Copilot disable<CR>", { noremap = true, silent = true }),
+
 }
 
 

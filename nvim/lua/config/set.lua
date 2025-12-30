@@ -24,6 +24,10 @@ vim.opt.updatetime = 50
 vim.g.mapleader = " "
 vim.g.undotree_SetFocusWhenToggle = 1
 
+--wrap text
+vim.opt.wrap = true
+
+
 --vim.opt.completeopt = "menuone,noselect"
 vim.cmd("set list")
 vim.cmd("set listchars=eol:¬,tab:>·")

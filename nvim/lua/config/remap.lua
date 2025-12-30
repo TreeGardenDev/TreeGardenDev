@@ -89,4 +89,24 @@ vim.keymap.set("n", "<leader>j", "<cmd>lprev<CR>zz")
 
 vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
 vim.keymap.set("n", "<leader>x", "<cmd>!chmod +x %<CR>", { silent = true })
-
+--local copilot_on = true
+--vim.api.nvim_create_user_command("CopilotToggle", function()
+--    --run copilot status and if the first line says online then turn it off else turn it on
+--    local copilot_on=function ()
+--        local curr_status = vim.cmd("Copilot status")
+--        if string.find(curr_status, "Online") then
+--            return true
+--        else
+--            return false
+--        end
+--    end
+--	if copilot_on then
+--		vim.cmd("Copilot disable")
+--		print("Copilot OFF")
+--	else
+--		vim.cmd("Copilot enable")
+--		print("Copilot ON")
+--	end
+--	--copilot_on = not copilot_on
+--end, { nargs = 0 })
+--vim.keymap.set("", "<M-\\>", ":CopilotToggle<CR>", { noremap = true, silent = true })

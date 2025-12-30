@@ -1,51 +1,44 @@
-@import "./rose-pine.css";
-
 * {
     border-radius: 1;
-    font-size: 10px;
     font-family: "BerkeleyMono Nerd Font";
+    font-size: 11px;
     min-height: 0;
     font-weight: bold;
-    background: @base;
-    border: 0px solid @overlay;
+    border: 0px;
 }
 
 window#waybar {
-    background: #1A1A1A;
-    color: white;
+    background: #282828;
+    color: #ebdbb2;
 }
 
 #workspaces {
-    color: @foam;
-	margin: 2px;
-	margin-left: 2px;
-	border-radius: 2px;
+	background-color: #282828;
+	margin: 1px;
+	margin-left: 5px;
+	border-radius: 5px;
 
 }
 #workspaces button {
-    padding: 0 1px;
-    color:@rose;
+    padding: 0 4px;
+    color: #e8e8e8;
 }
-#workspaces button.active{
-    color: white;
-	background-color: @foam;
-	border-radius: 2px;
-}
+
 #workspaces button.focused {
-    color: @foam;
-    background-color: white;
-    border-radius: 2px;
+    color: #2e3440;
+    background-color: #e8e8e8;
+    border-radius: 5px;
 }
 
 #workspaces button:hover {
-    color: @rose;
-	background-color: @foam;
-	border-radius: 2px;
+    color: #1A1A1A;
+	background-color: #5e81ac;
+	border-radius: 5px;
 }
 
-#custom-date,#custom-clipboard,#cpu, #clock, #battery, #pulseaudio, #network, #custom-governor, #custom-betterbattery, #idle_inhibitor, #tray{
-	padding: 0px 5px;
-	margin: 0px 0px;
+#custom-date, #clock, #battery, #pulseaudio, #network {
+	padding: 0px 10px;
+	margin: 5px 0px;
 }
 
 #custom-date {
@@ -63,14 +56,11 @@ window#waybar {
 #backlight {
     color: #e8e8e8;
 }
-#idle_inhibitor {
-    color: #e8e8e8;
-}
 
 #clock {
     color: #e8e8e8;
     border-radius: 0px 5px 5px 0px;
-    margin-right: 3px;
+    margin-right: 10px;
 }
 
 #battery {
@@ -79,16 +69,12 @@ window#waybar {
 
 @keyframes blink {
     to {
-        background-color: white;
-        color: white;
+        background-color: #e8e8e8;
+        color: black;
     }
 }
 
-#custom-betterbattery.charging {
-    color: #e8e8e8;
-}
-
-#custom-spotify {
+#battery.charging {
     color: #e8e8e8;
 }
 
@@ -103,6 +89,9 @@ window#waybar {
 }
 #network {
 	color: #e8e8e8;
+}
+#idle_inhibitor {
+    color: #e8e8e8;
 }
 
 #pulseaudio {
